@@ -326,83 +326,88 @@ $(document).ready(function() {
         // 체크리스트 아이템 추가하기
         $(document).ready(function() {
 
-            $('.tw-task-add-checklist-item__input').keypress(function(event) {
+            function addChecklistItem(enteredText, classCounter, selectedTaskIndex) {
+                var newDiv = $('<div class="tw-task-checklist-pane__item-wrapper unique-class-name-' + classCounter + '">' +
+                    '<div class="tw-task-checklist-item ax-task-checklist-item" data-title="리스트 제목" data-complete="true" style="opacity: 1;">' +
+                    '<div class="tw-task-checklist-item__checkbox-container">' +
+                    '<div class="tw-click-area tw-task-checkbox checklist-checkbox ax-task-checklist-item__checkbox --large --clickable" role="button" tabindex="0">' +
+                    '<i class="tw-icon tw-task-checkbox__check-mark bi bi-check-lg"></i>' +
+                    '<span style="display: none;"></span>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="tw-task-checklist-item__label-container ax-task-checklist-item__label-container" draggable="true">' +
+                    '<div>' +
+                    '<div class="tw-click-area tw-checklist-assignee ax-checklist-assignee --clickable" role="button" tabindex="0">' +
+                    '<div class="tw-checklist-assignee__no-assignee">' +
+                    '<i class="tw-icon bi bi-person-plus"></i>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="tw-task-checklist-item__label">' +
+                    '<div class="tw-task-checklist-item__label-title ax-task-checklist-item__label-title">' +
+                    '<div class="tw-editable-text-area ax-editable-text-area --editable --plain-text">' +
+                    '<i class="tw-icon tw-editable-text-area__icon bi bi-pencil"></i>' +
+                    '<article class="tw-markdown-content tw-editable-text-area__text ax-editable-text-area__text">' +
+                    '<p>' + enteredText + '</p>' +
+                    '</article>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="tw-click-area tw-task-checklist-item__delete-button ax-task-checklist-item__delete-button --clickable" role="button" tabindex="0">' +
+                    '<i class="delete-checklist tw-icon bi bi-trash"></i>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>');
+            
+                var checklistHTML = $('<div class="task-card-checklist">').append(
+                    $('<div class="task-card-checklist__content">')
+                );
+            
+                var mainChecklistItem = $('<div class="click-area task-card-checklist-item unique-class-name-' + classCounter + '" role="button" tabindex="0">').append(
+                    $('<div class="task-card-checklist-item__checkbox-container">').append(
+                        $('<div class="click-area task-checkbox --small" role="button" tabindex="0">').append(
+                            $('<i class="icon task-checkbox__check-mark bi bi-check"></i>')
+                        )
+                    ), $('<div class="task-card-checklist-item__label-container">').append(
+                        $('<div class="task-card-checklist-item__label">').append(
+                            $('<span class="markdown-line">').append(
+                                $('<p>' + enteredText + '</p>')
+                            )
+                        )
+                    )
+                );
+            
+                var mainmoreview = $('<div class="click-area task-card-checklist__footer" role="button" tabindex="0">').append(
+                    $('<span class="tasks.checklist.footer.see_all_checklist_v2">').text("모든 체크리스트")
+                );
+            
+                $('.tw-task-add-checklist-item').before(newDiv);
+                
+                // 자식이 하나도 없어서 처음 만들어 질 때
+                if ($('.task').eq(selectedTaskIndex).find('.task-card-checklist').length === 0) {
+                    $('.task-body').eq(selectedTaskIndex).prepend(checklistHTML);
+                    $('.task-card-checklist__content').eq(selectedTaskIndex).append(mainChecklistItem);
+                // 모든 체크리스트 생길 때
+                } else if ($('.task').eq(selectedTaskIndex).find('.task-card-checklist__content').children().length === 1) {
+                    $('.task-card-checklist__content').eq(selectedTaskIndex).append(mainChecklistItem);
+                    $('.task-card-checklist').eq(selectedTaskIndex).append(mainmoreview);
+                // 나머지 경우 
+                } else {
+                    $('.task-card-checklist__footer').eq(selectedTaskIndex).before(mainChecklistItem);
+                }
+            
+                $('.tw-task-add-checklist-item__input').val(''); // textarea 내용 비우기
+            }
+            
+            $('.tw-task-add-checklist-item__input').keypress(function (event) {
                 if (event.which == 13) { // 13은 Enter 키의 키 코드입니다.
                     classCounter++;
                     event.preventDefault(); // 기본 엔터 동작을 막습니다.
-                    var enteredText = $(this).val(); // textarea의 내용을 가져옵니다.
-                    var newDiv =  $('<div class="tw-task-checklist-pane__item-wrapper unique-class-name-' + classCounter + '">' + 
-                    '<div class="tw-task-checklist-item ax-task-checklist-item" data-title="리스트 제목" data-complete="true" style="opacity: 1;">' +
-                        '<div class="tw-task-checklist-item__checkbox-container">' +
-                            '<div class="tw-click-area tw-task-checkbox checklist-checkbox ax-task-checklist-item__checkbox --large --clickable" role="button" tabindex="0">' +
-                                '<i class="tw-icon tw-task-checkbox__check-mark bi bi-check-lg"></i>' +
-                                '<span style="display: none;"></span>' +
-                            '</div>' +
-                        '</div>' +
-                        '<div class="tw-task-checklist-item__label-container ax-task-checklist-item__label-container" draggable="true">' +
-                            '<div>' +
-                                '<div class="tw-click-area tw-checklist-assignee ax-checklist-assignee --clickable" role="button" tabindex="0">' +
-                                    '<div class="tw-checklist-assignee__no-assignee">' +
-                                        '<i class="tw-icon bi bi-person-plus"></i>' +
-                                    '</div>' +
-                                '</div>' + 
-                            '</div>' +
-                            '<div class="tw-task-checklist-item__label">' +
-                                '<div class="tw-task-checklist-item__label-title ax-task-checklist-item__label-title">' +
-                                    '<div class="tw-editable-text-area ax-editable-text-area --editable --plain-text">' +
-                                        '<i class="tw-icon tw-editable-text-area__icon bi bi-pencil"></i>' +
-                                        '<article class="tw-markdown-content tw-editable-text-area__text ax-editable-text-area__text">' +
-                                            '<p>' + enteredText + '</p>' +
-                                        '</article>' +
-                                    '</div>' +
-                                '</div>' +
-                            '</div>' +
-                            '<div class="tw-click-area tw-task-checklist-item__delete-button ax-task-checklist-item__delete-button --clickable" role="button" tabindex="0">' +
-                                '<i class="delete-checklist tw-icon bi bi-trash"></i>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>' +
-                    '</div>');
-
-                    var checklistHTML = $('<div class="task-card-checklist">').append(
-                    $('<div class="task-card-checklist__content">')
-                    );
-                    
-                    var mainChecklistItem = $('<div class="click-area task-card-checklist-item unique-class-name-' + classCounter + '" role="button" tabindex="0">').append(
-                        $('<div class="task-card-checklist-item__checkbox-container">').append(
-                            $('<div class="click-area task-checkbox --small" role="button" tabindex="0">').append(
-                                $('<i class="icon task-checkbox__check-mark bi bi-check"></i>')
-                            )
-                        ), $('<div class="task-card-checklist-item__label-container">').append(
-                            $('<div class="task-card-checklist-item__label">').append(
-                                $('<span class="markdown-line">').append(
-                                    $('<p>' + enteredText + '</p>')
-                                )
-                            )
-                        )
-                    );
-
-                    var mainmoreview =  $('<div class="click-area task-card-checklist__footer" role="button" tabindex="0">').append(
-                        $('<span class="tasks.checklist.footer.see_all_checklist_v2">').text("모든 체크리스트")
-                    );
-                
-                    $('.tw-task-add-checklist-item').before(newDiv);
-                    // 첫 추가
-                    if ($('.task').eq(selectedTaskIndex).find('.task-card-checklist').length === 0) {
-                        // task 내에 task-card-checklist가 하나 이상 있을 때
-                        $('.task-body').eq(selectedTaskIndex).prepend(checklistHTML);
-                        $('.task-card-checklist__content').eq(selectedTaskIndex).append(mainChecklistItem);
-                    } else if ($('.task').eq(selectedTaskIndex).find('.task-card-checklist__content').children().length === 1) {
-                        $('.task-card-checklist__content').eq(selectedTaskIndex).append(mainChecklistItem);
-                        $('.task-card-checklist').eq(selectedTaskIndex).append(mainmoreview);
-                    } else {
-                        // 그 외의 경우
-                        $('.task-card-checklist__footer').eq(selectedTaskIndex).before(mainChecklistItem);
-                    }
-                    $(this).val(''); // textarea 내용 비우기
-                    alert (classCounter)
+                    enteredText = $(this).val(); // textarea의 내용을 가져옵니다.
+                    addChecklistItem(enteredText, classCounter, selectedTaskIndex);
                 }
             });
+            
             // checklist 글자가 생겼을 때 'enter 눌러주세요.' 글자 생기게 만드는 함수
             $('.tw-task-add-checklist-item__input').on('input', function() {
                 var enter = $('.tw-task-add-checklist-item__enter-to-save');
@@ -415,82 +420,85 @@ $(document).ready(function() {
                     enter.remove();
                 }
             });
-        });
         // 체크리스트 checkbox 관련
-        $(document).ready(function(){
-            
-            // 체크리스트 삭제버튼 누르면 삭제되는 함수
-            $(document).on('click', '.delete-checklist', function(){
-                var clickedElement = $(this);
-                var clickedIndex = $('.ax-task-checklist-item__checkbox').index(clickedElement);
-                $('.tw-task-checklist-pane__item-wrapper').eq(clickedIndex).remove();
-            })
-            
-            function toggleChecklistItem(clickedElement) {
-                var clickedIndex = $('.ax-task-checklist-item__checkbox').index(clickedElement);
-                var isCompleted = $('.ax-task-checklist-item').eq(clickedIndex).hasClass('--checked');
-                var hoursAgo = 0; // 수정: 시간 값 계산
-                var done = $('<div class="tw-task-checklist-item__label-subtitle">' +
-                    '<span data-l10n-key="tasks.properties.completed_by">완료자</span>' +
-                    '<span class="tw-text --body">완 료자</span>' +
-                    '<span>' + hoursAgo + '<span style="display: none;"></span>시간전</span>' +
-                    '</div>');
-            
-                // 체크리스트 완료되기 전 상태 
-                if (!isCompleted) {
-                    $('.checklist-checkbox').eq(clickedIndex).addClass('--animate');
-                    setTimeout(function () {
-                        $('.ax-task-checklist-item').eq(clickedIndex).addClass('--checked');
-                        $('.checklist-checkbox').eq(clickedIndex).addClass('--completed');
-                        $('.tw-checklist-assignee__no-assignee').eq(clickedIndex).addClass('--checked');
-                        $('.tw-task-checklist-item__label').eq(clickedIndex).append(done); // 수정: 클래스 선택자를 선택한 요소로 변경
-                    }, 500);
-                } else {
-                    $('.tw-task-checklist-item__label-subtitle').remove();
-                    $('.checklist-checkbox').eq(clickedIndex).removeClass('--animate')
-                    $('.ax-task-checklist-item').eq(clickedIndex).removeClass('--checked')
-                    $('.tw-checklist-assignee__no-assignee').eq(clickedIndex).removeClass('--checked')
-                    $('.checklist-checkbox').eq(clickedIndex).removeClass('--completed')
-                    
-                }
-                if ($('.task').eq(selectedTaskIndex).find('.task-card-checklist__content').children().length < 1) {
-                    $('taks').find('.task-card-checklist').remove()
-                }
+        
+        // 체크리스트 삭제버튼 누르면 삭제되는 함수
+        $(document).on('click', '.delete-checklist', function(){
+            var clickedElement = $(this);
+            var clickedIndex = $('.ax-task-checklist-item__checkbox').index(clickedElement);
+            $('.tw-task-checklist-pane__item-wrapper').eq(clickedIndex).remove();
+        })
+        
+        function toggleChecklistItem(clickedElement) {
+            var clickedIndex = $('.ax-task-checklist-item__checkbox').index(clickedElement);
+            var isCompleted = $('.ax-task-checklist-item').eq(clickedIndex).hasClass('--checked');
+            var hoursAgo = 0; // 수정: 시간 값 계산
+            var done = $('<div class="tw-task-checklist-item__label-subtitle">' +
+                '<span data-l10n-key="tasks.properties.completed_by">완료자</span>' +
+                '<span class="tw-text --body">완 료자</span>' +
+                '<span>' + hoursAgo + '<span style="display: none;"></span>시간전</span>' +
+                '</div>');
+        
+            // 사이드바 체크리스트 완료되기 전 상태 
+            if (!isCompleted) {
+                $('.' + thirdClassName).find('.checklist-checkbox').addClass('--animate');
+                setTimeout(function () {
+                    $('.' + thirdClassName).find('.ax-task-checklist-item').addClass('--checked');
+                    $('.' + thirdClassName).find('.checklist-checkbox').addClass('--completed');
+                    $('.' + thirdClassName).find('.tw-checklist-assignee__no-assignee').addClass('--checked');
+                    $('.' + thirdClassName).find('.tw-task-checklist-item__label').append(done); // 수정: 클래스 선택자를 선택한 요소로 변경
+                }, 500);
+            } else {
+                $('.' + thirdClassName).find('.tw-task-checklist-item__label-subtitle').remove();
+                $('.' + thirdClassName).find('.checklist-checkbox').removeClass('--animate')
+                $('.' + thirdClassName).find('.ax-task-checklist-item').removeClass('--checked')
+                $('.' + thirdClassName).find('.tw-checklist-assignee__no-assignee').removeClass('--checked')
+                $('.' + thirdClassName).find('.checklist-checkbox').removeClass('--completed')
+                // 하위메뉴에 메뉴 생겨야 해서 만든 함수
+                $('.' + thirdClassName).removeClass('--checked')
             }
-            // 하위메뉴 checkbox 클릭 이벤트 
-            function toggleTaskCheckbox(clickedElement) {
-                var contain = $('.task').eq(selectedTaskIndex).find(clickedElement).hasClass('--completed');
+            if ($('.task').eq(selectedTaskIndex).find('.task-card-checklist__content').children().length < 1) {
+                $('taks').find('.task-card-checklist').remove()
+            }
+        }
+        // 하위메뉴 checkbox 클릭 이벤트 
+        function toggleTaskCheckbox(clickedElement) {
+            var contain = $('.task').eq(selectedTaskIndex).find(clickedElement).hasClass('--completed');
+            console.log(thirdClassName);
+            if (!contain) {
                 console.log(thirdClassName);
-                if (!contain) {
-                    $('.' + thirdClassName).find(clickedElement).addClass('--animate');
-                    $('.' + thirdClassName).find(clickedElement).closest('.task-card-checklist-item').addClass('--checked');
-                    $('.' + thirdClassName).find(clickedElement).addClass('--completed');
-                    if ($('.task').eq(selectedTaskIndex).find('.task-card-checklist__content').children().length <= 1) {
-                        $('task').eq(selectedTaskIndex).find('.task-card-checklist').remove()
-                    }
-                } else {
-                    $('.' + thirdClassName).find(clickedElement).removeClass('--completed');
-                    $('.' + thirdClassName).find(clickedElement).removeClass('--animate');
+                $('.' + thirdClassName).find(clickedElement).addClass('--animate');
+                $('.' + thirdClassName).find(clickedElement).closest('.task-card-checklist-item').addClass('--checked');
+                $('.' + thirdClassName).find(clickedElement).addClass('--completed');
+                if ($('.task').eq(selectedTaskIndex).find('.task-card-checklist__content').children().length <= 1) {
+                    $('task').eq(selectedTaskIndex).find('.task-card-checklist').remove()
                 }
+                // 클릭되서 컨텐츠 없을때 사이드바에서 생기도록 만들어야함
+            } else {
+                $('.' + thirdClassName).find(clickedElement).removeClass('--completed');
+                $('.' + thirdClassName).find(clickedElement).removeClass('--animate');
             }
-            
-            // 클릭한 애의 부모의 data id값을 알아야하고 그걸 변수 처리해서 위에 함수에 적용해야한다.
-            $(document).on('click', '.task-checkbox.--small', function () {
-                debugger;
-                thirdClassName = $('.task-card-checklist-item').attr('class').split(' ')[2];
-                toggleTaskCheckbox(this);
-                toggleChecklistItem('.ax-task-checklist-item__checkbox');
-            });
-            
-            $(document).on('click', '.ax-task-checklist-item__checkbox', function () {
-                // 클릭한 애의 인덱스값가져와서 main에 있는애의 index를 가져와서해야함 
-                toggleTaskCheckbox('.task-checkbox.--small');
-                toggleChecklistItem(this);
-            });
-            
+        }
+        
+        // 클릭한 애의 부모의 data id값을 알아야하고 그걸 변수 처리해서 위에 함수에 적용해야한다.
+        $(document).on('click', '.task-checkbox.--small', function () {
+            thirdClassName = $(this).closest('.task-card-checklist-item').attr('class').split(' ')[2];
+            toggleTaskCheckbox(this);
+            toggleChecklistItem('.ax-task-checklist-item__checkbox');
         });
-
+        
+        $(document).on('click', '.ax-task-checklist-item__checkbox', function () {
+            debugger;
+            // 클릭한 애의 인덱스값가져와서 main에 있는애의 index를 가져와서해야함 
+            thirdClassName = $(this).closest('.tw-task-checklist-pane__item-wrapper').attr('class').split(' ')[1];
+            console.log(thirdClassName);
+            toggleTaskCheckbox('.task-checkbox.--small');
+            toggleChecklistItem(this);
+        });
+        
     });
+
+});
     
 
 
