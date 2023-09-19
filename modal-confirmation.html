@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>솔루션사업 · 아이디알소프트</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css"/>
+</head>
+<body class="HACK__modal">
+    <div style="width: 100%; height: 100%;">
+        <!--리스트 삭제 modal-->
+        <div class="popup-layer-confirmation">
+            <div class="popup-layer__portal">
+                <div>
+                    <sction class="confirmation-modal">
+                        <div tabindex="0" data-testid="keyboard" style="outline: none;">
+                            <div class="click-outside-layer --dim"></div>
+                            <div class="confirmation-modal__content">
+                                <button type="button" class="click-logic button-v-2 --size-34-px --square --round --variant-gray confirmation-modal__close-button">
+                                    <div class="button-v-2__main-container">
+                                        <i class="icon button-v-2__icon">
+                                            <i class="bi bi-x-lg"></i>
+                                        </i>
+                                    </div>
+                                </button>
+                                <div class="confirmation-modal__title">
+                                    <span class="tasks.task_lists.modal.confirm_tasklist_deletion">업무리스트 삭제</span>
+                                </div>
+                                <div class="confirmation-modal__description">
+                                    <div>
+                                        <span class="tasks.task_lists.modal.warning1">정말 삭제하시겠습니까?</span>
+                                        <span class="text --weight-bold">현황보고</span>
+                                        <span class="tasks.task_lists.modal.warning2">업무리스트는 영구 삭제됩니다.</span>
+                                    </div>
+                                </div>
+                                <div class="confirmation-modal__buttons">
+                                    <button class="button --size-34 --padding-normal --secondary" type="button">
+                                        <div class="button__main-container">
+                                            <span class="tasks.task_lists.modal.buttons.cancel_keep_tasklist">아니오, 업무리스트를 유지합니다.</span>
+                                        </div>
+                                    </button>
+                                    <button class="button --size-34 --padding-normal --danger" type="button">
+                                        <div class="button__main-container">
+                                            <span class="tasks.task_lists.modal.buttons.yes_delete_tasklist">네</span>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </sction>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

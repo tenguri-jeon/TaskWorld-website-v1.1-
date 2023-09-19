@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>솔루션사업 · 아이디알소프트</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/icon.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/fancy.css">
+    <link rel="stylesheet" href="css/checkbox.css">
+    <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.1.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@3.1.0/js/froala_editor.pkgd.min.js"></script>
+</head>
+<body class="HACK__modal">
+    <div style="width: 100%; height: 100%;">
+        <!--업무리스트 복사 modal-->
+        <div class="popup-layer-duplicate">
+            <div class="popup-layer__portal">
+                <div>
+                    <div tabindex="0" data-testid="keyboard" style="outline: none;">
+                        <div class="modal-2">
+                            <div class="click-outside-layer --dim"></div>
+                            <div class="modal-2__modal" style="width: 500px;">
+                                <div class="modal-2__stack">
+                                    <div class="modal-2__control-container" style="min-height: 34px;">
+                                        <div class="modal-2__spacer"></div>
+                                        <button type="button" class="click-logic button-v-2 --size-34-px --square --round --variant-gray">
+                                            <div class="button-v-2__main-container">
+                                                <i class="icon button-v-2__icon">
+                                                    <i class="bi bi-x-lg"></i>
+                                                </i>
+                                            </div>
+                                        </button> 
+                                    </div>
+                                    <header class="modal-2__title">
+                                        <span class="tasklist.duplication.title">하위 업무 복사하기</span>
+                                    </header>
+                                    <div class="modal-2__description"></div>
+                                    <div class="modal-2__content-container">
+                                        <div class="modal-2__content">
+                                            <div class="spacer" style="flex-direction: column; gap: 15px; align-items: stretch; justify-content: start;">
+                                                <div>
+                                                    <div class="form-label">
+                                                        <span class="text --heading --weight-bold" style="font-size: 14px;">
+                                                            <span class="tasklist.duplication.tasklist-title">업무 제목</span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="form-input --size-34-px">
+                                                        <div class="form-input__control-wrapper">
+                                                            <div class="form-input__control">
+                                                                <div class="form-input__input-container">
+                                                                    <input class="form-input__input-element" name="tasklist-title" type="text" value="[복사됨] 1/4분기 수주/매출 현황">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="form-label">
+                                                        <span class="text --heading --weight-bold" style="font-size: 14px;">
+                                                            <span class="tasklist.duplication.keep">다음을 유지하기</span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="spacer" style="flex-direction: column; gap: 10px; align-items: stretch; justify-content: start;">
+                                                        <div class="click-area choice --size-1 --checked" role="button" tabindex="0">
+                                                            <div class="choice__checkbox">
+                                                                <i class="icon bi bi-check-lg"></i>
+                                                            </div>
+                                                            <div class="choice__label">
+                                                                <span class="tasklist.duplication.files">파일</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="click-area choice --size-1 --checked" role="button" tabindex="0">
+                                                            <div class="choice__checkbox">
+                                                                <i class="icon bi bi-check-lg"></i>
+                                                            </div>
+                                                            <div class="choice__label">
+                                                                <span class="tasklist.duplication.comments">코멘트</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="click-area choice --size-1 --checked" role="button" tabindex="0">
+                                                            <div class="choice__checkbox">
+                                                                <i class="icon bi bi-check-lg"></i>
+                                                            </div>
+                                                            <div class="choice__label">
+                                                                <span class="tasklist.duplication.checklists">체크리스트</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="click-area choice --size-1" role="button" tabindex="0">
+                                                            <div class="choice__checkbox"></div>
+                                                            <div class="choice__label">
+                                                                <span class="tasklist.duplication.checklists">메인업무</span>
+                                                                <span class="task-duplication-modal__information-icon__wrapper">
+                                                                    <i class="icon task-duplication-modal__information-icon">
+                                                                        <i class="bi bi-info-circle"></i>
+                                                                    </i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="form-label">
+                                                        <span class="text --heading --weight-bold" style="font-size: 14px;">
+                                                            <span class="tasklist.duplication.location">복사할 위치</span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="tasklist-location-selector">
+                                                        <div class="tasklist-location-selector__location-container">
+                                                            <div class="click-area tasklist-location-selector__location duplication-location-popup-button" role="button" tabindex="0">
+                                                                <div class="tasklist-location-selector__title">
+                                                                    <span class="tasklist-location-selector__project-title-container">
+                                                                        <span class="tasklist-location-selector__project-title">솔루션사업</span>
+                                                                    </span>
+                                                                    <i class="icon task-location-title__icon">
+                                                                        <i class="bi bi-chevron-right"></i>
+                                                                    </i>
+                                                                    <span class="tasklist-location-selector__project-title-container">
+                                                                        <span class="tw-task-location-title__tasklist-title">작성가이드</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tasklist-location-selector__expander"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="spacer modal-2__button-container" style="height: auto; flex-direction: row; gap: 10px; align-items: center; justify-content: start;">
+                                        <div class="spacer__expandable">
+                                            <div class="spacer" style="flex-flow: wrap; gap: 10px; align-items: center; justify-content: end;">
+                                                <button type="button" class="click-logic button-v-2 --size-42-px --variant-primary">
+                                                    <div class="button-v-2__main-container">
+                                                        <span class="tasklist.buttons.create_tasklist">복사하기</span>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="popup-container__popup-loation" style="display: none;">
+                        <div class="click-outside-layer"></div>
+                        <div class="popup-content-wrapper">
+                            <div tabindex="0" data-testid="keyboard" style="outline: none;">
+                                <div tabindex="0" data-testid="keyboard" style="outline: none;">
+                                    <div class="input-kit-widget --shadow base-location-input-widget base-location-input-widget">
+                                        <div class="input-kit-widget__head">
+                                            <div class="input-kit-widget__title">
+                                                <span class="input_widget.headers.project_header.change_task_location">위치 변경</span>
+                                            </div>
+                                            <div class="input-kit-widget__buttons-wrapper input-kit-widget__modal-location-buttons-wrapper">
+                                                <button type="button" class="click-logic button-v-2 --size-34-px --square --round --variant-gray input-kit-widget__close-button">
+                                                    <div class="button-v-2__main-container">
+                                                        <i class="icon button-v-2__icon">
+                                                            <i class="bi bi-x-lg"></i>
+                                                        </i>
+                                                    </div>
+                                                </button> 
+                                            </div>
+                                        </div>
+                                        <div class="input-kit-widget__body">
+                                            <section class="input-kit-huge-row input-kit-huge-row-location">
+                                                <div class="input-kit-huge-row__left">
+                                                    <div class="input-kit-huge-row__item-info">
+                                                        <div class="input-kit-huge-row__item-subtitle">프로젝트</div>
+                                                        <div class="input-kit-huge-row__item-title">솔루션사업</div>
+                                                    </div>
+                                                </div>
+                                                <div class="input-kit-huge-row__right">
+                                                    <i class="icon bi bi-chevron-right"></i>
+                                                </div>
+                                            </section>
+                                            <div class="location-input-widget__confirm-button">
+                                                <button class="button --size-42 --padding-normal --full-width" type="button">
+                                                    <div class="button__main-container">
+                                                        <span class="input_widget.header.project_headers.change_task_location">위치 변경</span>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="popup-container__popup-location-project" style="display: none;">
+                        <div class="click-outside-layer"></div>
+                        <div class="popup-content-wrapper">
+                            <div tabindex="0" data-testid="keyboard" style="outline: none;">
+                                <div class="input-kit-widget --shadow project-input-widget"> 
+                                    <div class="input-kit-widget__head">
+                                        <div class="click-area input-kit-widget__back-button input-kit-widget__back-button-location" role="button" tabindex="0">
+                                            <i class="icon input-kit-widget__back-icon">
+                                                <i class="bi bi-chevron-left"></i>
+                                            </i>
+                                        </div>
+                                        <div class="input-kit-widget__title">
+                                            <div class="project-input-widget__title">
+                                                <span class="input_widget.headers.project_headers.select_project">프로젝트 선택</span>
+                                            </div>
+                                        </div>
+                                        <div class="input-kit-widget__buttons-wrapper input-kit-widget__project-location-buttons-wrapper">
+                                            <button type="button" class="click-logic button-v-2 --size-34-px --square --round --variant-gray input-kit-widget__close-button">
+                                                <div class="button-v-2__main-container">
+                                                    <i class="icon button-v-2__icon">
+                                                        <i class="bi bi-x-lg"></i>
+                                                    </i>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="input-kit-widget__body">
+                                        <div tabindex="0" data-testid="keyboard" style="outline: none;">
+                                            <div class="input-kit-search-virtual" style="height: 288px;">
+                                                <div class="search-box input-kit-search-virtual__search-box --compact --large" style="height: 34px;">
+                                                    <i class="icon search-box__icon">
+                                                        <i class="bi bi-search"></i>
+                                                    </i>
+                                                    <input class="search-box__input" type="text" autocomplete="off" placeholder="프로젝트 검색" value>
+                                                </div>
+                                                <div class="input-kit-search-virtual__list" style="position: relative;">
+                                                    <div style="overflow: visible; height: 0px;">
+                                                        <div class="virtual-list hack-scrollbar" style="position: relative; height: 254px; width: 100%; overflow: auto; will-change: transform; direction: ltr;">
+                                                            <div style="height: 120px; width: 100%;">
+                                                                <div style="position: absolute; left: 0px; top: 0px; height: 35px; width: 100%;">
+                                                                    <div class="virtual-list__item" data-item-index="0" style="margin: 10px 10px 5px;">
+                                                                        <section class="input-kit-row --focused --hand">
+                                                                            <div class="input-kit-row__content">
+                                                                                <div class="input-kit-row__left">
+                                                                                <i class="icon bi bi-globe"></i>
+                                                                                </div>
+                                                                                <div class="input-kit-row__text">요구사항 관리</div> 
+                                                                            </div>
+                                                                            <div class="input-kit-row__right"></div>
+                                                                        </section>
+                                                                    </div>
+                                                                </div>
+                                                                <div style="position: absolute; left: 0px; top: 45px; height: 35px; width: 100%;">
+                                                                    <div class="virtual-list__item" data-item-index="0" style="margin: 0px 10px 5px;">
+                                                                        <section class="input-kit-row --hand">
+                                                                            <div class="input-kit-row__content">
+                                                                                <div class="input-kit-row__left">
+                                                                                <i class="icon bi bi-globe"></i>
+                                                                                </div>
+                                                                                <div class="input-kit-row__text">솔루션별 FAQ</div> 
+                                                                            </div>
+                                                                            <div class="input-kit-row__right"></div>
+                                                                        </section>
+                                                                    </div>
+                                                                </div>
+                                                                <div style="position: absolute; left: 0px; top: 80px; height: 40px; width: 100%;">
+                                                                    <div class="virtual-list__item" data-item-index="0" style="margin: 10px 10px 5px;">
+                                                                        <section class="input-kit-row --hand">
+                                                                            <div class="input-kit-row__content">
+                                                                                <div class="input-kit-row__left">
+                                                                                <i class="icon bi bi-lock"></i>
+                                                                                </div>
+                                                                                <div class="input-kit-row__text">공용 자료실</div> 
+                                                                            </div>
+                                                                            <div class="input-kit-row__right"></div>
+                                                                        </section>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+</body>   
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/sidebar-popup.js"></script>
+<script>
+    
+    $(document).on('click', '.tw-unpin-modal__checkbox', function(){
+        var contain = $('.tw-unpin-modal__checkbox').hasClass('--checked')
+        var icon = $('<i id="check-icon" class="tw-icon bi bi-check-lg"></i>')  
+
+        if (contain) {
+            $('.tw-unpin-modal__checkbox').removeClass('--checked')    
+            $('#check-icon').remove();
+        }else{
+            $('.tw-unpin-modal__checkbox').addClass('--checked')
+            $('.tw-choice__checkbox').append(icon);
+        }
+    })
+
+
+</script>
+</html>

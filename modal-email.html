@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>솔루션사업 · 아이디알소프트</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css"/>
+</head>
+<body class="HACK__modal">
+    <div style="width: 100%; height: 100%;">
+        <!--이메일로 업무 작성 만들기 modal-->
+        <div class="popup-layer-email">
+            <div class="popup-layer__portal">
+                <div>
+                    <div tabindex="0" data-testid="keyboard" style="outline: none;">
+                        <section class="modal">
+                            <div class="click-outside-layer --dim"></div>
+                            <div class="modal__content">
+                                <div class="modal__rest-buttons">
+                                    <div class="click-area modal__close-button" role="button" tabindex="0">
+                                        <i class="icon modal__top-icon">
+                                            <i class="bi bi-x-lg"></i>
+                                        </i>
+                                    </div>
+                                </div>
+                                <div class="modal-content">
+                                    <div class="modal-content__wrapper">
+                                        <header class="modal-content__header">
+                                            <div class="modal-content__title">이메일로 업무 작성</div>
+                                        </header>
+                                        <div class="modal-content__body">
+                                            <div class="email-bridge-setting">
+                                                <div class="spacer" style="flex-direction: column; gap: 20px; align-items: stretch; justify-content: start;">
+                                                    <span class="text --heading --weight-bold">
+                                                        <span class="workspace_settings.email_bridge_pane_tasklist">
+                                                            이메일로 "솔루션사업 > 현황보고"에 업무 추가하기
+                                                        </span>
+                                                    </span>
+                                                    <div class="text" style="font-size: 14px;">
+                                                        <span class="workspace_settings.email_bridge_pane.description_tasklist">아래 이메일 주소로 이메일을 보내 업무를 자동으로 작성합니다.</span>
+                                                    </div>
+                                                    <div class="spacer" style="flex-direction: column; gap: 5px; align-items: stretch; justify-content: start;">
+                                                        <div class="copy-link-form">
+                                                            <div class="form-input-with-button">
+                                                                <div class="form-input --size-34-px form-input-with-button__input">
+                                                                    <div class="form-input__control-wrapper">
+                                                                        <div class="form-input__control">
+                                                                            <div class="form-input__input-container">
+                                                                                <input class="form-input__input-element copy-link-form__input form-input-with-button__input-element" name="copy_url" type="text" value> 
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <button class="button --size-34 --padding-normal form-input-with-button__button" type="button">
+                                                                    <div class="button__main-container">
+                                                                        <span class="workspace_settings.email_bridge_pane.copy-email">이메일 복사</span>
+                                                                    </div>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="spacer" style="flex-direction: row; gap: 5px; align-items: stretch; justify-content: start;">
+                                                            <span class="text --small"></span>
+                                                            <div class="spacer__expandable"></div>
+                                                            <span class="text --small">
+                                                               <button type="button" class="click-logic link --color-teal">
+                                                                    <span class="workspace_settings.email_bridge_pane.send-me">이 주소를 내 이메일로 전송</span>
+                                                               </button> 
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <img src="https://d30795irbdecem.cloudfront.net/assets/email-bridge-guide-ko-3614df20.png">
+                                                    </div>
+                                                    <ul class="email-bridge-setting__guide-text">
+                                                        <li>
+                                                            <span class="workspace_settings.email_bridge_pane.guide-email-subject">이메일 제목은 업무 제목이 됩니다.</span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="workspace_settings.email_bridge_pane.guide-email-body">이메일 내용은 업무 설명이 됩니다.</span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="workspace_settings.email_bridge_pane.guide-email-attn">첨부 파일은 업무 파일로 추가됩니다.</span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="workspace_settings.email_bridge_pane.guide-email-to">받는 사람: 수신인은 해당 업무에 배정됩니다.</span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="workspace_settings.email_bridge_pane.guide-email-cc">참조: 수신인은 해당 업무 팔로워가 됩니다.</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

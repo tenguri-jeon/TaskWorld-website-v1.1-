@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>솔루션사업 · 아이디알소프트</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/icon.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/fancy.css">
+    <link rel="stylesheet" href="css/checkbox.css">
+    <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.1.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@3.1.0/js/froala_editor.pkgd.min.js"></script>
+</head>
+<body class="HACK__modal">
+    <div style="width: 100%; height: 100%;">
+        <!-- 배정하기->새업무 modal -->
+        <div class="popup-layer-new-tasklist">
+            <div class="popup-layer__portal">
+                <div>
+                    <div tabindex="0" data-testid="keyboard" style="outline: none;">
+                        <div class="modal-2">
+                            <div class="click-outside-layer --dim"></div>
+                            <div class="tw-modal-2__modal ax-modal-2__modal ax-add-new-task-modal">
+                                <div class="tw-modal-2__stack">
+                                    <div class="tw-modal-2__control-container">
+                                        <div class="tw-modal-2__spacer"></div>
+                                        <button type="button" class="tw-click-logic tw-button-v-2 --size-34-px --square --round --variant-gray ax-modal-2__close-button">
+                                            <div class="tw-button-v-2__main-container">
+                                                <i class="tw-icon bi bi-x-lg"></i>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <header class="tw-modal-2__title"> 새업무</header>
+                                    <div class="tw-modal-2__description"></div>
+                                    <div class="tw-modal-2__content-container">
+                                        <div class="tw-modal-2__content">
+                                            <div class="tw-add-new-task-modal-content">
+                                                <div tabindex="0" data-testied="keyboard" style="outline: none;">
+                                                    <div class="tw-add-new-task-modal-content__container">
+                                                        <div class="tw-add-new-task-modal-location-breadcrumb">
+                                                            <div class="tw-click-area tw-hover-background tw-add-new-task-modal-location-breadcrumb__button ax-add-new-task-modal-location-breadcrumb__button --clickable" role="button" tabindex="0">
+                                                                <span>사업이름</span>
+                                                                <i class="tw-icon bi bi-chevron-right"></i>
+                                                                업무
+                                                            </div>
+                                                        </div>
+                                                        <div id="newproject"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tw-spacer tw-modal-2__button-container" style="height: auto; flex-direction: row; gap: 10px; align-items: center; justify-content: start;">
+                                        <div class="tw-spacer__expandable">
+                                            <div class="tw-spacer" style="flex-flow: wrap; gap: 10px; align-items: center; justify-content: end;">
+                                                <button type="button" class="tw-click-logic tw-button-v-2 --size-42-px --variant-primary ax-add-new-task-modal__create-button" disabled>
+                                                    <div class="tw-button-v-2__main-container">
+                                                        <span data-l10n-key="tasks.buttons.create_task"> 업무 작성</span>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>     
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>          
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/sidebar-popup.js"></script>
+<script>
+    
+    $(document).on('click', '.tw-unpin-modal__checkbox', function(){
+        var contain = $('.tw-unpin-modal__checkbox').hasClass('--checked')
+        var icon = $('<i id="check-icon" class="tw-icon bi bi-check-lg"></i>')  
+
+        if (contain) {
+            $('.tw-unpin-modal__checkbox').removeClass('--checked')    
+            $('#check-icon').remove();
+        }else{
+            $('.tw-unpin-modal__checkbox').addClass('--checked')
+            $('.tw-choice__checkbox').append(icon);
+        }
+    })
+
+
+</script>
+
+<script>
+    // 에디터
+    $(function () {
+        var editor = new FroalaEditor('#newproject')
+    }); 
+
+</script>
+
+</html>

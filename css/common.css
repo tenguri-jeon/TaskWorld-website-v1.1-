@@ -1,0 +1,47 @@
+html{
+    font-family: proxima-nova-regular,Proxima Nova,nanum-barun-gothic,Avenir Next,Segoe UI,Helvetica,Arial,sans-serif;
+}
+body{
+    background-color: inherit;
+    height: 100%;
+    overflow: hidden;
+}
+.click-area{
+    cursor: pointer;
+}
+img{
+    border: none;
+    box-sizing: border-box;
+    max-width: 100%;
+    vertical-align: middle;
+}
+ul{
+    padding-left: 30px;
+    margin: 0 0 15px;
+    list-style-type: disc;
+}
+*+ul{
+    margin-top: 15px;
+}
+.toolbar-button{
+    align-items: center;
+    appearance: none;
+    background: #eef0f2;
+    border-radius: 8px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    justify-content: space-between;
+    max-width: 100%;
+    outline: none;
+    position: relative;
+}
+input{
+    color: inherit;
+    font-family: inherit;
+    transition: none;
+}
+strong{
+    font-weight: 700;
+}
