@@ -31,7 +31,6 @@ $(document).ready(function() {
         var contain = $(this).hasClass('--checked');
         var checkIcon = $('<i class="tw-icon bi bi-check-lg"></i>')
         var numberOfCheckElements = $('.bi-check-lg').length;
-        console.log(numberOfCheckElements);
 
         // 제일 위에 있는 체크박스가 클릭될 시, 밑에있는 하위 체크박스는 모두 체크된다
         if ($(this).is('.ax-resource-table-head__header-cell .tw-choice')) {

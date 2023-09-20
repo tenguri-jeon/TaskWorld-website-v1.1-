@@ -1,3 +1,4 @@
+// 제목 input
 $(document).ready(function() {
   var isInputMode = false;
   var clickedElementIndex = null;
@@ -34,7 +35,6 @@ $(document).ready(function() {
 
   // input에서 다른곳 클릭시 text로 바뀜
   function handleOutsideClick(event) {
-    debugger;
     inputText = $(this).text();
     textareaInputText = $('.tw-editable-text-field__input').val();
 
@@ -54,7 +54,7 @@ $(document).ready(function() {
     // text내용과 input내용이 일치하는지 확인 후 이벤트 발생 (input이 이상한곳에 생기지 않도록 하기 위한 장치)
     inputText = $(this).text();
     textareaInputText = $('.tw-editable-text-field__input').val();
-    console.log(inputText,'일치?', textareaInputText)
+    // console.log(inputText,'일치?', textareaInputText)
     
     
     if (!$(event.target).hasClass('editable-text-field__text')) {

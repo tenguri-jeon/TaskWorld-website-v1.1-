@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function(){
             secondClass = '';
             clickedElement = $(this); // 전역 변수에 할당
             clickedIndex = $('.tasklist-menu__button').index(clickedElement); // 전역 변수에 할당
-    
+
             $('.tasklist-header').eq(clickedIndex).addClass(secondClass);
             $('.tasklist-header__input-panel-container').eq(clickedIndex).addClass(secondClass);
         });
@@ -57,13 +57,14 @@ document.addEventListener("DOMContentLoaded", function(){
         // colorpicker를 클릭하면 array에 colorpicker색을 넣어주는 함수
         $('.color-label').click(function() {
             const classesArray = $(this).attr('class').split(' ');
+            var allcolor = '--bg-blue2 --bg-sky-blue --bg-pink --bg-purple -bg-sky-blue -bg-green --bg-amber --bg-red --bg-orange --bg-brown --bg-gray --bg-rainbow';
+            var classesToRemove = allcolor.split(' ');
     
             // 가져온 클래스 목록 배열의 두 번째 클래스를 가져옵니다.(color ex) --bg-pink )
             if (classesArray.length >= 2) {
                 secondClass = classesArray[1]; // 전역 변수에 할당
-                var allcolor = '.--bg-blue2 --bg-pink --bg-purple -bg-sky-blue -bg-green --bg-amber --bg-red --bg-orange --bg-brown --bg-gray --bg-rainbow';
 
-                $('.tasklist-header').eq(clickedIndex).removeClass(allcolor);
+                $('.tasklist-header').eq(clickedIndex).removeClass(classesToRemove.join(' '));
                 $('.tasklist-header__input-panel-container').eq(clickedIndex).removeClass(allcolor);
 
                 $('.tasklist-header').eq(clickedIndex).addClass(secondClass);
@@ -839,26 +840,4 @@ document.addEventListener("DOMContentLoaded", function(){
         openconfirmationModal();
     });
 
-
-    // 큰 컨텐츠 checkbox 클릭 이벤트
-    $(document).ready(function() {
-        $(document).on('click' , '.task-checkbox.--medium' , function() {
-            var contain = $(this).hasClass('--completed');
-        
-            if (!contain) {
-                $(this).addClass('--completed');
-                $(this).addClass('--animate');
-                setTimeout(function() {
-                    $(this).closest('.task').addClass('--done');
-                    $(this).closest('.task').removeClass('--is-pinned');    
-                }.bind(this), 500);    
-            } else {
-                $(this).removeClass('--completed');
-                $(this).removeClass('--animate');
-                $(this).closest('.task').removeClass('--done');
-                $(this).closest('.task').addClass('--is-pinned');
-            }
-        });
-    });
-    
 });

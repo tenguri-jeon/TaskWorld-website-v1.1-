@@ -1071,6 +1071,12 @@
     font-size: 14px;
     gap: 5px;
     padding: 14px 12px 13px;
+    cursor: pointer;
+}
+
+.create-tasklist-button:hover{
+    background-color: #27b6ba;
+    color: #fff;
 }
 
 /*tasklist-footer*/

@@ -12,86 +12,103 @@
     });
 
 // sidebar  에서 click box 
-$(document).ready(function() {
-    $('#checkbox').click(function() {
-        var isCompleted = $('.tw-task-completion-box__check-mark').css('color') === 'rgb(255, 255, 255)';
+// 함수 1: 체크박스 클릭 시 실행할 함수
+function handleCheckboxClick() {
+    var isCompleted = $('.tw-task-completion-box__check-mark').css('color') === 'rgb(255, 255, 255)';
 
-        if (isCompleted) {
-            // 원상복귀
-            $('.tw-task-completion-box__background-left, .tw-task-completion-box__background-right').css({
-                'background-color': 'unset',
-                'border-color': '#D4D6DB'
-            });
-            $('.tw-task-completion-box__check-mark').css({
-                'color': '#EEF0F2'
-            });
-            $('.ax-task-completion-box').data('bs-title', '클릭하여 업무 완료');
+    // 원상복귀
+    if (isCompleted) {
+        $('.tw-task-completion-box__background-left, .tw-task-completion-box__background-right').css({
+            'background-color': 'unset',
+            'border-color': '#D4D6DB'
+        });
+        $('.tw-task-completion-box__check-mark').css({
+            'color': '#EEF0F2'
+        });
+        $('.ax-task-completion-box').data('bs-title', '클릭하여 업무 완료');
 
+        $('.tw-task-completion-box__background-center').css({
+            'transform': 'scaleX(1)',
+            'background-color': 'unset',
+            'border-color': '#D4D6DB;'
+        });
+        $('.tw-task-completion-box__background-right').css({
+            'transform': 'translateX(17px)'
+        });
+        $('.ax-task-completion-box').css({
+            'width': '38px'
+        });
+        $('.tw-task-completion-box__completed-task').css({
+            'display': 'none'
+        });
+    } else {
+        // 클릭시 변화
+        $('.tw-task-completion-box__background-left, .tw-task-completion-box__background-right').css({
+            'background-color': '#27b6ba',
+            'border-color': '#259295'
+        });
+        $('.tw-task-completion-box__check-mark').css({
+            'color': '#fff'
+        });
+        $('.ax-task-completion-box').data('bs-title', '클릭하여 다시 열기');
+
+        setTimeout(function() {
             $('.tw-task-completion-box__background-center').css({
-                'transform': 'scaleX(1)',
-                'background-color': 'unset',
-                'border-color': '#D4D6DB;'
-            });
-            $('.tw-task-completion-box__background-right').css({
-                'transform': 'translateX(17px)'
-            });
-            $('.ax-task-completion-box').css({
-                'width': '38px'
-            });
-            $('.tw-task-completion-box__completed-task').css({
-                'display': 'none'
-            });
-        } else {
-            // 클릭시 변화
-            $('.tw-task-completion-box__background-left, .tw-task-completion-box__background-right').css({
+                'transform': 'scaleX(106.391)',
                 'background-color': '#27b6ba',
                 'border-color': '#259295'
             });
-            $('.tw-task-completion-box__check-mark').css({
-                'color': '#fff'
+            $('.tw-task-completion-box__background-right').css({
+                'transform': 'translateX(122.391px)'
             });
-            $('.ax-task-completion-box').data('bs-title', '클릭하여 다시 열기');
+            $('.ax-task-completion-box').css({
+                'width': '140px'
+            });
+            $('.tw-task-completion-box__completed-task').css({
+                'display': 'flex'
+            });
+        }, 500); // 1초 대기 후 함수 실행
+    }
+}
 
-            setTimeout(function() {
-                $('.tw-task-completion-box__background-center').css({
-                    'transform': 'scaleX(106.391)',
-                    'background-color': '#27b6ba',
-                    'border-color': '#259295'
-                });
-                $('.tw-task-completion-box__background-right').css({
-                    'transform': 'translateX(122.391px)'
-                });
-                $('.ax-task-completion-box').css({
-                    'width': '140px'
-                });
-                $('.tw-task-completion-box__completed-task').css({
-                    'display': 'flex'
-                });
-            }, 500); // 1초 대기 후 함수 실행
-        }
-    });
-});
+// 함수 2: 큰 컨텐츠 체크박스 클릭 시 실행할 함수
+function handleMediumCheckboxClick() {
+    var isCompleted = true; // 초기값 설정
 
-// sidebar- 잠금설정js
+    if (isCompleted) {
+        $(this).addClass('--completed');
+        $(this).addClass('--animate');
+        setTimeout(function() {
+            $(this).closest('.task').addClass('--done');
+            $(this).closest('.task').removeClass('--is-pinned');    
+        }.bind(this), 500);    
+    } else {
+        $(this).removeClass('--completed');
+        $(this).removeClass('--animate');
+        $(this).closest('.task').removeClass('--done');
+        $(this).closest('.task').addClass('--is-pinned');
+    }
+}
+
+// 문서가 준비되면 실행되는 코드
 $(document).ready(function() {
-    $('.ax-task-properties-header-options__lock-task-button').click(function() {
-        var contain = $(this).hasClass('--square');
+    var isCompleted = false; // 초기값 설정
 
-        if (contain) {
-            $(this).removeClass('--square');
-            $(this).addClass('--selected');
-            $('#lock-icon').addClass('bi-lock');
-            $('#lock-icon').removeClass('bi-unlock');
-            $('.lock-text').css({'display' : 'block'});
-        } else {
-            $(this).addClass('--square');
-            $(this).removeClass('--selected');
-            $('#lock-icon').removeClass('bi-lock');
-            $('#lock-icon').addClass('bi-unlock');
-            $('.lock-text').css({'display' : 'none'});
-        }
+    // 체크박스 클릭 이벤트 핸들러 등록
+    $('#checkbox').click(() => {
+        debugger;
+        isCompleted = !isCompleted; // 체크박스 클릭 시 상태 토글
+        handleCheckboxClick(); // 함수 호출
+        handleMediumCheckboxClick(isCompleted);
+    });
+
+    // 큰 컨텐츠 체크박스 클릭 이벤트 핸들러 등록
+    $(document).on('click', '.task-checkbox.--medium', function() {
+        debugger;
+        handleMediumCheckboxClick(isCompleted); // 함수 호출
     });
 });
+
 
 // 링크 저장되었다는 알람 js
 const appendAlert = (message, type) => {
@@ -185,13 +202,13 @@ $(document).ready(function() {
             '</div>');
             $('#change-input').replaceWith(newDiv);
 
-            console.log(selectedTaskIndex);
             $('.task-header__title').eq(selectedTaskIndex).text(inputText)
             isInputMode = false;
         }
     }
 
     $(document).on('click', '#change-input', function() {
+        debugger;
         toggleInputMode('.tw-editable-panel-title');
     });
 
@@ -393,7 +410,7 @@ $(document).ready(function() {
                     $('.task-card-checklist').eq(selectedTaskIndex).append(mainmoreview);
                 // 나머지 경우 
                 } else {
-                    $('.task-card-checklist__footer').eq(selectedTaskIndex).before(mainChecklistItem);
+                    $('.task-card-checklist__content').eq(selectedTaskIndex).append(mainChecklistItem);
                 }
             
                 $('.tw-task-add-checklist-item__input').val(''); // textarea 내용 비우기
@@ -454,8 +471,10 @@ $(document).ready(function() {
                 $('.' + thirdClassName).find('.ax-task-checklist-item').removeClass('--checked')
                 $('.' + thirdClassName).find('.tw-checklist-assignee__no-assignee').removeClass('--checked')
                 $('.' + thirdClassName).find('.checklist-checkbox').removeClass('--completed')
-                // 하위메뉴에 메뉴 생겨야 해서 만든 함수
-                $('.' + thirdClassName).removeClass('--checked')
+                // 하위메뉴에 메뉴 생겨야 해서 만든 함수( 조건이 있어야 할듯 막 생기면 안되고)
+                if ($('.' + thirdClassName).hasClass('--checked')) {
+                    $('.' + thirdClassName).removeClass('--checked')
+                }
             }
             if ($('.task').eq(selectedTaskIndex).find('.task-card-checklist__content').children().length < 1) {
                 $('taks').find('.task-card-checklist').remove()
@@ -463,20 +482,21 @@ $(document).ready(function() {
         }
         // 하위메뉴 checkbox 클릭 이벤트 
         function toggleTaskCheckbox(clickedElement) {
-            var contain = $('.task').eq(selectedTaskIndex).find(clickedElement).hasClass('--completed');
-            console.log(thirdClassName);
+            var contain = $('.' + thirdClassName).find(clickedElement).hasClass('--completed');
             if (!contain) {
-                console.log(thirdClassName);
                 $('.' + thirdClassName).find(clickedElement).addClass('--animate');
                 $('.' + thirdClassName).find(clickedElement).closest('.task-card-checklist-item').addClass('--checked');
                 $('.' + thirdClassName).find(clickedElement).addClass('--completed');
-                if ($('.task').eq(selectedTaskIndex).find('.task-card-checklist__content').children().length <= 1) {
-                    $('task').eq(selectedTaskIndex).find('.task-card-checklist').remove()
-                }
+                $('.task').eq(selectedTaskIndex).find('.task-card-checklist').removeClass('display');
+                // 모든 체크리스트 삭제
+                if ($('.task').eq(selectedTaskIndex).find('.task-card-checklist__content > div').length === $('.task').eq(selectedTaskIndex).find('.task-card-checklist__content > div.--checked').length) {
+                    $('.task').eq(selectedTaskIndex).find('.task-card-checklist').addClass('display');
+                }                
                 // 클릭되서 컨텐츠 없을때 사이드바에서 생기도록 만들어야함
             } else {
                 $('.' + thirdClassName).find(clickedElement).removeClass('--completed');
                 $('.' + thirdClassName).find(clickedElement).removeClass('--animate');
+                $('.task').eq(selectedTaskIndex).find('.task-card-checklist').removeClass('display');
             }
         }
         
@@ -488,10 +508,8 @@ $(document).ready(function() {
         });
         
         $(document).on('click', '.ax-task-checklist-item__checkbox', function () {
-            debugger;
             // 클릭한 애의 인덱스값가져와서 main에 있는애의 index를 가져와서해야함 
             thirdClassName = $(this).closest('.tw-task-checklist-pane__item-wrapper').attr('class').split(' ')[1];
-            console.log(thirdClassName);
             toggleTaskCheckbox('.task-checkbox.--small');
             toggleChecklistItem(this);
         });
