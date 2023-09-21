@@ -11,105 +11,6 @@
       });
     });
 
-// sidebar  에서 click box 
-// 함수 1: 체크박스 클릭 시 실행할 함수
-function handleCheckboxClick() {
-    var isCompleted = $('.tw-task-completion-box__check-mark').css('color') === 'rgb(255, 255, 255)';
-
-    // 원상복귀
-    if (isCompleted) {
-        $('.tw-task-completion-box__background-left, .tw-task-completion-box__background-right').css({
-            'background-color': 'unset',
-            'border-color': '#D4D6DB'
-        });
-        $('.tw-task-completion-box__check-mark').css({
-            'color': '#EEF0F2'
-        });
-        $('.ax-task-completion-box').data('bs-title', '클릭하여 업무 완료');
-
-        $('.tw-task-completion-box__background-center').css({
-            'transform': 'scaleX(1)',
-            'background-color': 'unset',
-            'border-color': '#D4D6DB;'
-        });
-        $('.tw-task-completion-box__background-right').css({
-            'transform': 'translateX(17px)'
-        });
-        $('.ax-task-completion-box').css({
-            'width': '38px'
-        });
-        $('.tw-task-completion-box__completed-task').css({
-            'display': 'none'
-        });
-    } else {
-        // 클릭시 변화
-        $('.tw-task-completion-box__background-left, .tw-task-completion-box__background-right').css({
-            'background-color': '#27b6ba',
-            'border-color': '#259295'
-        });
-        $('.tw-task-completion-box__check-mark').css({
-            'color': '#fff'
-        });
-        $('.ax-task-completion-box').data('bs-title', '클릭하여 다시 열기');
-
-        setTimeout(function() {
-            $('.tw-task-completion-box__background-center').css({
-                'transform': 'scaleX(106.391)',
-                'background-color': '#27b6ba',
-                'border-color': '#259295'
-            });
-            $('.tw-task-completion-box__background-right').css({
-                'transform': 'translateX(122.391px)'
-            });
-            $('.ax-task-completion-box').css({
-                'width': '140px'
-            });
-            $('.tw-task-completion-box__completed-task').css({
-                'display': 'flex'
-            });
-        }, 500); // 1초 대기 후 함수 실행
-    }
-}
-
-// 함수 2: 큰 컨텐츠 체크박스 클릭 시 실행할 함수
-function handleMediumCheckboxClick() {
-    var isCompleted = true; // 초기값 설정
-
-    if (isCompleted) {
-        $(this).addClass('--completed');
-        $(this).addClass('--animate');
-        setTimeout(function() {
-            $(this).closest('.task').addClass('--done');
-            $(this).closest('.task').removeClass('--is-pinned');    
-        }.bind(this), 500);    
-    } else {
-        $(this).removeClass('--completed');
-        $(this).removeClass('--animate');
-        $(this).closest('.task').removeClass('--done');
-        $(this).closest('.task').addClass('--is-pinned');
-    }
-}
-
-// 문서가 준비되면 실행되는 코드
-$(document).ready(function() {
-    var isCompleted = false; // 초기값 설정
-
-    // 체크박스 클릭 이벤트 핸들러 등록
-    $('#checkbox').click(() => {
-        debugger;
-        isCompleted = !isCompleted; // 체크박스 클릭 시 상태 토글
-        handleCheckboxClick(); // 함수 호출
-        handleMediumCheckboxClick(isCompleted);
-    });
-
-    // 큰 컨텐츠 체크박스 클릭 이벤트 핸들러 등록
-    $(document).on('click', '.task-checkbox.--medium', function() {
-        debugger;
-        handleMediumCheckboxClick(isCompleted); // 함수 호출
-    });
-});
-
-
 // 링크 저장되었다는 알람 js
 const appendAlert = (message, type) => {
     const wrapper = document.createElement('div')
@@ -208,7 +109,6 @@ $(document).ready(function() {
     }
 
     $(document).on('click', '#change-input', function() {
-        debugger;
         toggleInputMode('.tw-editable-panel-title');
     });
 
@@ -516,125 +416,104 @@ $(document).ready(function() {
         
     });
 
-});
-    
-
-
-        // .tw-color-label.--bg-sky-blue를 클릭할 때
-        $('.tw-color-label.--bg-sky-blue').click(function() {
-            const selectedTask = $('.task.--is-selected');
-            const taskColor = selectedTask.find('.task__task-color, .task-color');
-            
-            taskColor.removeClass(function(index, className) {
-                return (className.match(/--bg-.+/) || []).join(' ');
-            });
-
-            taskColor.addClass('--bg-sky-blue');
-        });
-
-        // .tw-color-label.--bg-green를 클릭할 때
-        $('.tw-color-label.--bg-green').click(function() {
-            const selectedTask = $('.task.--is-selected');
-            const taskColor = selectedTask.find('.task__task-color, .task-color');
-
-            taskColor.removeClass(function(index, className) {
-                return (className.match(/--bg-.+/) || []).join(' ');
-            });
-
-            taskColor.addClass('--bg-green');
-        });
-
-        // .tw-color-label.--bg-amber를 클릭할 때
-        $('.tw-color-label.--bg-amber').click(function() {
-            const selectedTask = $('.task.--is-selected');
-            const taskColor = selectedTask.find('.task__task-color, .task-color');
-            
-            taskColor.removeClass(function(index, className) {
-                return (className.match(/--bg-.+/) || []).join(' ');
-            });
-
-            taskColor.addClass('--bg-amber');
-        });
-
-        // .tw-color-label.--bg-pink를 클릭할 때
-        $('.tw-color-label.--bg-pink').click(function() {
-            const selectedTask = $('.task.--is-selected');
-            const taskColor = selectedTask.find('.task__task-color, .task-color');
-            
-            taskColor.removeClass(function(index, className) {
-                return (className.match(/--bg-.+/) || []).join(' ');
-            });
-
-            taskColor.addClass('--bg-pink');
-        });
-
-        // .tw-color-label.--bg-red를 클릭할 때
-        $('.tw-color-label.--bg-red').click(function() {
-            const selectedTask = $('.task.--is-selected');
-            const taskColor = selectedTask.find('.task__task-color, .task-color');
-            
-            taskColor.removeClass(function(index, className) {
-                return (className.match(/--bg-.+/) || []).join(' ');
-            });
-
-            taskColor.addClass('--bg-red');
-        });
-
-        // .tw-color-label.--bg-orange를 클릭할 때
-        $('.tw-color-label.--bg-orange').click(function() {
-            const selectedTask = $('.task.--is-selected');
-            const taskColor = selectedTask.find('.task__task-color, .task-color');
-            
-            taskColor.removeClass(function(index, className) {
-                return (className.match(/--bg-.+/) || []).join(' ');
-            });
-
-            taskColor.addClass('--bg-orange');
-        });
-
-        // .tw-color-label.--bg-brown를 클릭할 때
-        $('.tw-color-label.--bg-brown').click(function() {
-            const selectedTask = $('.task.--is-selected');
-            const taskColor = selectedTask.find('.task__task-color, .task-color');
-            
-            taskColor.removeClass(function(index, className) {
-                return (className.match(/--bg-.+/) || []).join(' ');
-            });
-
-            taskColor.addClass('--bg-brown');
-        });
-
-        // .tw-color-label.--bg-gray를 클릭할 때
-        $('.tw-color-label.--bg-gray').click(function() {
-            const selectedTask = $('.task.--is-selected');
-            const taskColor = selectedTask.find('.task__task-color, .task-color');
-            
-            taskColor.removeClass(function(index, className) {
-                return (className.match(/--bg-.+/) || []).join(' ');
-            });
-
-            taskColor.addClass('--bg-gray');
-        });
-
-        // .tw-color-label.--bg-rainbow를 클릭할 때
-        $('.tw-color-label.--bg-rainbow').click(function() {
-            const selectedTask = $('.task.--is-selected');
-            const taskColor = selectedTask.find('.task__task-color, .task-color');
-            
-            taskColor.removeClass(function(index, className) {
-                return (className.match(/--bg-.+/) || []).join(' ');
-            });
-
-            taskColor.addClass('--bg-rainbow');
-        });
-
-        // tw-task-properties-header-options__close-button 클릭 시 모든 task 초기화
-        $(taskPropertiesCloseButton).click(function () {
-            $('.task').removeClass('--is-selected');
-            $('.task .task-meta-item').css('color', '');
-        });
-        
     });
+
+    // .tw-color-label.--bg-sky-blue를 클릭할 때
+    $('.tw-color-label.--bg-sky-blue').click(function() {
+        const selectedTask = $('.task.--is-selected');
+        const taskColor = selectedTask.find('.task__task-color, .task-color');
+        
+        taskColor.removeClass(function(index, className) {
+            return (className.match(/--bg-.+/) || []).join(' ');
+        });
+        taskColor.addClass('--bg-sky-blue');
+    });
+    // .tw-color-label.--bg-green를 클릭할 때
+    $('.tw-color-label.--bg-green').click(function() {
+        const selectedTask = $('.task.--is-selected');
+        const taskColor = selectedTask.find('.task__task-color, .task-color');
+        taskColor.removeClass(function(index, className) {
+            return (className.match(/--bg-.+/) || []).join(' ');
+        });
+        taskColor.addClass('--bg-green');
+    });
+    // .tw-color-label.--bg-amber를 클릭할 때
+    $('.tw-color-label.--bg-amber').click(function() {
+        const selectedTask = $('.task.--is-selected');
+        const taskColor = selectedTask.find('.task__task-color, .task-color');
+        
+        taskColor.removeClass(function(index, className) {
+            return (className.match(/--bg-.+/) || []).join(' ');
+        });
+        taskColor.addClass('--bg-amber');
+    });
+    // .tw-color-label.--bg-pink를 클릭할 때
+    $('.tw-color-label.--bg-pink').click(function() {
+        const selectedTask = $('.task.--is-selected');
+        const taskColor = selectedTask.find('.task__task-color, .task-color');
+        
+        taskColor.removeClass(function(index, className) {
+            return (className.match(/--bg-.+/) || []).join(' ');
+        });
+        taskColor.addClass('--bg-pink');
+    });
+    // .tw-color-label.--bg-red를 클릭할 때
+    $('.tw-color-label.--bg-red').click(function() {
+        const selectedTask = $('.task.--is-selected');
+        const taskColor = selectedTask.find('.task__task-color, .task-color');
+        
+        taskColor.removeClass(function(index, className) {
+            return (className.match(/--bg-.+/) || []).join(' ');
+        });
+        taskColor.addClass('--bg-red');
+    });
+    // .tw-color-label.--bg-orange를 클릭할 때
+    $('.tw-color-label.--bg-orange').click(function() {
+        const selectedTask = $('.task.--is-selected');
+        const taskColor = selectedTask.find('.task__task-color, .task-color');
+        
+        taskColor.removeClass(function(index, className) {
+            return (className.match(/--bg-.+/) || []).join(' ');
+        });
+        taskColor.addClass('--bg-orange');
+    });
+    // .tw-color-label.--bg-brown를 클릭할 때
+    $('.tw-color-label.--bg-brown').click(function() {
+        const selectedTask = $('.task.--is-selected');
+        const taskColor = selectedTask.find('.task__task-color, .task-color');
+        
+        taskColor.removeClass(function(index, className) {
+            return (className.match(/--bg-.+/) || []).join(' ');
+        });
+        taskColor.addClass('--bg-brown');
+    });
+    // .tw-color-label.--bg-gray를 클릭할 때
+    $('.tw-color-label.--bg-gray').click(function() {
+        const selectedTask = $('.task.--is-selected');
+        const taskColor = selectedTask.find('.task__task-color, .task-color');
+        
+        taskColor.removeClass(function(index, className) {
+            return (className.match(/--bg-.+/) || []).join(' ');
+        });
+        taskColor.addClass('--bg-gray');
+    });
+    // .tw-color-label.--bg-rainbow를 클릭할 때
+    $('.tw-color-label.--bg-rainbow').click(function() {
+        const selectedTask = $('.task.--is-selected');
+        const taskColor = selectedTask.find('.task__task-color, .task-color');
+        
+        taskColor.removeClass(function(index, className) {
+            return (className.match(/--bg-.+/) || []).join(' ');
+        });
+        taskColor.addClass('--bg-rainbow');
+    });
+    // tw-task-properties-header-options__close-button 클릭 시 모든 task 초기화
+    $(taskPropertiesCloseButton).click(function () {
+        $('.task').removeClass('--is-selected');
+        $('.task .task-meta-item').css('color', '');
+    });
+        
+});
 
 // sidebar_자동저장
 $(document).ready(function() {
