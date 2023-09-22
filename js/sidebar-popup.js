@@ -1632,7 +1632,7 @@ $(document).ready(function() {
             deletemodalContainer.remove();
         }
     }  
-    // 수정하기 버튼 클릭 시 내용 수정
+    // check-list 수정하기 버튼 클릭 시 내용 수정
     function toggleInputMode(textElement, clickedIndex) {
         if (!isInputMode) {
             var checklistName = $(textElement).eq(clickedIndex).text();

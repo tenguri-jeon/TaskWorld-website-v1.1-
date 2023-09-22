@@ -42905,15 +42905,15 @@ a:hover .tw-channel-location {
     background: #d6f5dd
 }
 
-.tw-resource-row.--approval-resources: hover {
+.tw-resource-row.--approval-resources:hover {
     background:rgba(114,209,134,.4)
 }
 
-.tw-resource-row.--approval-resources: hover .tw-toolbar-button {
+.tw-resource-row.--approval-resources:hover .tw-toolbar-button {
     background:transparent
 }
 
-.tw-resource-row.--approval-resources: hover .tw-resource-table__pin-icon {
+.tw-resource-row.--approval-resources:hover .tw-resource-table__pin-icon {
     visibility:hidden
 }
 
@@ -43062,4 +43062,21 @@ a:hover .tw-channel-location {
 
 .dropdown-menu-end .bi{
     font-size: 12px;
+}
+
+.pre-created-tasklist{
+    -ms-flex-align: center;
+    background-color: #1f5c87;
+    border-radius: 8px;
+    cursor: default;
+    display: flex;
+    font-size: 14px;
+    padding: 8px 5px 8px 10px;
+    position: relative;
+}
+
+.pre-created-tasklist.--view-column{
+    margin: 0 10px 10px 5px;
+    width: 280px;
+    -webkit-box-align: center;
 }

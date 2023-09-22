@@ -8875,7 +8875,7 @@ a.tw-click-logic[href],button.tw-click-logic:not(:disabled) {
     color: #4882ab
 }
 
-.tw-link:not(.--disabled).--color-blue: focus,.tw-link:not(.--disabled).--color-blue:hover {
+.tw-link:not(.--disabled).--color-blue:focus,.tw-link:not(.--disabled).--color-blue:hover {
     color:#1f5c87
 }
 
@@ -8883,7 +8883,7 @@ a.tw-click-logic[href],button.tw-click-logic:not(:disabled) {
     color: #7e68e5
 }
 
-.tw-link:not(.--disabled).--color-purple: focus,.tw-link:not(.--disabled).--color-purple:hover {
+.tw-link:not(.--disabled).--color-purple:focus,.tw-link:not(.--disabled).--color-purple:hover {
     color:#5f4db0
 }
 

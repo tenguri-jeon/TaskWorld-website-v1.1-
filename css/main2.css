@@ -425,21 +425,6 @@
     margin-bottom: 5px;
     overflow: hidden;
 }
-.tasklist-header{
-    background-color: #1f5c87;
-    align-items: center;
-    border-radius: 8px 8px 0 0;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    font-size: 14px;
-    font-weight: 600;
-    height: 44px;
-    justify-content: space-between;
-    padding: 0 5px;
-    position: relative;
-}
 .tasklist-header__left-section{
     flex: 1 1;
     overflow: hidden;

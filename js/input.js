@@ -3,6 +3,8 @@ $(document).ready(function() {
   var isInputMode = false;
   var clickedElementIndex = null;
   var inputText = '';
+  var completed = true; 
+
 
   function toggleInputMode(textElement, index) {
     var checklistName = $(textElement).eq(index).text();
@@ -31,6 +33,92 @@ $(document).ready(function() {
       $('.tasklist-header__editable-text-field-container').eq(index).append(newDiv);
       isInputMode = false;
     }
+  }
+
+  function makeNewProject(){
+    var newTitle = $('.tw-editable-text-field__input').val();
+    var newDiv = $(
+      '<div class="kanban-board-columns__column" style="width: 300px;">' +
+        '<section class="tasklist">' +
+          '<div class="kanban-list-header">' +
+            '<div class="tasklist__frame-top">' +
+              '<div>' +
+                '<div class="tasklist-header --bg-blue2">' +
+                  '<div class="tasklist-header__left-section">' +
+                    '<div class="tasklist-header__editable-text-field-container">' +
+                      '<div class="click-area editable-text-field --plain-text" role="button" tabindex="0">' +
+                        '<div class="editable-text-field__text">' + newTitle + '</div>' +
+                        '<i class="icon editable-text-field__icon" data-icon="pen">' +
+                          '<i class="bi bi-pencil"></i>' +
+                        '</i>' +
+                      '</div>' +
+                    '</div>' +
+                  '</div>' +
+                  '<div class="tasklist-header__right-section">' +
+                    '<div class="click-area tasklist-header__add-icon" role="button">' +
+                      '<i class="bi bi-plus fs-4"></i>' +
+                    '</div>' +
+                    '<div class="tasklist-menu">' +
+                      '<div class="click-area tasklist-menu__button" role="button">' +
+                        '<i class="bi bi-three-dots-vertical"></i>' +
+                      '</div>' +
+                    '</div>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="tasklist-header__input-panel-container" style="display: none;">' +
+                  '<section class="task-or-note-input-panel">' +
+                    '<textarea class="task-or-note-input-panel__input-box hack-scrollbar" placeholder="새 업무 만들기" style="height: inherit;"></textarea>' +
+                    '<div class="task-or-note-input-panel__panels">' +
+                      '<div class="task-or-note-input-panel__panel-left">' +
+                        '<div class="task-properties-panel">' +
+                          '<div class="click-area task-properties-panel__member-panel-item" role="button" tabindex="0">' +
+                            '<i class="icon bi bi-person-plus"></i>' +
+                          '</div>' +
+                          '<div class="click-area task-properties-panel__tag-panel-item" role="button" tabindex="0">' +
+                            '<i class="icon bi bi-tag"></i>' +
+                          '</div>' +
+                          '<div class="click-area task-properties-panel__calendar-panel-item" role="button" tabindex="0">' +
+                            '<i class="icon bi bi-calendar4-week"></i>' +
+                          '</div>' +
+                        '</div>' +
+                      '</div>' +
+                      '<div class="task-or-note-input-panel__panel-right">' +
+                        '<button class="button --size-28 --secondary task-or-note-input-panel__cancel-button" type="button">' +
+                          '<div class="button__main-container">' +
+                            '<span class="tasks.buttonns.cancel">취소</span>' +
+                          '</div>' +
+                        '</button>' +
+                        '<button class="button --size-28 task-or-note-input-panel__create-button" type="button" disabled="disabled">' +
+                          '<div class="button__main-container">' +
+                            '<span class="tasks.buttonns.create">만들기</span>' +
+                          '</div>' +
+                        '</button>' +
+                      '</div>' +
+                    '</div>' +
+                  '</section>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</section>' +
+      '</div>'
+    );
+    var newElement = $(
+      '<div class="click-area create-tasklist-button" role="button" tabindex="0">' +
+        '<i class="tw-icon bi bi-plus-lg"></i>' +
+        '<span class="projects.button.create-tasklist-button_new_tasklist">새 업무리스트 만들기</span>' +
+      '</div>'
+    );
+
+    var newElementParent = $('<div class="kanban-column"></div>'
+
+    )
+        
+    $('.tw-editable-text-field__input').closest('.kanban-column').append(newDiv);
+    $('.kanban-board__new-tasklist-area').remove();
+    $('.kanban-columns').prepend(newElementParent);
+    $('.kanban-column').eq(0).append(newElement);
+
   }
 
   // input에서 다른곳 클릭시 text로 바뀜
@@ -77,8 +165,58 @@ $(document).ready(function() {
   $(document).on('keypress', '.tw-editable-text-field__input', function(event) {
     if (event.which === 13) {
       event.preventDefault();
-      toggleInputMode('.editable-text-field__text', clickedElementIndex);
+      if ($(this).closest('.pre-created-tasklist').length > 0) {
+        makeNewProject();
+        return;
+      }else{
+        toggleInputMode('.editable-text-field__text', clickedElementIndex);
+      }
     }
   });
+
+  $('.tw-task-completion-box__click-area').click(function(){
+    slidebarCompleted();
+  })
   
+  // sidebar_자동저장
+  
+  function slidebarCompleted() {
+    if (completed) {
+      $('.tw-task-properties-header').addClass('--completed');
+      setTimeout(function(){
+        $('.ax-task-completion-box').css({
+          'width': '130px'
+        });
+        $('.tw-task-completion-box__background-center').css({
+          'transform': 'scaleX(107)'
+        });
+        $('.tw-task-completion-box__background-right').css({
+          'transform': 'translateX(122.391px)'
+        });
+        $('.tw-task-completion-box__completed-task').css({
+          'display': 'flex'
+        },2000);
+        console.log(
+        $('.task').eq(clickedElementIndex))
+      })
+  
+      completed = false; // 상태를 토글합니다.
+    } else {
+      $('.tw-task-properties-header').removeClass('--completed');
+      $('.ax-task-completion-box').css({
+        'width': '34px'
+      });
+      $('.tw-task-completion-box__background-center').css({
+        'transform': 'scaleX(1)'
+      });
+      $('.tw-task-completion-box__background-right').css({
+        'transform': 'translateX(17px)'
+      });
+      $('.tw-task-completion-box__completed-task').css({
+        'display': 'none'
+      });
+  
+      completed = true; // 상태를 토글합니다.
+    }
+  }
 });

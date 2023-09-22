@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function(){
             secondClass = '';
             clickedElement = $(this); // 전역 변수에 할당
             clickedIndex = $('.tasklist-menu__button').index(clickedElement); // 전역 변수에 할당
-
+    
             $('.tasklist-header').eq(clickedIndex).addClass(secondClass);
             $('.tasklist-header__input-panel-container').eq(clickedIndex).addClass(secondClass);
         });
@@ -57,19 +57,28 @@ document.addEventListener("DOMContentLoaded", function(){
         // colorpicker를 클릭하면 array에 colorpicker색을 넣어주는 함수
         $('.color-label').click(function() {
             const classesArray = $(this).attr('class').split(' ');
-            var allcolor = '--bg-blue2 --bg-sky-blue --bg-pink --bg-purple -bg-sky-blue -bg-green --bg-amber --bg-red --bg-orange --bg-brown --bg-gray --bg-rainbow';
-            var classesToRemove = allcolor.split(' ');
     
             // 가져온 클래스 목록 배열의 두 번째 클래스를 가져옵니다.(color ex) --bg-pink )
             if (classesArray.length >= 2) {
-                secondClass = classesArray[1]; // 전역 변수에 할당
-
-                $('.tasklist-header').eq(clickedIndex).removeClass(classesToRemove.join(' '));
-                $('.tasklist-header__input-panel-container').eq(clickedIndex).removeClass(allcolor);
-
-                $('.tasklist-header').eq(clickedIndex).addClass(secondClass);
-                $('.tasklist-header__input-panel-container').eq(clickedIndex).addClass(secondClass);
-            } 
+                var secondClass = classesArray[1]; // 두 번째 클래스 이름을 가져와서 변수에 할당
+                var allcolor = '--bg-blue2 --bg-pink --bg-purple --bg-sky-blue --bg-green --bg-amber --bg-red --bg-orange --bg-brown --bg-gray --bg-rainbow';
+            
+                // 클래스를 추가 및 제거할 대상 요소를 선택합니다.
+                var $tasklistHeader = $('.tasklist-header').eq(clickedIndex);
+                var $inputPanelContainer = $('.tasklist-header__input-panel-container').eq(clickedIndex);
+            
+                // 클래스 이름 목록을 배열로 분할합니다.
+                var classList = allcolor.split(' ');
+            
+                // 모든 클래스를 제거합니다.
+                $tasklistHeader.removeClass(classList);
+                $inputPanelContainer.removeClass(classList);
+            
+                // 두 번째 클래스를 추가합니다.
+                $tasklistHeader.addClass(secondClass);
+                $inputPanelContainer.addClass(secondClass);
+            }
+            
         });
     
         // colorpicker 클릭하면 해당하는 색 active해주는 이벤트
@@ -100,99 +109,6 @@ document.addEventListener("DOMContentLoaded", function(){
             menuPopup.style.left = menuPopupLeft + 'px';
             menuPopup.style.top = menuPopupTop + 'px';
             menuPopup.style.position = 'absolute';
-
-            //header color chage
-            // 각 색상 원소에 대한 클래스 추가 함수
-            // function addColorClass(button, colorClass) {
-            //     const tasklistHeader = button.closest('.tasklist-header');
-            //     if (tasklistHeader) {
-            //         tasklistHeader.classList.remove('--bg-blue2', '--bg-purple', '--bg-sky-blue', '--bg-green', '--bg-amber', '--bg-pink', '--bg-red', '--bg-orange', '--bg-brown', '--bg-brown', '--bg-gray', '--bg-rainbow');
-            //         tasklistHeader.classList.add(colorClass);
-            //     }
-                
-            //     const tasklistHeaderInputContainers = tasklistHeader.querySelectorAll('.tasklist-header__input-panel-container');
-            //     if (tasklistHeaderInputContainers) {
-            //         tasklistHeaderInputContainers.forEach(function(inputContainer) {
-            //             inputContainer.classList.remove('--bg-blue2', '--bg-purple', '--bg-sky-blue', '--bg-green', '--bg-amber', '--bg-pink', '--bg-red', '--bg-orange', '--bg-brown', '--bg-brown', '--bg-gray', '--bg-rainbow');
-            //             inputContainer.classList.add(colorClass);
-            //         });
-            //     }
-            // }
-
-            // const colorPickerCircleBlue2 = menuPopup.querySelector('.color-picker__circle.--color-blue2');
-            // const colorPickerCirclePurple = menuPopup.querySelector('.color-picker__circle.--color-purple');
-            // const colorPickerCircleSkyblue = menuPopup.querySelector('.color-picker__circle.--color-sky-blue');
-            // const colorPickerCircleGreen = menuPopup.querySelector('.color-picker__circle.--color-green');
-            // const colorPickerCircleYellow = menuPopup.querySelector('.color-picker__circle.--color-amber');
-            // const colorPickerCirclePink = menuPopup.querySelector('.color-picker__circle.--color-pink');
-            // const colorPickerCircleRed = menuPopup.querySelector('.color-picker__circle.--color-red');
-            // const colorPickerCircleOrange = menuPopup.querySelector('.color-picker__circle.--color-orange');
-            // const colorPickerCircleBrown = menuPopup.querySelector('.color-picker__circle.--color-brown');
-            // const colorPickerCircleGray = menuPopup.querySelector('.color-picker__circle.--color-gray');
-            // const colorPickerCircleRainbow = menuPopup.querySelector('.color-picker__circle.--color-rainbow');
-
-            // if (colorPickerCircleBlue2) {
-            //     colorPickerCircleBlue2.addEventListener('click', function() {
-            //         addColorClass(button, '--bg-blue2');
-            //     });
-            // }
-
-            // if (colorPickerCirclePurple) {
-            //     colorPickerCirclePurple.addEventListener('click', function() {
-            //         addColorClass(button, '--bg-purple');
-            //     });
-            // }
-
-            // if (colorPickerCircleSkyblue) {
-            //     colorPickerCircleSkyblue.addEventListener('click', function() {
-            //         addColorClass(button, '--bg-sky-blue');
-            //     });
-            // }
-
-            // if (colorPickerCircleGreen) {
-            //     colorPickerCircleGreen.addEventListener('click', function() {
-            //         addColorClass(button, '--bg-green');
-            //     });
-            // }
-
-            // if (colorPickerCircleYellow) {
-            //     colorPickerCircleYellow.addEventListener('click', function() {
-            //         addColorClass(button, '--bg-amber');
-            //     });
-            // }
-
-            // if (colorPickerCirclePink) {
-            //     colorPickerCirclePink.addEventListener('click', function() {
-            //         addColorClass(button, '--bg-pink');
-            //     });
-            // }
-            // if (colorPickerCircleRed) {
-            //     colorPickerCircleRed.addEventListener('click', function() {
-            //         addColorClass(button, '--bg-red');
-            //     });
-            // }
-            // if (colorPickerCircleOrange) {
-            //     colorPickerCircleOrange.addEventListener('click', function() {
-            //         addColorClass(button, '--bg-orange');
-            //     });
-            // }
-            // if (colorPickerCircleBrown) {
-            //     colorPickerCircleBrown.addEventListener('click', function() {
-            //         addColorClass(button, '--bg-brown');
-            //     });
-            // }
-            // if (colorPickerCircleGray) {
-            //     colorPickerCircleGray.addEventListener('click', function() {
-            //         addColorClass(button, '--bg-gray');
-            //     });
-            // }
-            // if (colorPickerCircleRainbow) {
-            //     colorPickerCircleRainbow.addEventListener('click', function() {
-            //         addColorClass(button, '--bg-rainbow');
-            //     });
-            // }
-            //header color chage
-
     
             if (menuPopupLayer.style.display === 'none' || menuPopupLayer.style.display === '') {
             menuPopup.style.display = 'block';
@@ -839,5 +755,5 @@ document.addEventListener("DOMContentLoaded", function(){
         e.stopPropagation();
         openconfirmationModal();
     });
-
+    
 });

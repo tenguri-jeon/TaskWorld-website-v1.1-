@@ -1,11 +1,7 @@
 // 새로 만들기
 $(document).ready(function() {
-    // 새로만들기 클릭하면
-    // 새로운 컴포넌트 만들어짐.
-    // 기능은 이미 되어 있으니까 틀만 잘 만들면 됨.
-    // 해서 엔터를 누르면새로운 새로운 section형성
-    $('.create-tasklist-button').click(function(){
-        debugger;
+
+    $(document).on('click' , '.create-tasklist-button' , function(){
         // newDiv 는 새로만들기 클릭했을 때, kanban header제목 정해주는 영역임
         var newDiv = $( '<div class="kanban-board__new-tasklist-area">' +
                 '<div>' +
@@ -23,6 +19,18 @@ $(document).ready(function() {
         
         $('.create-tasklist-button').closest('.kanban-column').append(newDiv);
         $('.create-tasklist-button').remove();
+    })
+
+    $(document).on('click', '.tw-pre-created-tasklist__icon .bi-x-lg', function() {
+        var newElement = $(
+            '<div class="click-area create-tasklist-button" role="button" tabindex="0">' +
+              '<i class="tw-icon bi bi-plus-lg"></i>' +
+              '<span class="projects.button.create-tasklist-button_new_tasklist">새 업무리스트 만들기</span>' +
+            '</div>'
+          );
+        $(this).closest('.kanban-column').append(newElement);
+        $(this).closest('.pre-created-tasklist').remove()
+
     })
 
 })

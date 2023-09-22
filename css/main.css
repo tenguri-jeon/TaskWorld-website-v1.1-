@@ -524,6 +524,7 @@
     background-color: #fff;
     border-color: #27b6ba;
     color: #0d1017;
+    flex-basis: 90%;
 }
 .editable-text-field__icon{
     margin-left: 5px;
@@ -2690,5 +2691,30 @@ textarea:focus{
 }
 .color-picker__circle.--selected.--color-rainbow{
     border-color: rgba(70, 76, 89, .3);
+}
+
+.pre-created-tasklist{
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: flex-start;
+    background-color: #1f5c87;
+    border-radius: 8px;
+    cursor: default;
+    display: flex;
+    font-size: 14px;
+    padding: 8px 8px 8px 10px;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pre-created-tasklist.pre-created-tasklist{
+    margin: 0 10px 10px 5px;
+    width: 280px;
+}
+
+.pre-created-tasklist .tw-pre-created-tasklist__icon{
+    transform: scale(1.5);
+    color: white;
 }
 

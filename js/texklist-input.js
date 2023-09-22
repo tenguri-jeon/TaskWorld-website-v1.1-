@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
             panel.style.display = 'block';
             const index = Array.from(tasklistContainer).indexOf(container);
             if (index !== -1) {
-                tasklistContainer[index].style.height = '543px'; //9/18수정//
+                tasklistContainer[index].style.height = '543px';
             }
             if (icon.classList.contains('tasklist-header__add-icon')) {
                 activePanelHeader = panel;
@@ -64,6 +64,33 @@ document.addEventListener("DOMContentLoaded", function() {
             togglePanel(button, panelFooter, container);
         });
     });
+    
+    function attachClickEventToDynamicElements() {
+        var dynamicIcons = document.querySelectorAll('.click-area.create-tasklist-button');
+        
+        dynamicIcons.forEach(function(icon, index) {
+          icon.addEventListener('click', function() {
+            const panel = inputPanelsHeader[index]; // 동적으로 생성된 요소의 패널과 컨테이너 선택
+            const container = tasklistContainer[index];
+            togglePanel(icon, panel, container);
+          });
+        });
+      }
+      
+      // 페이지가 로드될 때 초기화 및 이벤트 핸들러 연결
+      document.addEventListener('DOMContentLoaded', function() {
+        // 초기 요소에 대한 이벤트 핸들러 연결
+        iconElementsHeader.forEach((icon, index) => {
+          icon.addEventListener('click', function() {
+            const panel = inputPanelsHeader[index];
+            const container = tasklistContainer[index];
+            togglePanel(icon, panel, container);
+          });
+        });
+        
+        // 동적 요소에 대한 이벤트 핸들러 연결
+        attachClickEventToDynamicElements();
+      });
 
     cancelButtonElements.forEach((cancelButton, index) => {
         cancelButton.addEventListener('click', function() {
