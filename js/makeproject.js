@@ -41,7 +41,7 @@ $(document).ready(function() {
 
     // component만드는 함수
     function makeNewProject(title, clickindex) {
-        var newComponent = $('<div class="task__outer">').append(
+        var newComponent = $('<div class="task__outer" draggable="true">').append(
             $('<div class="task__wrapper">').append(
                 $('<section class="task">').append(
                     $('<div class="task-color task__task-color"></div>'),

@@ -2718,3 +2718,10 @@ textarea:focus{
     color: white;
 }
 
+.is-dragging{
+    background-color: #999999;
+}
+
+.is-dragging .task{
+    background-color: #999;
+}

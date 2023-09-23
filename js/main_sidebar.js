@@ -40,8 +40,8 @@ $(document).ready(function() {
     });
 
     $(document).on('keypress', '.modify-input', function(event) {
+        event.preventDefault();
         if (event.which === 13) {
-            event.preventDefault();
             toggleInputMode('.tw-editable-panel-title');
         }
     });
@@ -52,31 +52,37 @@ $(document).ready(function() {
 
     // task 클릭 시 background color 변경 및 sidebar 열기
     $(document).on('click', '.task', function() {
+        debugger;
+        var clickedElement = event.target;
         const clickedTask = $(this);
         clickedTaskIndex = $(this).data('task-index');
-
         const contain = clickedTask.hasClass('--is-selected');
         const componentName = clickedTask.find('.task-header__title').text();
-    
-        // 여기에 화면 초기화 기능 넣어줄 예정임 sidebar 열릴때마다 화면 초기화 해주는 함수 (단계거쳐야함)
-        belong()
-        checklist()
-        
+            
         // 모든 task 초기화
         $('.task').removeClass('--is-selected');
         $('.task .task-meta-item').css('color', ''); 
     
         if (!contain) {
-            clickedTask.addClass('--is-selected');
-            clickedTask.removeClass('--done');
-    
-            clickedTask.find('.task-meta-item').css('color', '#fff');
-    
-            floatingSidebarModal.style.display = 'block';
-            $('.ax-editable-panel-title').text(componentName);
-    
-            // 클릭한 task의 index를 저장
-            selectedTaskIndex = $('.task').index(clickedTask);
+            // 조건 중 만약 area input박스를 누르면 나오지 않도록 설정
+            if (clickedElement.classList.contains('task-checkbox')) {
+                floatingSidebarModal.style.display = 'none';
+                slidebarCompleted();
+            }else{
+                clickedTask.addClass('--is-selected');
+                clickedTask.removeClass('--done');
+                
+                clickedTask.find('.task-meta-item').css('color', '#fff');
+                
+                floatingSidebarModal.style.display = 'block';
+                belong()
+                checklist()
+                bigCheck()
+                $('.ax-editable-panel-title').text(componentName);
+                
+                // 클릭한 task의 index를 저장
+                selectedTaskIndex = $('.task').index(clickedTask);
+            }
         } else {
             floatingSidebarModal.style.display = 'none';
         }
@@ -95,7 +101,58 @@ $(document).ready(function() {
         $('.tw-task-checklist-pane__item-wrapper').remove()
         // 초기화 했으면 main에 있는 글자 데이터 가져와서 , 그것의 length() 가져오고 그것만큼 생기도록 만들어줘야햠
         const number = $('.task').eq(clickedTaskIndex).find('.task-card-checklist__content').children().length
-        console.log(number)
+        classCounter = $('.task').eq(clickedTaskIndex).find('.click-area task-card-checklist-item').attr('class')
+        console.log(classCounter)
+        var enteredText = '텍스트'
+
+        // length가져왔으니 그것만큼 체크리스트 만들어주기
+        // 컴포넌트 가져왔고 클릭한 애의 이름 가져오고 그거에 맞게 
+        // 클래스 이름 부여해 주면 연동 가능!
+        var newDiv = $('<div class="tw-task-checklist-pane__item-wrapper' + classCounter + '">' +
+        '<div class="tw-task-checklist-item ax-task-checklist-item" data-title="리스트 제목" data-complete="true" style="opacity: 1;">' +
+        '<div class="tw-task-checklist-item__checkbox-container">' +
+        '<div class="tw-click-area tw-task-checkbox checklist-checkbox ax-task-checklist-item__checkbox --large --clickable" role="button" tabindex="0">' +
+        '<i class="tw-icon tw-task-checkbox__check-mark bi bi-check-lg"></i>' +
+        '<span style="display: none;"></span>' +
+        '</div>' +
+        '</div>' +
+        '<div class="tw-task-checklist-item__label-container ax-task-checklist-item__label-container" draggable="true">' +
+        '<div>' +
+        '<div class="tw-click-area tw-checklist-assignee ax-checklist-assignee --clickable" role="button" tabindex="0">' +
+        '<div class="tw-checklist-assignee__no-assignee">' +
+        '<i class="tw-icon bi bi-person-plus"></i>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="tw-task-checklist-item__label">' +
+        '<div class="tw-task-checklist-item__label-title ax-task-checklist-item__label-title">' +
+        '<div class="tw-editable-text-area ax-editable-text-area --editable --plain-text">' +
+        '<i class="tw-icon tw-editable-text-area__icon bi bi-pencil"></i>' +
+        '<article class="tw-markdown-content tw-editable-text-area__text ax-editable-text-area__text">' +
+        '<p>' + enteredText + '</p>' +
+        '</article>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="tw-click-area tw-task-checklist-item__delete-button ax-task-checklist-item__delete-button --clickable" role="button" tabindex="0">' +
+        '<i class="delete-checklist tw-icon bi bi-trash"></i>' +
+        '</div>' +
+        '</div>' +
+        '</div>');
+
+    }
+
+    // 컴포넌트 열때마다 체크박스 확인 후,sidebar와 연동
+    function bigCheck(){
+        const contain = $('.task').eq(clickedTaskIndex).find('.task-checkbox').hasClass('--completed')
+        console.log(contain)
+        if (!contain) {
+            completed = false;
+            slidebarCompleted()
+        }else{
+            completed = true;
+            slidebarCompleted()
+        }
     }
         
     // .tw-color-label.--bg-purple를 클릭할 때
@@ -278,10 +335,11 @@ $(document).ready(function() {
             $('.tw-task-add-checklist-item__input').val(''); // textarea 내용 비우기
         }
 
-        $('.tw-task-add-checklist-item__input').keypress(function (event) {
+        $(document).on('keydown', '.tw-task-add-checklist-item__input', function (event) {
+            console.log('keydown event fired');
             if (event.which == 13) { // 13은 Enter 키의 키 코드입니다.
+                event.preventDefault(); // 엔터 키의 기본 동작인 줄바꿈을 막습니다.
                 classCounter++;
-                event.preventDefault(); // 기본 엔터 동작을 막습니다.
                 enteredText = $(this).val(); // textarea의 내용을 가져옵니다.
                 addChecklistItem(enteredText, classCounter, selectedTaskIndex);
             }
@@ -365,7 +423,6 @@ $(document).ready(function() {
             }
         }
         
-        // 클릭한 애의 부모의 data id값을 알아야하고 그걸 변수 처리해서 위에 함수에 적용해야한다.
         $(document).on('click', '.task-checkbox.--small', function () {
             thirdClassName = $(this).closest('.task-card-checklist-item').attr('class').split(' ')[2];
             toggleTaskCheckbox(this);
@@ -477,13 +534,12 @@ $(document).ready(function() {
         $('.task').removeClass('--is-selected');
         $('.task .task-meta-item').css('color', '');
     });
-    
 
-    //메인 / sidebar 체크 
+    //메인 // sidebar 체크 
     // sidbar 체크박스 클릭
-    $(document).on('click' , '.tw-task-completion-box__click-area', function(){
-        slidebarCompleted();
-    })
+    // $(document).on('click' , '.tw-task-completion-box__click-area', function(){
+    //     slidebarCompleted();
+    // })
 
     // main 체크박스 클릭
     $(document).on('click' , '.task-checkbox', function(){
@@ -494,7 +550,6 @@ $(document).ready(function() {
     function slidebarCompleted() {
         if (completed) {
           $('.tw-task-properties-header').addClass('--completed');
-          setTimeout(function(){
             $('.ax-task-completion-box').css({
               'width': '130px'
             });
@@ -506,12 +561,11 @@ $(document).ready(function() {
             });
             $('.tw-task-completion-box__completed-task').css({
               'display': 'flex'
-            },2000);
+            });
             // 선택한 $('.task').eq(selectedTaskIndex)의 자식요소의 체크박스 체크 확인
             $('.task').eq(selectedTaskIndex).find('.click-area task-checkbox, .--medium').addClass('--completed')
             $('.task').eq(selectedTaskIndex).addClass('--done')
             completedConponentTime()
-        })
       
           completed = false; // 상태를 토글합니다.
         } else {
