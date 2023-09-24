@@ -76,8 +76,8 @@ $(document).ready(function() {
                 
                 floatingSidebarModal.style.display = 'block';
                 belong()
-                checklist()
-                bigCheck()
+                // checklist()
+                // bigCheck()
                 $('.ax-editable-panel-title').text(componentName);
                 
                 // 클릭한 task의 index를 저장
@@ -101,13 +101,8 @@ $(document).ready(function() {
         $('.tw-task-checklist-pane__item-wrapper').remove()
         // 초기화 했으면 main에 있는 글자 데이터 가져와서 , 그것의 length() 가져오고 그것만큼 생기도록 만들어줘야햠
         const number = $('.task').eq(clickedTaskIndex).find('.task-card-checklist__content').children().length
-        classCounter = $('.task').eq(clickedTaskIndex).find('.click-area task-card-checklist-item').attr('class')
-        console.log(classCounter)
-        var enteredText = '텍스트'
+        classCounter = $('.task').eq(clickedTaskIndex).find('.task-card-checklist-item').attr('class')
 
-        // length가져왔으니 그것만큼 체크리스트 만들어주기
-        // 컴포넌트 가져왔고 클릭한 애의 이름 가져오고 그거에 맞게 
-        // 클래스 이름 부여해 주면 연동 가능!
         var newDiv = $('<div class="tw-task-checklist-pane__item-wrapper' + classCounter + '">' +
         '<div class="tw-task-checklist-item ax-task-checklist-item" data-title="리스트 제목" data-complete="true" style="opacity: 1;">' +
         '<div class="tw-task-checklist-item__checkbox-container">' +
@@ -140,6 +135,14 @@ $(document).ready(function() {
         '</div>' +
         '</div>');
 
+        // length가져왔으니 그것만큼 체크리스트 만들어주기
+        // 컴포넌트 가져왔고 클릭한 애의 이름 가져오고 그거에 맞게 
+        // 클래스 이름 부여해 주면 연동 가능!
+        for (let i = 0; i < number.length; i++) {
+            var enteredText = $('.'+ classCounter).find('.markdown-line').eq(i).text()
+            var clonedDiv = newDiv.clone();
+            $('.tw-task-add-checklist-item').before(clonedDiv);
+        }
     }
 
     // 컴포넌트 열때마다 체크박스 확인 후,sidebar와 연동
@@ -245,7 +248,7 @@ $(document).ready(function() {
             }
         });
         // input 클릭 시 text로 변환시키는 이벤트
-        $(document).on('keypress', '.checklist-input', function(event) {
+        $('.tw-task-add-checklist-item__input').keypress(function (event) {
             if (event.which === 13) {
                 event.preventDefault();
                 inputText = $('.checklist-input').val().trim();
@@ -336,7 +339,7 @@ $(document).ready(function() {
         }
 
         $(document).on('keydown', '.tw-task-add-checklist-item__input', function (event) {
-            console.log('keydown event fired');
+            debugger;
             if (event.which == 13) { // 13은 Enter 키의 키 코드입니다.
                 event.preventDefault(); // 엔터 키의 기본 동작인 줄바꿈을 막습니다.
                 classCounter++;
