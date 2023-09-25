@@ -58,15 +58,12 @@ $(document).ready(function() {
         clickedTaskIndex = $(this).data('task-index');
         const contain = clickedTask.hasClass('--is-selected');
         const componentName = clickedTask.find('.task-header__title').text();
-<<<<<<< Updated upstream
             
-=======
     
         // 여기에 화면 초기화 기능 넣어줄 예정임 sidebar 열릴때마다 화면 초기화 해주는 함수 (단계거쳐야함)
         belong()
         checklist()
 
->>>>>>> Stashed changes
         // 모든 task 초기화
         $('.task').removeClass('--is-selected');
         $('.task .task-meta-item').css('color', ''); 
@@ -109,7 +106,6 @@ $(document).ready(function() {
         $('.tw-task-checklist-pane__item-wrapper').remove()
         // 초기화 했으면 main에 있는 글자 데이터 가져와서 , 그것의 length() 가져오고 그것만큼 생기도록 만들어줘야햠
         const number = $('.task').eq(clickedTaskIndex).find('.task-card-checklist__content').children().length
-<<<<<<< Updated upstream
         classCounter = $('.task').eq(clickedTaskIndex).find('.task-card-checklist-item').attr('class')
 
         var newDiv = $('<div class="tw-task-checklist-pane__item-wrapper' + classCounter + '">' +
@@ -165,10 +161,8 @@ $(document).ready(function() {
             completed = true;
             slidebarCompleted()
         }
-=======
         console.log(number)
         
->>>>>>> Stashed changes
     }
         
     // .tw-color-label.--bg-purple를 클릭할 때
