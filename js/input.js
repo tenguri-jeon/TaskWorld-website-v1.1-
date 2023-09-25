@@ -3,7 +3,6 @@ $(document).ready(function() {
   var isInputMode = false;
   var clickedElementIndex = null;
   var inputText = '';
-  var completed = true; 
 
 
   function toggleInputMode(textElement, index) {
@@ -111,7 +110,6 @@ $(document).ready(function() {
     );
 
     var newElementParent = $('<div class="kanban-column"></div>'
-
     )
         
     $('.tw-editable-text-field__input').closest('.kanban-column').append(newDiv);
@@ -137,7 +135,7 @@ $(document).ready(function() {
     }
   }
 
-  // input -> text바뀌는 이벤트
+  //  main input -> text바뀌는 이벤트
   $(document).on('click', '.editable-text-field__text', function(event) {
     // text내용과 input내용이 일치하는지 확인 후 이벤트 발생 (input이 이상한곳에 생기지 않도록 하기 위한 장치)
     inputText = $(this).text();
@@ -174,49 +172,4 @@ $(document).ready(function() {
     }
   });
 
-  $('.tw-task-completion-box__click-area').click(function(){
-    slidebarCompleted();
-  })
-  
-  // sidebar_자동저장
-  
-  function slidebarCompleted() {
-    if (completed) {
-      $('.tw-task-properties-header').addClass('--completed');
-      setTimeout(function(){
-        $('.ax-task-completion-box').css({
-          'width': '130px'
-        });
-        $('.tw-task-completion-box__background-center').css({
-          'transform': 'scaleX(107)'
-        });
-        $('.tw-task-completion-box__background-right').css({
-          'transform': 'translateX(122.391px)'
-        });
-        $('.tw-task-completion-box__completed-task').css({
-          'display': 'flex'
-        },2000);
-        console.log(
-        $('.task').eq(clickedElementIndex))
-      })
-  
-      completed = false; // 상태를 토글합니다.
-    } else {
-      $('.tw-task-properties-header').removeClass('--completed');
-      $('.ax-task-completion-box').css({
-        'width': '34px'
-      });
-      $('.tw-task-completion-box__background-center').css({
-        'transform': 'scaleX(1)'
-      });
-      $('.tw-task-completion-box__background-right').css({
-        'transform': 'translateX(17px)'
-      });
-      $('.tw-task-completion-box__completed-task').css({
-        'display': 'none'
-      });
-  
-      completed = true; // 상태를 토글합니다.
-    }
-  }
 });
