@@ -21,6 +21,7 @@ $(document).ready(function() {
         $('.create-tasklist-button').remove();
     })
 
+    // 닫기버튼
     $(document).on('click', '.tw-pre-created-tasklist__icon .bi-x-lg', function() {
         var newElement = $(
             '<div class="click-area create-tasklist-button" role="button" tabindex="0">' +
@@ -41,9 +42,10 @@ $(document).ready(function() {
 
     // component만드는 함수
     function makeNewProject(title, clickindex) {
+        var dataIndex = $('.task').length + 1;
         var newComponent = $('<div class="task__outer" draggable="true">').append(
             $('<div class="task__wrapper">').append(
-                $('<section class="task">').append(
+                $('<section class="task" data-task-index="' + dataIndex + '">').append(
                     $('<div class="task-color task__task-color"></div>'),
                     $('<div class="task__except-color">').append(
                         $('<div class="task__front">').append(
@@ -58,7 +60,8 @@ $(document).ready(function() {
                                         )
                                     ),
                                     $('<span class="task-header__title">'+ title +'</span>')
-                                )
+                                ),
+                                $('<div class="task-body"></div>')
                             )
                         )
                     )
@@ -76,23 +79,63 @@ $(document).ready(function() {
     // 버튼 클릭시 컴포넌트 생성하는 이벤트
     $(document).on('click', '.task-or-note-input-panel__create-button', function() {
         componentTextbox = $(this).closest('.task-or-note-input-panel').find('.task-or-note-input-panel__input-box');
+        kanbanColumn = $(this).closest('.tasklist');
+        // 지금 인덱스 값이 이상해서 새로 만든 component의 index값을 가져오지 못하고 있음
         var index = $('.task-or-note-input-panel__create-button').index(this);
-        var dividedIndex = Math.floor(index / 2); 
+        // var dividedIndex = Math.floor(index / 2); 
         var componentTitle = componentTextbox.val()
 
-        makeNewProject(componentTitle , dividedIndex);
+        if (!kanbanColumn.find('.tasklist__inner-container').length) {
+            var makeKanban = $('<div class="kanban-items hack-scrollbar">' + 
+            '<div class="tasklist__container" style ="overflow: hidden; height: 0px; width: 0px;">'+
+                '<div class="tasklist__inner-container" style="position: relative; height: 656px; width: 300px; overflow: auto; will-change: trasform; direction: 1tr;">' + 
+                '</div>' + 
+            '</div>' +
+            '</div>'
+            )
+            kanbanColumn.append(makeKanban);
+            makeNewProject(componentTitle , index);
+        }else{
+            makeNewProject(componentTitle , index);
+        }
     })
 
     $(document).on('keydown', '.task-or-note-input-panel__input-box', function(event) {
         if (event.which === 13) {
+            debugger;
             event.preventDefault();
             var componentTitle = $(this).val();
-            var index = $('.task-or-note-input-panel__create-button').index();
-            var dividedIndex = Math.floor(index / 2); 
-    
-            makeNewProject(componentTitle, dividedIndex);
+            var index = $('.task-or-note-input-panel__create-button').index(this);
+
+
+            if (!kanbanColumn.find('.tasklist__inner-container').length) {
+                var makeKanban = $('<div class="kanban-items hack-scrollbar">' + 
+                '<div class="tasklist__container" style ="overflow: hidden; height: 0px; width: 0px;">'+
+                    '<div class="tasklist__inner-container" style="position: relative; height: 656px; width: 300px; overflow: auto; will-change: trasform; direction: 1tr;">' + 
+                    '</div>' + 
+                '</div>' +
+                '</div>'
+                )
+                kanbanColumn.append(makeKanban);
+                makeNewProject(componentTitle , index);
+            }else{
+                makeNewProject(componentTitle , index);
+            }
         }
     });
+
+    $(document).ready(function() {
+        // tasklist-header__add-icon를 클릭할 때 이벤트 핸들러 추가
+        $(document).on('click', '.tasklist-header__add-icon', function() {
+            // 클릭된 아이콘과 관련된 패널을 보여줍니다.
+            $(this).closest('.kanban-column').find('.tasklist-header__input-panel-container').css('display', 'block');
+        });
     
+        // task-or-note-input-panel__cancel-button를 클릭할 때 이벤트 핸들러 추가
+        $(document).on('click', '.task-or-note-input-panel__cancel-button', function() {
+            // 클릭된 버튼과 관련된 패널을 숨깁니다.
+            $(this).closest('.tasklist-header__input-panel-container').css('display', 'none');
+        });
+    });
 
 })

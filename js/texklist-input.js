@@ -92,6 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
         attachClickEventToDynamicElements();
       });
 
+    
     cancelButtonElements.forEach((cancelButton, index) => {
         cancelButton.addEventListener('click', function() {
             const cancelButtonPanelHeader = cancelButton.closest('.tasklist-header__input-panel-container');
@@ -118,33 +119,30 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
-// create-button active
-document.addEventListener("DOMContentLoaded", function() {
-    const inputFields = document.querySelectorAll('.task-or-note-input-panel__input-box');
-    const createButtons = document.querySelectorAll('.task-or-note-input-panel__create-button');
-
-    function toggleButtonState(inputField, createButton) {
-        if (inputField.value.trim() !== '') {
-            createButton.classList.add('active');
-            createButton.removeAttribute('disabled');
-        } else {
-            createButton.classList.remove('active');
-            createButton.setAttribute('disabled', 'disabled');
-        }
-    }
-
-    inputFields.forEach((inputField, index) => {
-        const createButton = createButtons[index];
-        
-        inputField.addEventListener('input', function() {
-            toggleButtonState(inputField, createButton);
-        });
-
-        // 초기 상태 설정
+    $(document).ready(function() {
+        // 부모 요소에서 input 이벤트를 감지하여 하위 요소에 위임
+        $(document).on('input', '.task-or-note-input-panel__input-box', function() {
+            debugger;
+        const inputField = $(this);
+        const createButton = inputField.closest('.task-or-note-input-panel').find('.task-or-note-input-panel__create-button');
         toggleButtonState(inputField, createButton);
+        });
+    
+        function toggleButtonState(inputField, createButton) {
+        if (inputField.val().trim() !== '') {
+            createButton.addClass('active').prop('disabled', false);
+        } else {
+            createButton.removeClass('active').prop('disabled', true);
+        }
+        }
+    
+        // 초기 상태 설정
+        $('.task-or-note-input-panel__input-box').each(function(index) {
+        const createButton = $('.task-or-note-input-panel__create-button').eq(index);
+        toggleButtonState($(this), createButton);
+        });
     });
-});
+  
 
 
 //tasklist-header title-pen

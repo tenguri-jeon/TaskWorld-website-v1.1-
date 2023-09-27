@@ -51,19 +51,13 @@ $(document).ready(function() {
     });
 
     // task 클릭 시 background color 변경 및 sidebar 열기
-    $(document).on('click', '.task', function() {
-        debugger;
+    $(document).on('click', '.task', function(event) {
         var clickedElement = event.target;
         const clickedTask = $(this);
         clickedTaskIndex = $(this).data('task-index');
         const contain = clickedTask.hasClass('--is-selected');
         const componentName = clickedTask.find('.task-header__title').text();
             
-    
-        // 여기에 화면 초기화 기능 넣어줄 예정임 sidebar 열릴때마다 화면 초기화 해주는 함수 (단계거쳐야함)
-        belong()
-        checklist()
-
         // 모든 task 초기화
         $('.task').removeClass('--is-selected');
         $('.task .task-meta-item').css('color', ''); 
@@ -72,17 +66,16 @@ $(document).ready(function() {
             // 조건 중 만약 area input박스를 누르면 나오지 않도록 설정
             if (clickedElement.classList.contains('task-checkbox')) {
                 floatingSidebarModal.style.display = 'none';
-                slidebarCompleted();
+                slidebarCompleted(clickedTaskIndex);
             }else{
                 clickedTask.addClass('--is-selected');
                 clickedTask.removeClass('--done');
                 
                 clickedTask.find('.task-meta-item').css('color', '#fff');
-                
                 floatingSidebarModal.style.display = 'block';
-                belong()
-                // checklist()
-                // bigCheck()
+                belong(clickedTaskIndex);
+                checklist(clickedTaskIndex);
+                bigCheck(clickedTaskIndex);
                 $('.ax-editable-panel-title').text(componentName);
                 
                 // 클릭한 task의 index를 저장
@@ -94,75 +87,84 @@ $(document).ready(function() {
     });
 
     // 소속 이름 바꿔주기
-    function belong(){
-        const parent = $('.task').eq(clickedTaskIndex).closest('.tasklist')
+    function belong(clickedTaskIndex){
+        const parent = $('.task[data-task-index="' + clickedTaskIndex + '"]').closest('.tasklist')
         const text = parent.find('.editable-text-field__text').text()
         $('.tw-task-location-title__tasklist-title').text(text);
     }
 
     // sidebar열때마다 체크리스트 바꿔주기
-    function checklist(){
+    function checklist(clickedTaskIndex){
         // 일단 열때마다 초기화 시켜줘야함 
         $('.tw-task-checklist-pane__item-wrapper').remove()
         // 초기화 했으면 main에 있는 글자 데이터 가져와서 , 그것의 length() 가져오고 그것만큼 생기도록 만들어줘야햠
-        const number = $('.task').eq(clickedTaskIndex).find('.task-card-checklist__content').children().length
-        classCounter = $('.task').eq(clickedTaskIndex).find('.task-card-checklist-item').attr('class')
+        const number =  $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-card-checklist__content').children().length;
+        var classList =  $('.task[data-task-index="' + clickedTaskIndex + '"]').closest('.task-card-checklist-item')
+        
+        for (let i = 0; i < number; i++) {
+            let classCounterArray =  $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-card-checklist-item').eq(i).attr('class').split(' ')[2];
+            let checklistName =  $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.markdown-line').eq(i).text()
 
-        var newDiv = $('<div class="tw-task-checklist-pane__item-wrapper' + classCounter + '">' +
-        '<div class="tw-task-checklist-item ax-task-checklist-item" data-title="리스트 제목" data-complete="true" style="opacity: 1;">' +
-        '<div class="tw-task-checklist-item__checkbox-container">' +
-        '<div class="tw-click-area tw-task-checkbox checklist-checkbox ax-task-checklist-item__checkbox --large --clickable" role="button" tabindex="0">' +
-        '<i class="tw-icon tw-task-checkbox__check-mark bi bi-check-lg"></i>' +
-        '<span style="display: none;"></span>' +
-        '</div>' +
-        '</div>' +
-        '<div class="tw-task-checklist-item__label-container ax-task-checklist-item__label-container" draggable="true">' +
-        '<div>' +
-        '<div class="tw-click-area tw-checklist-assignee ax-checklist-assignee --clickable" role="button" tabindex="0">' +
-        '<div class="tw-checklist-assignee__no-assignee">' +
-        '<i class="tw-icon bi bi-person-plus"></i>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '<div class="tw-task-checklist-item__label">' +
-        '<div class="tw-task-checklist-item__label-title ax-task-checklist-item__label-title">' +
-        '<div class="tw-editable-text-area ax-editable-text-area --editable --plain-text">' +
-        '<i class="tw-icon tw-editable-text-area__icon bi bi-pencil"></i>' +
-        '<article class="tw-markdown-content tw-editable-text-area__text ax-editable-text-area__text">' +
-        '<p>' + enteredText + '</p>' +
-        '</article>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '<div class="tw-click-area tw-task-checklist-item__delete-button ax-task-checklist-item__delete-button --clickable" role="button" tabindex="0">' +
-        '<i class="delete-checklist tw-icon bi bi-trash"></i>' +
-        '</div>' +
-        '</div>' +
-        '</div>');
+            var newDiv = $('<div class="tw-task-checklist-pane__item-wrapper ' + classCounterArray + '">' +
+                '<div class="tw-task-checklist-item ax-task-checklist-item" data-title="리스트 제목" data-complete="true" style="opacity: 1;">' +
+                '<div class="tw-task-checklist-item__checkbox-container">' +
+                '<div class="tw-click-area tw-task-checkbox checklist-checkbox ax-task-checklist-item__checkbox --large --clickable" role="button" tabindex="0">' +
+                '<i class="tw-icon tw-task-checkbox__check-mark bi bi-check-lg"></i>' +
+                '<span style="display: none;"></span>' +
+                '</div>' +
+                '</div>' +
+                '<div class="tw-task-checklist-item__label-container ax-task-checklist-item__label-container" draggable="true">' +
+                '<div>' +
+                '<div class="tw-click-area tw-checklist-assignee ax-checklist-assignee --clickable" role="button" tabindex="0">' +
+                '<div class="tw-checklist-assignee__no-assignee">' +
+                '<i class="tw-icon bi bi-person-plus"></i>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="tw-task-checklist-item__label">' +
+                '<div class="tw-task-checklist-item__label-title ax-task-checklist-item__label-title">' +
+                '<div class="tw-editable-text-area ax-editable-text-area --editable --plain-text">' +
+                '<i class="tw-icon tw-editable-text-area__icon bi bi-pencil"></i>' +
+                '<article class="tw-markdown-content tw-editable-text-area__text ax-editable-text-area__text">' +
+                '<p>' + checklistName +'</p>' + 
+                '</article>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="tw-click-area tw-task-checklist-item__delete-button ax-task-checklist-item__delete-button --clickable" role="button" tabindex="0">' +
+                '<i class="delete-checklist tw-icon bi bi-trash"></i>' +
+                '</div>' +
+                '</div>' +
+                '</div>');
+        
+            var done = $('<div class="tw-task-checklist-item__label-subtitle">' +
+            '<span data-l10n-key="tasks.properties.completed_by">완료자</span>' +
+            '<span class="tw-text --body">완 료자</span>' +
+            '<span> 0 <span style="display: none;"></span>시간전</span>' +
+            '</div>');
 
-        // length가져왔으니 그것만큼 체크리스트 만들어주기
-        // 컴포넌트 가져왔고 클릭한 애의 이름 가져오고 그거에 맞게 
-        // 클래스 이름 부여해 주면 연동 가능!
-        for (let i = 0; i < number.length; i++) {
-            var enteredText = $('.'+ classCounter).find('.markdown-line').eq(i).text()
-            var clonedDiv = newDiv.clone();
-            $('.tw-task-add-checklist-item').before(clonedDiv);
+            // 만약 main 에서 class에 --checked이 있으면 체크리스트 체크된대로 나타나야함
+            if ( $('.task[data-task-index="' + clickedTaskIndex + '"]').find( '.' + classCounterArray).hasClass('--checked')) {
+                $('.tw-task-add-checklist-item').before(newDiv);
+                let checkbox = $('.tw-task-checklist-pane').find( '.' + classCounterArray).find('.ax-task-checklist-item__checkbox')
+                $(checkbox).closest('.tw-task-checklist-item').addClass('--checked');
+                $(checkbox).closest('.tw-task-checklist-item').find('.tw-task-checklist-item__label').append(done); 
+            }else{
+                $('.tw-task-add-checklist-item').before(newDiv);
+            }
         }
     }
 
     // 컴포넌트 열때마다 체크박스 확인 후,sidebar와 연동
-    function bigCheck(){
-        const contain = $('.task').eq(clickedTaskIndex).find('.task-checkbox').hasClass('--completed')
-        console.log(contain)
+    function bigCheck(clickedTaskIndex){
+        const contain =  $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-checkbox').hasClass('--completed')
         if (!contain) {
             completed = false;
-            slidebarCompleted()
+            slidebarCompleted(clickedTaskIndex)
         }else{
             completed = true;
-            slidebarCompleted()
+            slidebarCompleted(clickedTaskIndex)
         }
-        console.log(number)
-        
     }
         
     // .tw-color-label.--bg-purple를 클릭할 때
@@ -255,7 +257,7 @@ $(document).ready(function() {
             }
         });
         // input 클릭 시 text로 변환시키는 이벤트
-        $('.tw-task-add-checklist-item__input').keypress(function (event) {
+        $(document).on('keypress', '.tw-task-add-checklist-item__input', function(event) {
             if (event.which === 13) {
                 event.preventDefault();
                 inputText = $('.checklist-input').val().trim();
@@ -324,33 +326,33 @@ $(document).ready(function() {
             $('.tw-task-add-checklist-item').before(newDiv);
             
             // 자식이 하나도 없어서 처음 만들어 질 때
-            if ($('.task').eq(selectedTaskIndex).find('.task-card-checklist').length === 0) {
-                $('.task-body').eq(selectedTaskIndex).prepend(checklistHTML);
-                $('.task-card-checklist__content').eq(selectedTaskIndex).append(mainChecklistItem);
+            if ($('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-card-checklist__content').children().length === 0 ) {
+                $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-body').prepend(checklistHTML);
+                $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-card-checklist__content').append(mainChecklistItem);
             // 모든 체크리스트 생길 때
-        } else if ($('.task').eq(selectedTaskIndex).find('.task-card-checklist__content:not(.--checked)').children().length === 1) {
-            // 조건이 모든 더보기가 없을때 라고 하면 안됨 //예외/숨김처리 되어있을 수도 있음 
-                // 조건 => ('.task-card-checklist__content')가 doen를 가지고 있지 않은애가 1개일때로 바꿔야함
-                $('.task').eq(selectedTaskIndex).find('.task-card-checklist').removeClass('display');
-                $('.task-card-checklist__content').eq(selectedTaskIndex).append(mainChecklistItem);
+            } else if ($('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-card-checklist__content:not(.--checked)').children().length === 1) {
+                $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-card-checklist').removeClass('display');
+                $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-card-checklist__content').append(mainChecklistItem);
                 if(!$('.task').eq(0).find('.task-card-checklist__footer').length){
                     $('.task-card-checklist').eq(selectedTaskIndex).append(mainmoreview);
                 }
             // 나머지 경우 
             } else {
-                $('.task-card-checklist__content').eq(selectedTaskIndex).append(mainChecklistItem);
-                $('.task').eq(selectedTaskIndex).find('.task-card-checklist').removeClass('display');
+                $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-card-checklist__content').append(mainChecklistItem);
+                $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-card-checklist').removeClass('display');
             }
         
             $('.tw-task-add-checklist-item__input').val(''); // textarea 내용 비우기
         }
 
         $(document).on('keydown', '.tw-task-add-checklist-item__input', function (event) {
-            debugger;
             if (event.which == 13) { // 13은 Enter 키의 키 코드입니다.
                 event.preventDefault(); // 엔터 키의 기본 동작인 줄바꿈을 막습니다.
                 classCounter++;
                 enteredText = $(this).val(); // textarea의 내용을 가져옵니다.
+                if (enteredText.length === 0) {
+                    return;
+                }
                 addChecklistItem(enteredText, classCounter, selectedTaskIndex);
             }
         });
@@ -367,8 +369,8 @@ $(document).ready(function() {
                 enter.remove();
             }
         });
+
         // 체크리스트 checkbox 관련
-        
         // 체크리스트 삭제버튼 누르면 삭제되는 함수
         $(document).on('click', '.delete-checklist', function(){
             var classList = $(this).closest('.tw-task-checklist-pane__item-wrapper')
@@ -443,9 +445,12 @@ $(document).ready(function() {
             // 클릭한 애의 인덱스값가져와서 main에 있는애의 index를 가져와서해야함 
             thirdClassName = $(this).closest('.tw-task-checklist-pane__item-wrapper').attr('class').split(' ')[1];
             toggleTaskCheckbox('.task-checkbox.--small');
-            toggleChecklistItem(this);
+            if ( $('.' + thirdClassName).find('tw-task-checklist-item__label-subtitle').length < 1) {
+                toggleChecklistItem(this);
+            }else{
+                return;
+            }
         });
-        
     });
 
     });
@@ -547,17 +552,17 @@ $(document).ready(function() {
 
     //메인 // sidebar 체크 
     // sidbar 체크박스 클릭
-    // $(document).on('click' , '.tw-task-completion-box__click-area', function(){
-    //     slidebarCompleted();
-    // })
+    $(document).on('click' , '.tw-task-completion-box__click-area', function(){
+        slidebarCompleted(clickedTaskIndex);
+    })
 
-    // main 체크박스 클릭
-    $(document).on('click' , '.task-checkbox', function(){
-        slidebarCompleted();
-    });
+    // main 체크박스 클릭 (54번째 줄에서 실행하게 해 둠 //필요없음)
+    // $(document).on('click' , '.task-checkbox', function(){
+    //     slidebarCompleted();
+    // });
       
     // main체크박스 / sidebar체크박스 연동
-    function slidebarCompleted() {
+    function slidebarCompleted(selectedTaskIndex) {
         if (completed) {
           $('.tw-task-properties-header').addClass('--completed');
             $('.ax-task-completion-box').css({
@@ -575,7 +580,7 @@ $(document).ready(function() {
             // 선택한 $('.task').eq(selectedTaskIndex)의 자식요소의 체크박스 체크 확인
             $('.task').eq(selectedTaskIndex).find('.click-area task-checkbox, .--medium').addClass('--completed')
             $('.task').eq(selectedTaskIndex).addClass('--done')
-            completedConponentTime()
+            // completedConponentTime()
       
           completed = false; // 상태를 토글합니다.
         } else {
@@ -594,44 +599,44 @@ $(document).ready(function() {
           });
           $('.task').eq(selectedTaskIndex).find('.click-area task-checkbox, .--medium').removeClass('--completed')
           $('.task').eq(selectedTaskIndex).removeClass('--done')
-          completedConponentTime()
+        //   completedConponentTime()
           completed = true; // 상태를 토글합니다.
         }
     }
 
-    // 완료된 시간 추가하기
-    function completedConponentTime(){
-        var today = new Date();
-        var month = today.getMonth() + 1;
-        var day = today.getDate(); 
-        var $dateSummary = $(
-                     '<div class="tw-divided-row">' +
-                     '<div class="tw-task-date" data-testid="task-date">' +
-                     '<span data-l10n-key="tasks.properties.due_date_status.completed_on">' +
-                     '<span class="tw-text --weight-bold">' +
-                     '<span data-l10n-key="tasks.properties.date.today">' + month +'월' + day + '일</span>' +
-                     '</span>에 완료</span>' +
-                     '</div>' +
-                     '</div>' 
-                    );
+    // 완료된 시간 추가하기 => 전에 클릭한거 index를 기억해서 전에거에 추가하기 때문에 한번 살펴봐야함
+    // function completedConponentTime(){
+    //     var today = new Date();
+    //     var month = today.getMonth() + 1;
+    //     var day = today.getDate(); 
+    //     var $dateSummary = $(
+    //                  '<div class="tw-divided-row">' +
+    //                  '<div class="tw-task-date" data-testid="task-date">' +
+    //                  '<span data-l10n-key="tasks.properties.due_date_status.completed_on">' +
+    //                  '<span class="tw-text --weight-bold">' +
+    //                  '<span data-l10n-key="tasks.properties.date.today">' + month +'월' + day + '일</span>' +
+    //                  '</span>에 완료</span>' +
+    //                  '</div>' +
+    //                  '</div>' 
+    //                 );
 
-        var $dateSummaryBody = $('<div class="tw-task-body">' + 
-                                    '<div class="tw-task-body__date-summary">'+
-                                    '</div>'+
-                                '</div>'
-                                )
+    //     var $dateSummaryBody = $('<div class="tw-task-body">' + 
+    //                                 '<div class="tw-task-body__date-summary">'+
+    //                                 '</div>'+
+    //                             '</div>'
+    //                             )
 
-        if (!$('.task').eq(selectedTaskIndex).find('.tw-task-date').length > 0) {
-            if ($('.task').eq(selectedTaskIndex).find('.tw-task-body').length > 0) {
-                $('.task').eq(selectedTaskIndex).find('.tw-task-body__date-summary').append($dateSummary);
-            }else{
-                $('.task').eq(selectedTaskIndex).find('.task__except-color').append($dateSummaryBody);
-                $('.task').eq(selectedTaskIndex).find('.tw-task-body__date-summary').append($dateSummary);
-            }                                
-        }else{
-            $('.task').eq(selectedTaskIndex).find('.tw-task-body').remove();
-        }
-    }
+    //     if (!$('.task').eq(selectedTaskIndex).find('.tw-task-date').length > 0) {
+    //         if ($('.task').eq(selectedTaskIndex).find('.tw-task-body').length > 0) {
+    //             $('.task').eq(selectedTaskIndex).find('.tw-task-body__date-summary').append($dateSummary);
+    //         }else{
+    //             $('.task').eq(selectedTaskIndex).find('.task__except-color').append($dateSummaryBody);
+    //             $('.task').eq(selectedTaskIndex).find('.tw-task-body__date-summary').append($dateSummary);
+    //         }                                
+    //     }else{
+    //         $('.task').eq(selectedTaskIndex).find('.tw-task-body').remove();
+    //     }
+    // }
 });
 
 
