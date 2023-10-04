@@ -624,7 +624,8 @@
 }
 
 .tw-fancy-text-editor .ck .ck-editor__main>.ck-editor__editable:not(.ck-editor__nested-editable) {
-    padding-bottom: 44px
+    padding-bottom: 44px;
+    cursor: text;
 }
 
 .tw-fancy-text-editor .ck .ck-editor__main>.ck-editor__editable:hover:not(.ck-focused) {

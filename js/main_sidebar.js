@@ -84,7 +84,19 @@ $(document).ready(function() {
         } else {
             floatingSidebarModal.style.display = 'none';
         }
+
+        $('.remove-task').click(function(){
+            removeTask(clickedTask)
+            floatingSidebarModal.style.display = 'none';
+        })
+
     });
+
+    // 삭제 누르면 없어지는 함수
+   function removeTask(clickedTask){
+    const task = $('.task[data-task-index="' + clickedTaskIndex + '"]');
+    task.remove();
+   }
 
     // 소속 이름 바꿔주기
     function belong(clickedTaskIndex){
@@ -146,9 +158,12 @@ $(document).ready(function() {
             // 만약 main 에서 class에 --checked이 있으면 체크리스트 체크된대로 나타나야함
             if ( $('.task[data-task-index="' + clickedTaskIndex + '"]').find( '.' + classCounterArray).hasClass('--checked')) {
                 $('.tw-task-add-checklist-item').before(newDiv);
-                let checkbox = $('.tw-task-checklist-pane').find( '.' + classCounterArray).find('.ax-task-checklist-item__checkbox')
-                $(checkbox).closest('.tw-task-checklist-item').addClass('--checked');
+                let checkboxContainer = $('.tw-task-checklist-pane').find( '.' + classCounterArray).find('.ax-task-checklist-item__checkbox')
+                let checkbox = $('.' + classCounterArray).find('.ax-task-checklist-item__checkbox');
+                $(checkbox).addClass('--animate');
+                $(checkbox).addClass('--completed');
                 $(checkbox).closest('.tw-task-checklist-item').find('.tw-task-checklist-item__label').append(done); 
+                $(checkboxContainer).closest('.tw-task-checklist-item').addClass('--checked');
             }else{
                 $('.tw-task-add-checklist-item').before(newDiv);
             }
@@ -257,17 +272,17 @@ $(document).ready(function() {
             }
         });
         // input 클릭 시 text로 변환시키는 이벤트
-        $(document).on('keypress', '.tw-task-add-checklist-item__input', function(event) {
+    $(document).on('keypress', '.tw-task-add-checklist-item__input', function(event) {
             if (event.which === 13) {
                 event.preventDefault();
-                inputText = $('.checklist-input').val().trim();
-                if (inputText.length === 0) {
-                    return;
-                }
-                toggleInputMode('.checklist-input-text', clickedElementIndex);
+                 inputText = $('.checklist-input').val().trim();
+                 if (inputText.length === 0) {
+                     return;
+                 }
+                 toggleInputMode('.checklist-input-text', clickedElementIndex);
             }
-        // 체크리스트 아이템 추가하기
 
+        // 체크리스트 아이템 추가하기
         function addChecklistItem(enteredText, classCounter, selectedTaskIndex) {
             var newDiv = $('<div class="tw-task-checklist-pane__item-wrapper unique-class-name-' + classCounter + '">' +
                 '<div class="tw-task-checklist-item ax-task-checklist-item" data-title="리스트 제목" data-complete="true" style="opacity: 1;">' +
@@ -318,6 +333,26 @@ $(document).ready(function() {
                     )
                 )
             );
+
+            // var dividerLine = ` <div class="tw-task-body__date-summary">
+            //   <div class="tw-divided-row"></div>
+            // </div>
+            // <div class="tw-divided-row"></div>
+            // <div class="tw-divider tw-task-body__horizontal-divider --size-s"></div>
+            //     <div class="tw-task-body__columns">
+            //       <div class="tw-task-body__left">
+            //         <div class="tw-task-meta">
+            //           <div class="tw-task-meta-item --light-theme" data-meta-count="0/1">
+            //             <i class="tw-icon tw-task-meta-item__icon" data-icon="check-list"></i> 0/1
+            //             <div class="tw-task-meta-item__unread-mark">
+            //               <div class="tw-noti-badge__transition-group --hidden"></div>
+            //             </div>
+            //           </div>
+            //         </div>
+            //       </div>
+            //       <div class="tw-task-body__right"></div>
+            //     </div>
+            // `;
                         
             var mainmoreview = $('<div class="click-area task-card-checklist__footer" role="button" tabindex="0">').append(
                 $('<span class="tasks.checklist.footer.see_all_checklist_v2">').text("모든 체크리스트")
@@ -327,6 +362,7 @@ $(document).ready(function() {
             
             // 자식이 하나도 없어서 처음 만들어 질 때
             if ($('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-card-checklist__content').children().length === 0 ) {
+                // $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-body').prepend(dividerLine);
                 $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-body').prepend(checklistHTML);
                 $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-card-checklist__content').append(mainChecklistItem);
             // 모든 체크리스트 생길 때
@@ -384,7 +420,7 @@ $(document).ready(function() {
         function toggleChecklistItem(clickedElement) {
             var clickedIndex = $('.ax-task-checklist-item__checkbox').index(clickedElement);
             var isCompleted = $('.ax-task-checklist-item').eq(clickedIndex).hasClass('--checked');
-            var hoursAgo = 0; // 수정: 시간 값 계산
+            var hoursAgo = 0; 
             var done = $('<div class="tw-task-checklist-item__label-subtitle">' +
                 '<span data-l10n-key="tasks.properties.completed_by">완료자</span>' +
                 '<span class="tw-text --body">완 료자</span>' +
@@ -393,13 +429,13 @@ $(document).ready(function() {
         
             // 사이드바 체크리스트 완료되기 전 상태 
             if (!isCompleted) {
-                $('.' + thirdClassName).find('.checklist-checkbox').addClass('--animate');
-                setTimeout(function () {
-                    $('.' + thirdClassName).find('.ax-task-checklist-item').addClass('--checked');
-                    $('.' + thirdClassName).find('.checklist-checkbox').addClass('--completed');
-                    $('.' + thirdClassName).find('.tw-checklist-assignee__no-assignee').addClass('--checked');
-                    $('.' + thirdClassName).find('.tw-task-checklist-item__label').append(done); // 수정: 클래스 선택자를 선택한 요소로 변경
-                }, 500);
+                if (!$('.' + thirdClassName).find('.tw-task-checklist-item__label').children('.tw-task-checklist-item__label-subtitle').length > 0) {
+                    $('.' + thirdClassName).find('.checklist-checkbox').addClass('--animate');
+                        $('.' + thirdClassName).find('.ax-task-checklist-item').addClass('--checked');
+                        $('.' + thirdClassName).find('.checklist-checkbox').addClass('--completed');
+                        $('.' + thirdClassName).find('.tw-checklist-assignee__no-assignee').addClass('--checked');
+                        $('.' + thirdClassName).find('.tw-task-checklist-item__label').append(done); 
+                }
             } else {
                 $('.' + thirdClassName).find('.tw-task-checklist-item__label-subtitle').remove();
                 $('.' + thirdClassName).find('.checklist-checkbox').removeClass('--animate')
@@ -578,8 +614,11 @@ $(document).ready(function() {
               'display': 'flex'
             });
             // 선택한 $('.task').eq(selectedTaskIndex)의 자식요소의 체크박스 체크 확인
-            $('.task').eq(selectedTaskIndex).find('.click-area task-checkbox, .--medium').addClass('--completed')
-            $('.task').eq(selectedTaskIndex).addClass('--done')
+            $('[data-task-index="' + selectedTaskIndex + '"]').find('.click-area task-checkbox, .--medium').addClass('--completed');
+            $('[data-task-index="' + selectedTaskIndex + '"]').addClass('--done');
+            // check되었으면 task__outer 의 위치가 task__outer completed-task뒤쪽으로 이동 몇번째로 이동할지 정해야함
+            $('[data-task-index="' + selectedTaskIndex + '"]').closest('.task__outer').insertAfter('.completed-task')eq;
+
             // completedConponentTime()
       
           completed = false; // 상태를 토글합니다.
@@ -597,8 +636,8 @@ $(document).ready(function() {
           $('.tw-task-completion-box__completed-task').css({
             'display': 'none'
           });
-          $('.task').eq(selectedTaskIndex).find('.click-area task-checkbox, .--medium').removeClass('--completed')
-          $('.task').eq(selectedTaskIndex).removeClass('--done')
+          $('[data-task-index="' + selectedTaskIndex + '"]').find('.click-area task-checkbox, .--medium').removeClass('--completed')
+          $('[data-task-index="' + selectedTaskIndex + '"]').removeClass('--done')
         //   completedConponentTime()
           completed = true; // 상태를 토글합니다.
         }
@@ -637,6 +676,9 @@ $(document).ready(function() {
     //         $('.task').eq(selectedTaskIndex).find('.tw-task-body').remove();
     //     }
     // }
+
+    // 삭제 누르면 클릭한 task 삭제되는 함수
+    
 });
 
 

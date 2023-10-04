@@ -45,74 +45,47 @@ $(document).ready(function() {
 
   });
 
-//   $(document).ready(function(){
-//     // 클래스 '.undermenu-checkbox'를 가진 요소에 대한 클릭 이벤트 핸들러 설정
-//     $(document).on('click', '.undermenu-checkbox', function(){
-//         // 클릭한 요소와 해당 인덱스 가져오기
-//         var clickedElement = $(this);
-//         var clickedIndex = $('.undermenu-checkbox').index(clickedElement);
+// editor 변경란
+$(document).ready(function() {
+  // if문실행
+  $(document).on('click', '.ck-editor__editable', function() {
+    editor()
+  })
+  
+  // else문 실행
+  $(document).on('click', '.save-button', function() {
+    editor()
+  })
 
-//         // 관련 작업이 완료되었는지 확인
-//         var isCompleted = $('.js-task').eq(clickedIndex).hasClass('--done');
+// editor취소버튼 누르면 다시 돌아오는 이벤트
+  $(document).on('click', '.delete-button', function() {
+    $('#editor').css('display', 'none');
+    $('.tw-task-description-row').removeClass('display')
+    $('.button-wrapper').addClass('display')
+  })
 
-//         // 현재 상태를 기반으로 완료 상태를 토글
-//         if (!isCompleted) {
-//             // 애니메이션 추가 및 완료로 표시
-//             $('.undermenu-checkbox').eq(clickedIndex).addClass('--animate');
-//             setTimeout(function() {
-//                 $('.undermenu-checkbox').eq(clickedIndex).addClass('--completed');
-//                 $('.js-task').eq(clickedIndex).addClass('--done');
-//             }, 500);
-//         } else {
-//             // 완료 상태 제거
-//             $('.undermenu-checkbox').eq(clickedIndex).removeClass('--animate');
-//             $('.undermenu-checkbox').eq(clickedIndex).removeClass('--completed');
-//             $('.js-task').eq(clickedIndex).removeClass('--done');
-//         }
-//     });
-// });
+  function editor(){
+    var contain = $('.ax-task-description-row').hasClass('display')
+    // 먼저 text-> editor
+    if (!contain) {
+          let innerText = $('.ck-editor__editable').text()
+          $('.fr-element p').text(innerText);
+          innerText = ''
+          $('#editor').css('display', 'block');
+          $('.tw-task-description-row').addClass('display')
+          $('.button-wrapper').removeClass('display')
+          $('.fr-placeholder').remove()
+          $('.fr-element p').focus();
+    }else{
+      // editor -> text
+          let editorText = $('.fr-view').eq(0).children('p').text()
+          let text = editorText.replace(/\n/g, ' ');
+          $('.ck-editor__editable p').text(text)
+          editorText = ''
+          $('#editor').css('display', 'none');
+          $('.tw-task-description-row').removeClass('display')
+          $('.button-wrapper').addClass('display')
+    }
+  }
 
-// 완료 버튼 누를 시 sidebar => .tw-task-properties-header --completed
-// #checkbox 안에 있는 task-completion-box = "task-completion-box" --completed
-// tw-task-completion-box__background-center transform scaleX(106.391)
-// tw-task-completion-box__background-right  transform translateX(122.391px)
-// tw-task-completion-box__completed-task display flex
-
-
-// $(document).ready(function() {
-//     $(document).on('click' , '#change_textarea', function(){
-//         changeEditor();
-//         $('.button-wrapper').removeClass('display');
-//     })
-    
-//     $(document).on('click' , '.save-button', function(){
-//         changeTextarea();
-//         $('.button-wrapper').addClass('display');
-//     })
-// })
-
-
-// // aditor -> textarea
-// function changeTextarea(){
-//     var editorText = $('.fr-view').text()
-    
-//     // $('#editor').addClass('display')
-//     $('.change-input').removeAttr('editor');
-// }
-
-// // textarea -> aditor
-// function changeEditor(){
-//     var inputText = $('#change_textarea').val()
-//     $('.fr-view').empty().text(inputText);
-//     $('.fr-placeholder').remove()
-//     inputText = '';
-// }
-
-
-
-
-
-
-
-
-
+})

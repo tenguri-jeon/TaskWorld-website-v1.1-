@@ -56,3 +56,60 @@ const insertAboveTask = (zone, mouseY) => {
 
   return closestTask;
 };
+
+function setCursorStyle() {
+  const list = document.querySelector('.kanban-columns');
+  if (list.scrollWidth > list.clientWidth) {
+    list.style.cursor = 'grabbing'; // 스크롤이 있는 경우
+  } else {
+    list.style.cursor = 'auto'; // 스크롤이 없는 경우
+  }
+}
+
+// 페이지 로드될 때 실행
+window.addEventListener('load', setCursorStyle);
+window.addEventListener('resize', setCursorStyle);
+
+const list = document.querySelector('.kanban-columns');
+let isDragging = false;
+let startX = 0;
+let listX = 0;
+
+list.addEventListener('mousedown', (e) => {
+  if (e.target.tagName === 'P' || e.target.tagName === 'SPAN') {
+    e.preventDefault(); // 드래그를 시작하지 않도록 차단
+    return;
+  }
+  isDragging = true;
+  startX = e.clientX;
+  list.style.transition = 'none';
+  list.classList.add('panning'); // CSS 클래스 추가
+});
+
+document.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+
+  const deltaX = e.clientX - startX;
+  listX += deltaX;
+  
+  // 최대 이동 제한
+  const maxListX = list.clientWidth - list.scrollWidth;
+  if (listX > 0) {
+    listX = 0;
+  } else if (listX < maxListX) {
+    listX = maxListX;
+  }
+
+  list.style.transform = `translateX(${listX}px)`;
+  startX = e.clientX;
+});
+
+document.addEventListener('mouseup', () => {
+  if (!isDragging) return;
+
+  isDragging = false;
+  list.style.transition = 'all 0.3s ease';
+  list.classList.remove('panning'); // CSS 클래스 제거
+
+  // 마우스를 놓았을 때 움직임이 멈추며, 원하는 추가 동작을 이곳에 추가하세요.
+});

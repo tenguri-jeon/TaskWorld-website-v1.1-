@@ -68,11 +68,10 @@ $(document).ready(function() {
                 )
             )
         );
-
         $('.tasklist__inner-container').eq(clickindex).append(newComponent);
         $('.task-or-note-input-panel__input-box').val('')
-        $('.task-or-note-input-panel__create-button').removeClass('active');
-        $('.task-or-note-input-panel__create-button').prop('disabled', false)
+        $('.task-or-note-input-panel__create-button').eq(clickindex).removeClass('active');
+        $('.task-or-note-input-panel__create-button').eq(clickindex).prop('disabled', true);
     }
 
     
@@ -80,9 +79,7 @@ $(document).ready(function() {
     $(document).on('click', '.task-or-note-input-panel__create-button', function() {
         componentTextbox = $(this).closest('.task-or-note-input-panel').find('.task-or-note-input-panel__input-box');
         kanbanColumn = $(this).closest('.tasklist');
-        // 지금 인덱스 값이 이상해서 새로 만든 component의 index값을 가져오지 못하고 있음
         var index = $('.task-or-note-input-panel__create-button').index(this);
-        // var dividedIndex = Math.floor(index / 2); 
         var componentTitle = componentTextbox.val()
 
         if (!kanbanColumn.find('.tasklist__inner-container').length) {

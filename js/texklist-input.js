@@ -9,45 +9,45 @@ document.addEventListener("DOMContentLoaded", function() {
     let activePanelHeader = null;
     let activePanelFooter = null;
 
-    function togglePanel(icon, panel, container) {
-        if (activePanelHeader !== panel && activePanelFooter !== panel) {
-            if (activePanelHeader) {
-                activePanelHeader.style.display = 'none';
-                const index = Array.from(inputPanelsHeader).indexOf(activePanelHeader);
-                if (index !== -1) {
-                    tasklistContainer[index].style.height = '656px';
-                }
-            }
-            if (activePanelFooter) {
-                activePanelFooter.style.display = 'none';
-                const index = Array.from(inputPanelsFooter).indexOf(activePanelFooter);
-                if (index !== -1) {
-                    tasklistContainer[index].style.height = '656px';
-                }
-            }
-            panel.style.display = 'block';
-            const index = Array.from(tasklistContainer).indexOf(container);
-            if (index !== -1) {
-                tasklistContainer[index].style.height = '543px';
-            }
-            if (icon.classList.contains('tasklist-header__add-icon')) {
-                activePanelHeader = panel;
-            } else if (icon.classList.contains('tasklist-footer__add-task-button')) {
-                activePanelFooter = panel;
-            }
-        } else {
-            panel.style.display = 'none';
-            const index = Array.from(tasklistContainer).indexOf(container);
-            if (index !== -1) {
-                tasklistContainer[index].style.height = '656px';
-            }
-            if (icon.classList.contains('tasklist-header__add-icon')) {
-                activePanelHeader = null;
-            } else if (icon.classList.contains('tasklist-footer__add-task-button')) {
-                activePanelFooter = null;
-            }
-        }
-    }
+    // function togglePanel(icon, panel, container) {
+    //     if (activePanelHeader !== panel && activePanelFooter !== panel) {
+    //         if (activePanelHeader) {
+    //             activePanelHeader.style.display = 'none';
+    //             const index = Array.from(inputPanelsHeader).indexOf(activePanelHeader);
+    //             if (index !== -1) {
+    //                 tasklistContainer[index].style.height = '656px';
+    //             }
+    //         }
+    //         if (activePanelFooter) {
+    //             activePanelFooter.style.display = 'none';
+    //             const index = Array.from(inputPanelsFooter).indexOf(activePanelFooter);
+    //             if (index !== -1) {
+    //                 tasklistContainer[index].style.height = '656px';
+    //             }
+    //         }
+    //         panel.style.display = 'block';
+    //         const index = Array.from(tasklistContainer).indexOf(container);
+    //         if (index !== -1) {
+    //             tasklistContainer[index].style.height = '543px';
+    //         }
+    //         if (icon.classList.contains('tasklist-header__add-icon')) {
+    //             activePanelHeader = panel;
+    //         } else if (icon.classList.contains('tasklist-footer__add-task-button')) {
+    //             activePanelFooter = panel;
+    //         }
+    //     } else {
+    //         panel.style.display = 'none';
+    //         const index = Array.from(tasklistContainer).indexOf(container);
+    //         if (index !== -1) {
+    //             tasklistContainer[index].style.height = '656px';
+    //         }
+    //         if (icon.classList.contains('tasklist-header__add-icon')) {
+    //             activePanelHeader = null;
+    //         } else if (icon.classList.contains('tasklist-footer__add-task-button')) {
+    //             activePanelFooter = null;
+    //         }
+    //     }
+    // }
 
     iconElementsHeader.forEach((icon, index) => {
         icon.addEventListener('click', function() {
@@ -122,7 +122,6 @@ document.addEventListener("DOMContentLoaded", function() {
     $(document).ready(function() {
         // 부모 요소에서 input 이벤트를 감지하여 하위 요소에 위임
         $(document).on('input', '.task-or-note-input-panel__input-box', function() {
-            debugger;
         const inputField = $(this);
         const createButton = inputField.closest('.task-or-note-input-panel').find('.task-or-note-input-panel__create-button');
         toggleButtonState(inputField, createButton);

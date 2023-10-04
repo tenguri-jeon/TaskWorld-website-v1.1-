@@ -396,8 +396,14 @@
     border-radius: 5px;
 }
 
-
+/* 10/4일 수정 */
 /*main-contents*/
+.kanban-columns-wrapper{
+    background-color: #eef0f2;
+    width: 100%;
+    height: 100%;
+}
+
 .kanban-columns{
     position: absolute;
     right: 0;
@@ -407,15 +413,23 @@
     align-items: stretch;
     display: flex;
     flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    background-color: #eef0f2;
+    /* overflow-x: auto;
+    overflow-y: hidden; */
     border-top-left-radius: 18px;
+    transform: translate(0, 0);
+    cursor: auto;
+    height: 100%;
 }
 .kanban-column{
     height: 100%;
     margin: 0px 5px 0px;
 }
+
+.kanban-columns p,
+.kanban-columns span {
+  user-drag: none;
+}
+/* // 10/4 수정 */
 .kanban-board-columns__column{
     display: flex;
     flex-direction: column;

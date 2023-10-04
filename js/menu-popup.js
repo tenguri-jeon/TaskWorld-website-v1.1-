@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function(){
     let isMemberPopupOpen = false;
     let isTagsPopupOpen = false;
 
-    // 색상지정 이벤트
+    // header의 더보기 아이콘 클릭
     $(document).ready(function() {
         let secondClass; 
         let clickedElement;
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function(){
             // 가져온 클래스 목록 배열의 두 번째 클래스를 가져옵니다.(color ex) --bg-pink )
             if (classesArray.length >= 2) {
                 var secondClass = classesArray[1]; // 두 번째 클래스 이름을 가져와서 변수에 할당
-                var allcolor = '--bg-blue2 --bg-pink --bg-purple --bg-sky-blue --bg-green --bg-amber --bg-red --bg-orange --bg-brown --bg-gray --bg-rainbow';
+                var allcolor = '--bg-blue2 --bg-blue --bg-pink --bg-purple --bg-sky-blue --bg-green --bg-amber --bg-red --bg-orange --bg-brown --bg-gray --bg-rainbow';
             
                 // 클래스를 추가 및 제거할 대상 요소를 선택합니다.
                 var $tasklistHeader = $('.tasklist-header').eq(clickedIndex);
@@ -92,6 +92,7 @@ document.addEventListener("DOMContentLoaded", function(){
             var checkicon = $('<i class="icon color-label__icon"><i class="bi bi-check-lg"></i></i>');
             $(this).find('.color-label').append(checkicon);
         });
+
     });
   
     menuButtons.forEach((button) => {

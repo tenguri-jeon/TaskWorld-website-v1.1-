@@ -24262,7 +24262,7 @@ a.tw-click-logic[href],button.tw-click-logic:not(:disabled) {
     width: 28px
 }
 
-.tw-add-members-box__button.--new-ui: hover {
+.tw-add-members-box__button.--new-ui:hover {
     border:1px solid #eef0f2
 }
 
@@ -24288,27 +24288,27 @@ a.tw-click-logic[href],button.tw-click-logic:not(:disabled) {
     overflow-y: auto
 }
 
-.tw-add-members-box__right-container.--scrollable: :-webkit-scrollbar {
+.tw-add-members-box__right-container.--scrollable::-webkit-scrollbar {
     background:transparent;
     height: 8px;
     width: 8px
 }
 
-.tw-add-members-box__right-container.--scrollable: :-webkit-scrollbar-track {
+.tw-add-members-box__right-container.--scrollable::-webkit-scrollbar-track {
     background:#eef0f2;
     border-radius: 4px;
     height: 8px;
     width: 8px
 }
 
-.tw-add-members-box__right-container.--scrollable: :-webkit-scrollbar-thumb {
+.tw-add-members-box__right-container.--scrollable::-webkit-scrollbar-thumb {
     background:#b0b4bb;
     border-radius: 4px;
     height: 8px;
     width: 8px
 }
 
-.tw-add-members-box__right-container.--scrollable: :-webkit-scrollbar-thumb:hover {
+.tw-add-members-box__right-container.--scrollable::-webkit-scrollbar-thumb:hover {
     background:#bec1c8
 }
 
@@ -27035,7 +27035,7 @@ a.tw-click-logic[href],button.tw-click-logic:not(:disabled) {
     text-align: left
 }
 
-.tw-image-previewer-title__download-icon.--download: hover {
+.tw-image-previewer-title__download-icon.--download:hover {
     background:#eef0f2;
     color: #0d1017
 }
@@ -27139,7 +27139,7 @@ a.tw-click-logic[href],button.tw-click-logic:not(:disabled) {
     margin-left: 8px
 }
 
-.tw-task-review-activity-box__reviewers.--approve .tw-task-review-activity-box__reviewers-left>: first-child {
+.tw-task-review-activity-box__reviewers.--approve .tw-task-review-activity-box__reviewers-left>:first-child {
     padding-left:0
 }
 
@@ -27254,7 +27254,7 @@ a.tw-click-logic[href],button.tw-click-logic:not(:disabled) {
     visibility: visible
 }
 
-.tw-message.--clickable: hover {
+.tw-message.--clickable:hover {
     cursor:pointer
 }
 
@@ -29163,7 +29163,7 @@ a.tw-click-logic[href],button.tw-click-logic:not(:disabled) {
     background: #eef0f2
 }
 
-.tw-project-header__back-button:active.--new-ui,.tw-project-header__back-button: hover.--new-ui {
+.tw-project-header__back-button:active.--new-ui,.tw-project-header__back-button:hover.--new-ui {
     background:#d4d6db
 }
 
@@ -31426,7 +31426,7 @@ a.tw-click-logic[href],button.tw-click-logic:not(:disabled) {
     box-shadow: 0 3px 3px 0 #0d344f
 }
 
-.tw-chat-head-plus-button:focus.--new-ui,.tw-chat-head-plus-button: hover.--new-ui {
+.tw-chat-head-plus-button:focus.--new-ui,.tw-chat-head-plus-button:hover.--new-ui {
     background-color:#d4d6db;
     border: none;
     -webkit-box-shadow: none;
@@ -42530,7 +42530,7 @@ a.tw-click-logic[href],button.tw-click-logic:not(:disabled) {
     visibility: hidden
 }
 
-.tw-resource-table__pin-button.--clickable: hover {
+.tw-resource-table__pin-button.--clickable:hover {
     color:#464c59
 }
 
@@ -42539,7 +42539,7 @@ a.tw-click-logic[href],button.tw-click-logic:not(:disabled) {
     visibility: visible
 }
 
-.tw-resource-table__pin-button.--selected: hover {
+.tw-resource-table__pin-button.--selected:hover {
     color:#259295
 }
 

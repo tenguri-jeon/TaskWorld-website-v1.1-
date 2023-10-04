@@ -194,24 +194,261 @@
                 
             </section>
             <!--contents-->
-            <div class="kanban-columns">
-                <div class="kanban-column">
-                    <div class="click-area create-tasklist-button" role="button" tabindex="0">
-                        <i class="tw-icon bi bi-plus-lg"></i>
-                        <span class="projects.button.create-tasklist-button_new_tasklist">새 업무리스트 만들기</span>
+            <div class="kanban-columns-wrapper">
+                <div class="kanban-columns">
+                    <div class="kanban-column">
+                        <div class="click-area create-tasklist-button" role="button" tabindex="0">
+                            <i class="tw-icon bi bi-plus-lg"></i>
+                            <span class="projects.button.create-tasklist-button_new_tasklist">새 업무리스트 만들기</span>
+                        </div>
                     </div>
-                </div>
-                <div class="kanban-column">
-                    <div class="kanban-board-columns__column" style="width: 300px;">
-                        <section class="tasklist">
+                    <div class="kanban-column">
+                        <div class="kanban-board-columns__column" style="width: 300px;">
+                            <section class="tasklist">
+                                <div class="kanban-list-header">
+                                    <div class="tasklist__frame-top">
+                                        <div>
+                                            <div class="tasklist-header">
+                                                <div class="tasklist-header__left-section">
+                                                    <div class="tasklist-header__editable-text-field-container">
+                                                        <div class="click-area editable-text-field --plain-text" role="button" tabindex="0">
+                                                            <div class="editable-text-field__text">작성 가이드</div>
+                                                            <i class="icon editable-text-field__icon" data-icon="pen">
+                                                                <i class="bi bi-pencil"></i>
+                                                            </i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tasklist-header__right-section">
+                                                    <div class="click-area tasklist-header__add-icon" role="button">
+                                                        <i class="bi bi-plus fs-4"></i>
+                                                    </div>
+                                                    <div class="tasklist-menu">
+                                                        <div class="click-area tasklist-menu__button" role="button">
+                                                            <i class="bi bi-three-dots-vertical"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tasklist-header__input-panel-container" style="display: none;">
+                                                <section class="task-or-note-input-panel">
+                                                    <textarea class="task-or-note-input-panel__input-box hack-scrollbar" placeholder="새 업무 만들기" style="height: inherit;"></textarea>
+                                                    <div class="task-or-note-input-panel__panels">
+                                                        <div class="task-or-note-input-panel__panel-left">
+                                                            <div class="task-properties-panel">
+                                                                <div class="click-area task-properties-panel__member-panel-item" role="button" tabindex="0">
+                                                                    <i class="icon bi bi-person-plus"></i>
+                                                                </div>
+                                                                <div class="click-area task-properties-panel__tag-panel-item" role="button" tabindex="0">
+                                                                    <i class="icon bi bi-tag"></i>
+                                                                </div>
+                                                                <div class="click-area task-properties-panel__calendar-panel-item" role="button" tabindex="0">
+                                                                    <i class="icon bi bi-calendar4-week"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="task-or-note-input-panel__panel-right">
+                                                            <button class="button --size-28 --secondary task-or-note-input-panel__cancel-button" type="button">
+                                                                <div class="button__main-container">
+                                                                    <span class="tasks.buttonns.cancel">취소</span>
+                                                                </div>
+                                                            </button>
+                                                            <button class="button --size-28 task-or-note-input-panel__create-button" type="button" disabled>
+                                                                <div class="button__main-container">
+                                                                    <span class="tasks.buttonns.create">만들기</span>
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="kanban-items hack-scrollbar">
+                                    <div class="tasklist__container" style="overflow: hidden; height: 0px; width: 0px;">
+                                        <div class="tasklist__inner-container" style="position: relative; width: 300px; overflow: auto; will-change: trasform; direction: 1tr;">
+                                            <div class="task__outer" draggable="true">
+                                                <div class="task__wrapper">
+                                                    <section class="task ">
+                                                        <div class="task-color task__task-color --bg-rainbow"></div>
+                                                        <div class="task__except-color">
+                                                            <div class="task__front">
+                                                                <div class="sapcer" style="flex-direction: row; gap: 5px; align-items: stretch; justify-content: start;"></div>
+                                                            </div>
+                                                            <div class="task__inner">
+                                                                <div class="task__main">
+                                                                    <div class="task-header">
+                                                                        <div class="task-header__checkbox">
+                                                                            <div class="click-area task-checkbox --medium" role="button" tabindex="0">
+                                                                                <i class="icon task-checkbox__check-mark bi bi-check"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                        <span class="task-header__title">프로젝트 작성 가이드</span>
+                                                                    </div>
+                                                                    <div class="task-body">
+                                                                        <div class="task-body__date-summary">
+                                                                            <div class="divided-row"></div>
+                                                                        </div>
+                                                                        <div class="divided-row"></div>
+                                                                        <div class="divider task-body__horizontal-divider --size-s"></div>
+                                                                        <div class="task-body__columns">
+                                                                            <div class="task-body__left"></div>
+                                                                            <div class="task-body__right">
+                                                                                <div class="user-avatar-group">
+                                                                                    <div class="user-avatar-group__avatar-container --compact">
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div> 
+                                                    </section>
+                                                </div>
+                                            </div>
+                                            <div class="tasklist__completed-taks-header" style="height: unset; width: 100%; display: none;">
+                                                <div class="tasklist__header-done">
+                                                    <span class="task_lists.completed_tasks">완료된 업무</span>
+                                                </div>
+                                                <div class="click-area completed-task-sorting-menu__sort-by" role="button" tabindex="0">
+                                                    <i class="icon completed-task-sorting-menu__sorting-icon">
+                                                        <i class="bi bi-sort-up"></i>
+                                                    </i>
+                                                    <span class="tasks.task_lists.menu.sort">정렬</span>
+                                                    <i class="icon completed-task-sorting-menu__arrow-down-icon">
+                                                        <i class="bi bi-chevron-down"></i>
+                                                    </i>
+                                                </div>
+                                            </div>
+                                            <div class="task__outer completed-task" style="display: none;" draggable="true">
+                                                <div class="task__Wrapper">
+                                                    <section class="task --done">
+                                                        <div class="task-color task__task-color --bg-rainbow"></div>
+                                                        <div class="task__except-color">
+                                                            <div class="task__front">
+                                                                <div class="spacer" style="flex-direction: row; gap: 5px; align-items: stretch; justify-content: start;"></div>
+                                                            </div>
+                                                            <div class="task__inner">
+                                                                <div class="task__main">
+                                                                    <div class="task-header">
+                                                                        <div class="task-header__checkbox">
+                                                                            <div class="click-area task-checkbox --completed --medium" role="button" tabindex="0">
+                                                                                <i class="icon task-checkbox__check-mark bi bi-check"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                        <span class="task-header__title">프로젝트 작성 가이드</span>
+                                                                    </div>
+                                                                    <div class="task-body">
+                                                                        <div class="task-body__date-summary">
+                                                                            <div class="divided-row">
+                                                                                <div class="task-date">
+                                                                                    <span class="tasks.properties.due_date_status.completed_on">
+                                                                                        <span class="text --weight-bold">
+                                                                                            <span class="tasks.properties.date.yesterday">
+                                                                                                어제, 8월 30일에 완료
+                                                                                            </span>
+                                                                                        </span>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="divided-row"></div>
+                                                                        <div class="divider task-body__horizontal-divider --size-s"></div>
+                                                                        <div class="task-body__columns">
+                                                                            <div class="task-body__left"></div>
+                                                                            <div class="task-body__right">
+                                                                                <div class="user-avatar-group">
+                                                                                    <div class="user-avatar-group__avatar-container --compact">
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="files-drop-overlay">
+
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tasklist__frame-bottom">
+                                    <div class="tasklist-footer --compact --expanded">
+                                        <section class="task-or-note-input-panel tasklist-footer__task-or-note-input-panel" style="display: none;">
+                                            <textarea class="task-or-note-input-panel__input-box hack-scrollbar" placeholder="새 업무 만들기" style="height: inherit;"></textarea>
+                                            <div class="task-or-note-input-panel__panels">
+                                                <div class="task-or-note-input-panel__panel-left">
+                                                    <div class="task-properties-panel">
+                                                        <div class="click-area task-properties-panel__member-panel-item" role="button" tabindex="0">
+                                                            <i class="icon bi bi-person-plus"></i>
+                                                        </div>
+                                                        <div class="click-area task-properties-panel__tag-panel-item" role="button" tabindex="0">
+                                                            <i class="icon bi bi-tag"></i>
+                                                        </div>
+                                                        <div class="click-area task-properties-panel__calendar-panel-item" role="button" tabindex="0">
+                                                            <i class="icon bi bi-calendar4-week"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="task-or-note-input-panel__panel-right">
+                                                    <button class="button --size-28 --secondary task-or-note-input-panel__cancel-button" type="button">
+                                                        <div class="button__main-container">
+                                                            <span class="tasks.buttonns.cancel">취소</span>
+                                                        </div>
+                                                    </button>
+                                                    <button class="button --size-28 task-or-note-input-panel__create-button" type="button" disabled>
+                                                        <div class="button__main-container">
+                                                            <span class="tasks.buttonns.create">만들기</span>
+                                                        </div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <div class="tasklist-footer__wrapper">
+                                            <div class="tasklist-footer__left-section">
+                                                <div class="hbox" style="align-items: center; margin-left: -13px;">
+                                                    <div class="box-item" style="margin-left: 13px; flex-grow: 0; flex-shrink: 0;">
+                                                        <div class="hbox" style="align-items: center; margin-left: -5px;">
+                                                            <div class="box-item tasklist-footer__task-icon" style="margin-left: 5px; flex-grow: 0; flex-shrink: 0;">
+                                                                <i class="bi bi-check2-circle"></i>
+                                                            </div> 
+                                                            <div class="box-item tasklist-footer__active-task-count" style="margin-left: 5px; flex-grow: 0; flex-shrink: 0;">5</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tasklist-footer__right-section">
+                                                <div class="click-area tasklist-footer__toggle-completed-tasks-link" role="button" tabindex="0">완료된 업무 1개 보기</div>
+                                                <div class="tasklist-footer__add-task-separator"></div>
+                                                <div class="click-area tasklist-footer__add-task-button" role="button" tabindex="0">
+                                                    <i class="bi bi-plus fs-4"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="kanban-column">
+                        <div class="kanban-board-columns__column" style="width: 300px;">
+                            <section class="tasklist">
                             <div class="kanban-list-header">
                                 <div class="tasklist__frame-top">
                                     <div>
-                                        <div class="tasklist-header">
+                                        <div class="tasklist-header --bg-blue2">
                                             <div class="tasklist-header__left-section">
                                                 <div class="tasklist-header__editable-text-field-container">
                                                     <div class="click-area editable-text-field --plain-text" role="button" tabindex="0">
-                                                        <div class="editable-text-field__text">작성 가이드</div>
+                                                        <div class="editable-text-field__text">현황보고</div>
                                                         <i class="icon editable-text-field__icon" data-icon="pen">
                                                             <i class="bi bi-pencil"></i>
                                                         </i>
@@ -266,10 +503,83 @@
                             </div> 
                             <div class="kanban-items hack-scrollbar">
                                 <div class="tasklist__container" style="overflow: hidden; height: 0px; width: 0px;">
-                                    <div class="tasklist__inner-container" style="position: relative; height: 656px; width: 300px; overflow: auto; will-change: trasform; direction: 1tr;">
+                                    <div class="tasklist__inner-container" style="position: relative; width: 300px; overflow: auto; will-change: trasform; direction: 1tr;">
+                                        <div class="task__outer --padded" daraggable="true">
+                                            <div class="task__main-task-title">
+                                                <div class="click-area main-task-title" role="button" tabindex="0">
+                                                    <i class="icon main-task-title__icon">
+                                                        <i class="bi bi-diagram-2"></i>
+                                                    </i>
+                                                    <div class="trunced-text main-task-title__title" style="max-width: 250px;">2022년 수수/매출 목표</div>
+                                                </div>
+                                            </div>
+                                            <div class="task__wrapper">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#d4d6db" width="10" height="20">
+                                                    <path d="M0 0v10M0 10q0 8 8 8h2"></path>
+                                                </svg>
+                                                <section class="task --padded">
+                                                    <div class="task-color task__task-color"></div>
+                                                    <div class="task__except-color --padded">
+                                                        <div class="task__front">
+                                                            <div class="spacer" style="flex-direction: row; gap: 5px; align-items: stretch; justify-content: start;"></div>
+                                                        </div>
+                                                        <div class="task__inner">
+                                                            <div class="task__main">
+                                                                <div class="task-header">
+                                                                    <div class="task-header__checkbox">
+                                                                        <div class="click-area task-checkbox --medium" role="button" tabindex="0">
+                                                                            <i class="icon task-checkbox__check-mark bi bi-check"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <span class="task-header__title">1/4분기 수주/매출 현황</span>
+                                                                </div>
+                                                                <div class="task-body">
+                                                                    <div class="task-body__date-summary">
+                                                                        <div class="divided-row"></div>
+                                                                    </div>
+                                                                    <div class="divided-row"></div>
+                                                                    <div class="divider task-body__horizontal-divider --size-s"></div>
+                                                                    <div class="task-body__columns">
+                                                                        <div class="task-body__left">
+                                                                            <div class="task-meta">
+                                                                                <div class="task-meta-item">
+                                                                                    <i class="icon task-meta-item__icon">
+                                                                                        <i class="bi bi-chat"></i></i>3
+                                                                                    <div class="task-meta-item__unread-mark">
+                                                                                        <div class="noti-badge__transition-group"></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="task-meta-item">
+                                                                                    <i class="icon task-meta-item__icon">
+                                                                                        <i class="bi bi-paperclip"></i></i>3
+                                                                                    <div class="task-meta-item__unread-mark">
+                                                                                        <div class="noti-badge__transition-group"></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="task-body__right">
+                                                                            <div class="user-avatar-group">
+                                                                                <div class="user-avatar-group__avatar-container --compact">
+                                                                                    
+                                                                                </div>
+                                                                                <div class="user-avatar-group__avatar-container --compact">
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="files-drop-overlay"></div>
+                                                </section>
+                                            </div>
+                                        </div>
                                         <div class="task__outer" draggable="true">
                                             <div class="task__wrapper">
-                                                <section class="task ">
+                                                <section class="task">
                                                     <div class="task-color task__task-color --bg-rainbow"></div>
                                                     <div class="task__except-color">
                                                         <div class="task__front">
@@ -283,7 +593,7 @@
                                                                             <i class="icon task-checkbox__check-mark bi bi-check"></i>
                                                                         </div>
                                                                     </div>
-                                                                    <span class="task-header__title">프로젝트 작성 가이드</span>
+                                                                    <span class="task-header__title">새로운 프로젝트</span>
                                                                 </div>
                                                                 <div class="task-body">
                                                                     <div class="task-body__date-summary">
@@ -434,39 +744,211 @@
                                     </div>
                                 </div>
                             </div>
-                        </section>
+                            </section>
+                        </div>
                     </div>
-                </div>
-                <div class="kanban-column">
-                    <div class="kanban-board-columns__column" style="width: 300px;">
-                        <section class="tasklist">
-                           <div class="kanban-list-header">
-                            <div class="tasklist__frame-top">
-                                <div>
-                                    <div class="tasklist-header --bg-blue2">
-                                        <div class="tasklist-header__left-section">
-                                            <div class="tasklist-header__editable-text-field-container">
-                                                <div class="click-area editable-text-field --plain-text" role="button" tabindex="0">
-                                                    <div class="editable-text-field__text">현황보고</div>
-                                                    <i class="icon editable-text-field__icon" data-icon="pen">
-                                                        <i class="bi bi-pencil"></i>
-                                                    </i>
+                    <div class="kanban-column">
+                        <div class="kanban-board-columns__column" style="width: 300px;">
+                            <section class="tasklist">
+                                <div class="kanban-list-header">
+                                    <div class="tasklist__frame-top">
+                                        <div>
+                                            <div class="tasklist-header">
+                                                <div class="tasklist-header__left-section">
+                                                    <div class="tasklist-header__editable-text-field-container">
+                                                        <div class="click-area editable-text-field --plain-text" role="button" tabindex="0">
+                                                            <div class="editable-text-field__text">신규 라이선스</div>
+                                                            <i class="icon editable-text-field__icon" data-icon="pen">
+                                                                <i class="bi bi-pencil"></i>
+                                                            </i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tasklist-header__right-section">
+                                                    <div class="click-area tasklist-header__add-icon" role="button" >
+                                                        <i class="bi bi-plus fs-4"></i>
+                                                    </div>
+                                                    <div class="tasklist-menu">
+                                                        <div class="click-area tasklist-menu__button" role="button">
+                                                            <i class="bi bi-three-dots-vertical"></i>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="tasklist-header__right-section">
-                                            <div class="click-area tasklist-header__add-icon" role="button">
-                                                <i class="bi bi-plus fs-4"></i>
+                                            <div class="tasklist-header__input-panel-container" style="display: none;">
+                                                <section class="task-or-note-input-panel">
+                                                    <textarea class="task-or-note-input-panel__input-box hack-scrollbar" placeholder="새 업무 만들기" style="height: inherit;"></textarea>
+                                                    <div class="task-or-note-input-panel__panels">
+                                                        <div class="task-or-note-input-panel__panel-left">
+                                                            <div class="task-properties-panel">
+                                                                <div class="click-area task-properties-panel__member-panel-item" role="button" tabindex="0">
+                                                                    <i class="icon bi bi-person-plus"></i>
+                                                                </div>
+                                                                <div class="click-area task-properties-panel__tag-panel-item" role="button" tabindex="0">
+                                                                    <i class="icon bi bi-tag"></i>
+                                                                </div>
+                                                                <div class="click-area task-properties-panel__calendar-panel-item" role="button" tabindex="0">
+                                                                    <i class="icon bi bi-calendar4-week"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="task-or-note-input-panel__panel-right">
+                                                            <button class="button --size-28 --secondary task-or-note-input-panel__cancel-button" type="button">
+                                                                <div class="button__main-container">
+                                                                    <span class="tasks.buttonns.cancel">취소</span>
+                                                                </div>
+                                                            </button>
+                                                            <button class="button --size-28 task-or-note-input-panel__create-button" type="button" disabled>
+                                                                <div class="button__main-container">
+                                                                    <span class="tasks.buttonns.create">만들기</span>
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </section>
                                             </div>
-                                            <div class="tasklist-menu">
-                                                <div class="click-area tasklist-menu__button" role="button">
-                                                    <i class="bi bi-three-dots-vertical"></i>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="kanban-items hack-scrollbar">
+                                    <div class="tasklist__container" style="overflow: hidden; height: 0px; width: 0px;">
+                                        <div class="tasklist__inner-container" style="position: relative; width: 300px; overflow: auto; will-change: trasform; direction: 1tr;">
+                                            <div class="task__outer" draggable="true">
+                                                <div class="task__wrapper">
+                                                    <section class="task">
+                                                        <div class="task-color task__task-color --bg-red"></div> 
+                                                        <div class="task__except-color">
+                                                                <div class="task__front">
+                                                                    <div class="spacer" style="flex-direction: row; gap: 5px; align-items: stretch; justify-content: start;"></div>
+                                                                </div>
+                                                                <div class="task__inner">
+                                                                    <div class="task__main">
+                                                                        <div class="task-header">
+                                                                            <div class="task-header__checkbox">
+                                                                                <div class="click-area task-checkbox --medium" role="button" tabindex="0">
+                                                                                    <i class="icon task-checkbox__check-mark bi bi-check"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                            <span class="task-header__title">경찰청 사이버수사시스템용 OPENWORKS도입</span>
+                                                                        </div>
+                                                                        <!-- <div class="task-card-checklist">
+                                                                            <div class="task-card-checklist__content">
+                                                                                <div class="click-area task-card-checklist-item " role="button" tabindex="0">
+                                                                                    <div class="task-card-checklist-item__checkbox-container">
+                                                                                        <div class="click-area task-checkbox --small" role="button" tabindex="0">
+                                                                                            <i class="icon task-checkbox__check-mark bi bi-check"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="task-card-checklist-item__label-container">
+                                                                                        <div class="task-card-checklist-item__label">
+                                                                                            <span class="markdown-line">
+                                                                                                <p>납품(라이선스 발행)</p>
+                                                                                            </span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="click-area task-card-checklist-item" role="button" tabindex="0">
+                                                                                    <div class="task-card-checklist-item__checkbox-container">
+                                                                                        <div class="click-area task-checkbox --small" role="button" tabindex="0">
+                                                                                            <i class="icon task-checkbox__check-mark bi bi-check"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="task-card-checklist-item__label-container">
+                                                                                        <div class="task-card-checklist-item__label">
+                                                                                            <span class="markdown-line">
+                                                                                                <p>준공검수</p>
+                                                                                            </span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="click-area task-card-checklist-item" role="button" tabindex="0">
+                                                                                    <div class="task-card-checklist-item__checkbox-container">
+                                                                                        <div class="click-area task-checkbox --small" role="button" tabindex="0">
+                                                                                            <i class="icon task-checkbox__check-mark bi bi-check"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="task-card-checklist-item__label-container">
+                                                                                        <div class="task-card-checklist-item__label">
+                                                                                            <span class="markdown-line">
+                                                                                                <p>계산서 발행</p>
+                                                                                            </span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="click-area task-card-checklist__footer" role="button" tabindex="0">
+                                                                                <span class="tasks.checklist.footer.see_all_checklist_v2">모든 체크리스</span>
+                                                                            </div>
+                                                                        </div> -->
+                                                                        <div class="task-body">
+                                                                            <!-- <div class="tag-list task-body__tags">
+                                                                                <div class="tag --color-red --small">
+                                                                                    <div class="trunced-text tag__tag-name" style="max-width: 180px;">솔루션납품</div>
+                                                                                </div>
+                                                                                <div class="tag --color-purple --small">
+                                                                                    <div class="trunced-text tag__tag-name" style="max-width: 180px;">한국건강관리협회</div>
+                                                                                </div>
+                                                                                <div class="tag --color-blue --small">
+                                                                                    <div class="trunced-text tag__tag-name" style="max-width: 180px;">동양정보서비스</div>
+                                                                                </div>
+                                                                            </div> -->
+                                                                            <div class="task-body__date-summary">
+                                                                                <div class="divided-row"></div>
+                                                                            </div>
+                                                                            <div class="divided-row"></div>
+                                                                            <div class="divider task-body__horizontal-divider --size-s"></div>
+                                                                            <!-- <div class="task-body__columns">
+                                                                                <div class="task-body__left">
+                                                                                    <div class="task-meta">
+                                                                                        <div class="task-meta-item">
+                                                                                            <i class="icon task-meta-item__icon">
+                                                                                                <i class="bi bi-diagram-2"></i></i>7/11
+                                                                                            <div class="task-meta-item__unread-mark">
+                                                                                                <div class="noti-badge__transition-group"></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="task-meta">
+                                                                                            <div class="task-meta-item">
+                                                                                                <i class="icon task-meta-item__icon">
+                                                                                                    <i class="bi bi-chat"></i></i>4
+                                                                                                <div class="task-meta-item__unread-mark">
+                                                                                                    <div class="noti-badge__transition-group"></div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="task-meta-item">
+                                                                                                <i class="icon task-meta-item__icon">
+                                                                                                    <i class="bi bi-paperclip"></i></i>4
+                                                                                                <div class="task-meta-item__unread-mark">
+                                                                                                    <div class="noti-badge__transition-group"></div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="task-body__right">
+                                                                                    <div class="user-avatar-group">
+                                                                                        <div class="user-avatar-group__avatar-container --compact">
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div> -->
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="files-drop-overlay">
+                                                            
+                                                        </div>
+                                                    </section>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tasklist-header__input-panel-container" style="display: none;">
-                                        <section class="task-or-note-input-panel">
+                                </div>
+                                <div class="tasklist__frame-bottom">
+                                    <div class="tasklist-footer --compact --expanded">
+                                        <section class="task-or-note-input-panel tasklist-footer__task-or-note-input-panel" style="display: none;">
                                             <textarea class="task-or-note-input-panel__input-box hack-scrollbar" placeholder="새 업무 만들기" style="height: inherit;"></textarea>
                                             <div class="task-or-note-input-panel__panels">
                                                 <div class="task-or-note-input-panel__panel-left">
@@ -496,511 +978,31 @@
                                                 </div>
                                             </div>
                                         </section>
-                                    </div>
-                                </div>
-                            </div>
-                           </div> 
-                           <div class="kanban-items hack-scrollbar">
-                            <div class="tasklist__container" style="overflow: hidden; height: 0px; width: 0px;">
-                                <div class="tasklist__inner-container" style="position: relative; height: 656px; width: 300px; overflow: auto; will-change: trasform; direction: 1tr;">
-                                    <div class="task__outer --padded" daraggable="true">
-                                        <div class="task__main-task-title">
-                                            <div class="click-area main-task-title" role="button" tabindex="0">
-                                                <i class="icon main-task-title__icon">
-                                                    <i class="bi bi-diagram-2"></i>
-                                                </i>
-                                                <div class="trunced-text main-task-title__title" style="max-width: 250px;">2022년 수수/매출 목표</div>
-                                            </div>
-                                        </div>
-                                        <div class="task__wrapper">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#d4d6db" width="10" height="20">
-                                                <path d="M0 0v10M0 10q0 8 8 8h2"></path>
-                                            </svg>
-                                            <section class="task --padded">
-                                                <div class="task-color task__task-color"></div>
-                                                <div class="task__except-color --padded">
-                                                    <div class="task__front">
-                                                        <div class="spacer" style="flex-direction: row; gap: 5px; align-items: stretch; justify-content: start;"></div>
-                                                    </div>
-                                                    <div class="task__inner">
-                                                        <div class="task__main">
-                                                            <div class="task-header">
-                                                                <div class="task-header__checkbox">
-                                                                    <div class="click-area task-checkbox --medium" role="button" tabindex="0">
-                                                                        <i class="icon task-checkbox__check-mark bi bi-check"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <span class="task-header__title">1/4분기 수주/매출 현황</span>
-                                                            </div>
-                                                            <div class="task-body">
-                                                                <div class="task-body__date-summary">
-                                                                    <div class="divided-row"></div>
-                                                                </div>
-                                                                <div class="divided-row"></div>
-                                                                <div class="divider task-body__horizontal-divider --size-s"></div>
-                                                                <div class="task-body__columns">
-                                                                    <div class="task-body__left">
-                                                                        <div class="task-meta">
-                                                                            <div class="task-meta-item">
-                                                                                <i class="icon task-meta-item__icon">
-                                                                                    <i class="bi bi-chat"></i></i>3
-                                                                                <div class="task-meta-item__unread-mark">
-                                                                                    <div class="noti-badge__transition-group"></div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="task-meta-item">
-                                                                                <i class="icon task-meta-item__icon">
-                                                                                    <i class="bi bi-paperclip"></i></i>3
-                                                                                <div class="task-meta-item__unread-mark">
-                                                                                    <div class="noti-badge__transition-group"></div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="task-body__right">
-                                                                        <div class="user-avatar-group">
-                                                                            <div class="user-avatar-group__avatar-container --compact">
-                                                                                
-                                                                            </div>
-                                                                            <div class="user-avatar-group__avatar-container --compact">
-                                                                                
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                        <div class="tasklist-footer__wrapper">
+                                            <div class="tasklist-footer__left-section">
+                                                <div class="hbox" style="align-items: center; margin-left: -13px;">
+                                                    <div class="box-item" style="margin-left: 13px; flex-grow: 0; flex-shrink: 0;">
+                                                        <div class="hbox" style="align-items: center; margin-left: -5px;">
+                                                            <div class="box-item tasklist-footer__task-icon" style="margin-left: 5px; flex-grow: 0; flex-shrink: 0;">
+                                                                <i class="bi bi-check2-circle"></i>
+                                                            </div> 
+                                                            <div class="box-item tasklist-footer__active-task-count" style="margin-left: 5px; flex-grow: 0; flex-shrink: 0;">5</div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="files-drop-overlay"></div>
-                                            </section>
-                                        </div>
-                                    </div>
-                                    <div class="task__outer" draggable="true">
-                                        <div class="task__wrapper">
-                                            <section class="task">
-                                                <div class="task-color task__task-color --bg-rainbow"></div>
-                                                <div class="task__except-color">
-                                                    <div class="task__front">
-                                                        <div class="sapcer" style="flex-direction: row; gap: 5px; align-items: stretch; justify-content: start;"></div>
-                                                    </div>
-                                                    <div class="task__inner">
-                                                        <div class="task__main">
-                                                            <div class="task-header">
-                                                                <div class="task-header__checkbox">
-                                                                    <div class="click-area task-checkbox --medium" role="button" tabindex="0">
-                                                                        <i class="icon task-checkbox__check-mark bi bi-check"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <span class="task-header__title">새로운 프로젝트</span>
-                                                            </div>
-                                                            <div class="task-body">
-                                                                <div class="task-body__date-summary">
-                                                                    <div class="divided-row"></div>
-                                                                </div>
-                                                                <div class="divided-row"></div>
-                                                                <div class="divider task-body__horizontal-divider --size-s"></div>
-                                                                <div class="task-body__columns">
-                                                                    <div class="task-body__left"></div>
-                                                                    <div class="task-body__right">
-                                                                        <div class="user-avatar-group">
-                                                                            <div class="user-avatar-group__avatar-container --compact">
-                                                                                
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> 
-                                            </section>
-                                        </div>
-                                    </div>
-                                    <div class="tasklist__completed-taks-header" style="height: unset; width: 100%; display: none;">
-                                        <div class="tasklist__header-done">
-                                            <span class="task_lists.completed_tasks">완료된 업무</span>
-                                        </div>
-                                        <div class="click-area completed-task-sorting-menu__sort-by" role="button" tabindex="0">
-                                            <i class="icon completed-task-sorting-menu__sorting-icon">
-                                                <i class="bi bi-sort-up"></i>
-                                            </i>
-                                            <span class="tasks.task_lists.menu.sort">정렬</span>
-                                            <i class="icon completed-task-sorting-menu__arrow-down-icon">
-                                                <i class="bi bi-chevron-down"></i>
-                                            </i>
-                                        </div>
-                                    </div>
-                                    <div class="task__outer completed-task" style="display: none;" draggable="true">
-                                        <div class="task__Wrapper">
-                                            <section class="task --done">
-                                                <div class="task-color task__task-color --bg-rainbow"></div>
-                                                <div class="task__except-color">
-                                                    <div class="task__front">
-                                                        <div class="spacer" style="flex-direction: row; gap: 5px; align-items: stretch; justify-content: start;"></div>
-                                                    </div>
-                                                    <div class="task__inner">
-                                                        <div class="task__main">
-                                                            <div class="task-header">
-                                                                <div class="task-header__checkbox">
-                                                                    <div class="click-area task-checkbox --completed --medium" role="button" tabindex="0">
-                                                                        <i class="icon task-checkbox__check-mark bi bi-check"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <span class="task-header__title">프로젝트 작성 가이드</span>
-                                                            </div>
-                                                            <div class="task-body">
-                                                                <div class="task-body__date-summary">
-                                                                    <div class="divided-row">
-                                                                        <div class="task-date">
-                                                                            <span class="tasks.properties.due_date_status.completed_on">
-                                                                                <span class="text --weight-bold">
-                                                                                    <span class="tasks.properties.date.yesterday">
-                                                                                        어제, 8월 30일에 완료
-                                                                                    </span>
-                                                                                </span>
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="divided-row"></div>
-                                                                <div class="divider task-body__horizontal-divider --size-s"></div>
-                                                                <div class="task-body__columns">
-                                                                    <div class="task-body__left"></div>
-                                                                    <div class="task-body__right">
-                                                                        <div class="user-avatar-group">
-                                                                            <div class="user-avatar-group__avatar-container --compact">
-                                                                                
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="files-drop-overlay">
-
-                                                </div>
-                                            </section>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                           </div>
-                           <div class="tasklist__frame-bottom">
-                            <div class="tasklist-footer --compact --expanded">
-                                <section class="task-or-note-input-panel tasklist-footer__task-or-note-input-panel" style="display: none;">
-                                    <textarea class="task-or-note-input-panel__input-box hack-scrollbar" placeholder="새 업무 만들기" style="height: inherit;"></textarea>
-                                    <div class="task-or-note-input-panel__panels">
-                                        <div class="task-or-note-input-panel__panel-left">
-                                            <div class="task-properties-panel">
-                                                <div class="click-area task-properties-panel__member-panel-item" role="button" tabindex="0">
-                                                    <i class="icon bi bi-person-plus"></i>
-                                                </div>
-                                                <div class="click-area task-properties-panel__tag-panel-item" role="button" tabindex="0">
-                                                    <i class="icon bi bi-tag"></i>
-                                                </div>
-                                                <div class="click-area task-properties-panel__calendar-panel-item" role="button" tabindex="0">
-                                                    <i class="icon bi bi-calendar4-week"></i>
-                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="task-or-note-input-panel__panel-right">
-                                            <button class="button --size-28 --secondary task-or-note-input-panel__cancel-button" type="button">
-                                                <div class="button__main-container">
-                                                    <span class="tasks.buttonns.cancel">취소</span>
-                                                </div>
-                                            </button>
-                                            <button class="button --size-28 task-or-note-input-panel__create-button" type="button" disabled>
-                                                <div class="button__main-container">
-                                                    <span class="tasks.buttonns.create">만들기</span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </section>
-                                <div class="tasklist-footer__wrapper">
-                                    <div class="tasklist-footer__left-section">
-                                        <div class="hbox" style="align-items: center; margin-left: -13px;">
-                                            <div class="box-item" style="margin-left: 13px; flex-grow: 0; flex-shrink: 0;">
-                                                <div class="hbox" style="align-items: center; margin-left: -5px;">
-                                                    <div class="box-item tasklist-footer__task-icon" style="margin-left: 5px; flex-grow: 0; flex-shrink: 0;">
-                                                        <i class="bi bi-check2-circle"></i>
-                                                    </div> 
-                                                    <div class="box-item tasklist-footer__active-task-count" style="margin-left: 5px; flex-grow: 0; flex-shrink: 0;">5</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tasklist-footer__right-section">
-                                        <div class="click-area tasklist-footer__toggle-completed-tasks-link" role="button" tabindex="0">완료된 업무 1개 보기</div>
-                                        <div class="tasklist-footer__add-task-separator"></div>
-                                        <div class="click-area tasklist-footer__add-task-button" role="button" tabindex="0">
-                                            <i class="bi bi-plus fs-4"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </section>
-                    </div>
-                </div>
-                <div class="kanban-column">
-                    <div class="kanban-board-columns__column" style="width: 300px;">
-                        <section class="tasklist">
-                            <div class="kanban-list-header">
-                                <div class="tasklist__frame-top">
-                                    <div>
-                                        <div class="tasklist-header">
-                                            <div class="tasklist-header__left-section">
-                                                <div class="tasklist-header__editable-text-field-container">
-                                                    <div class="click-area editable-text-field --plain-text" role="button" tabindex="0">
-                                                        <div class="editable-text-field__text">신규 라이선스</div>
-                                                        <i class="icon editable-text-field__icon" data-icon="pen">
-                                                            <i class="bi bi-pencil"></i>
-                                                        </i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tasklist-header__right-section">
-                                                <div class="click-area tasklist-header__add-icon" role="button" >
+                                            <div class="tasklist-footer__right-section">
+                                                <div class="click-area tasklist-footer__toggle-completed-tasks-link" role="button" tabindex="0">완료된 업무 1개 보기</div>
+                                                <div class="tasklist-footer__add-task-separator"></div>
+                                                <div class="click-area tasklist-footer__add-task-button" role="button" tabindex="0">
                                                     <i class="bi bi-plus fs-4"></i>
                                                 </div>
-                                                <div class="tasklist-menu">
-                                                    <div class="click-area tasklist-menu__button" role="button">
-                                                        <i class="bi bi-three-dots-vertical"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tasklist-header__input-panel-container" style="display: none;">
-                                            <section class="task-or-note-input-panel">
-                                                <textarea class="task-or-note-input-panel__input-box hack-scrollbar" placeholder="새 업무 만들기" style="height: inherit;"></textarea>
-                                                <div class="task-or-note-input-panel__panels">
-                                                    <div class="task-or-note-input-panel__panel-left">
-                                                        <div class="task-properties-panel">
-                                                            <div class="click-area task-properties-panel__member-panel-item" role="button" tabindex="0">
-                                                                <i class="icon bi bi-person-plus"></i>
-                                                            </div>
-                                                            <div class="click-area task-properties-panel__tag-panel-item" role="button" tabindex="0">
-                                                                <i class="icon bi bi-tag"></i>
-                                                            </div>
-                                                            <div class="click-area task-properties-panel__calendar-panel-item" role="button" tabindex="0">
-                                                                <i class="icon bi bi-calendar4-week"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="task-or-note-input-panel__panel-right">
-                                                        <button class="button --size-28 --secondary task-or-note-input-panel__cancel-button" type="button">
-                                                            <div class="button__main-container">
-                                                                <span class="tasks.buttonns.cancel">취소</span>
-                                                            </div>
-                                                        </button>
-                                                        <button class="button --size-28 task-or-note-input-panel__create-button" type="button" disabled>
-                                                            <div class="button__main-container">
-                                                                <span class="tasks.buttonns.create">만들기</span>
-                                                            </div>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </section>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
-                            <div class="kanban-items hack-scrollbar">
-                                <div class="tasklist__container" style="overflow: hidden; height: 0px; width: 0px;">
-                                    <div class="tasklist__inner-container" style="position: relative; height: 656px; width: 300px; overflow: auto; will-change: trasform; direction: 1tr;">
-                                        <div class="task__outer" draggable="true">
-                                            <div class="task__wrapper">
-                                                <section class="task">
-                                                    <div class="task-color task__task-color --bg-red"></div> 
-                                                    <div class="task__except-color">
-                                                            <div class="task__front">
-                                                                <div class="spacer" style="flex-direction: row; gap: 5px; align-items: stretch; justify-content: start;"></div>
-                                                            </div>
-                                                            <div class="task__inner">
-                                                                <div class="task__main">
-                                                                    <div class="task-header">
-                                                                        <div class="task-header__checkbox">
-                                                                            <div class="click-area task-checkbox --medium" role="button" tabindex="0">
-                                                                                <i class="icon task-checkbox__check-mark bi bi-check"></i>
-                                                                            </div>
-                                                                        </div>
-                                                                        <span class="task-header__title">경찰청 사이버수사시스템용 OPENWORKS도입</span>
-                                                                    </div>
-                                                                    <div class="task-card-checklist">
-                                                                        <div class="task-card-checklist__content">
-                                                                            <div class="click-area task-card-checklist-item " role="button" tabindex="0">
-                                                                                <div class="task-card-checklist-item__checkbox-container">
-                                                                                    <div class="click-area task-checkbox --small" role="button" tabindex="0">
-                                                                                        <i class="icon task-checkbox__check-mark bi bi-check"></i>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="task-card-checklist-item__label-container">
-                                                                                    <div class="task-card-checklist-item__label">
-                                                                                        <span class="markdown-line">
-                                                                                            <p>납품(라이선스 발행)</p>
-                                                                                        </span>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="click-area task-card-checklist-item" role="button" tabindex="0">
-                                                                                <div class="task-card-checklist-item__checkbox-container">
-                                                                                    <div class="click-area task-checkbox --small" role="button" tabindex="0">
-                                                                                        <i class="icon task-checkbox__check-mark bi bi-check"></i>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="task-card-checklist-item__label-container">
-                                                                                    <div class="task-card-checklist-item__label">
-                                                                                        <span class="markdown-line">
-                                                                                            <p>준공검수</p>
-                                                                                        </span>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="click-area task-card-checklist-item" role="button" tabindex="0">
-                                                                                <div class="task-card-checklist-item__checkbox-container">
-                                                                                    <div class="click-area task-checkbox --small" role="button" tabindex="0">
-                                                                                        <i class="icon task-checkbox__check-mark bi bi-check"></i>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="task-card-checklist-item__label-container">
-                                                                                    <div class="task-card-checklist-item__label">
-                                                                                        <span class="markdown-line">
-                                                                                            <p>계산서 발행</p>
-                                                                                        </span>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="click-area task-card-checklist__footer" role="button" tabindex="0">
-                                                                            <span class="tasks.checklist.footer.see_all_checklist_v2">모든 체크리스</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="task-body">
-                                                                        <!-- <div class="tag-list task-body__tags">
-                                                                            <div class="tag --color-red --small">
-                                                                                <div class="trunced-text tag__tag-name" style="max-width: 180px;">솔루션납품</div>
-                                                                            </div>
-                                                                            <div class="tag --color-purple --small">
-                                                                                <div class="trunced-text tag__tag-name" style="max-width: 180px;">한국건강관리협회</div>
-                                                                            </div>
-                                                                            <div class="tag --color-blue --small">
-                                                                                <div class="trunced-text tag__tag-name" style="max-width: 180px;">동양정보서비스</div>
-                                                                            </div>
-                                                                        </div> -->
-                                                                        <div class="task-body__date-summary">
-                                                                            <div class="divided-row"></div>
-                                                                        </div>
-                                                                        <div class="divided-row"></div>
-                                                                        <div class="divider task-body__horizontal-divider --size-s"></div>
-                                                                        <div class="task-body__columns">
-                                                                            <div class="task-body__left">
-                                                                                <div class="task-meta">
-                                                                                    <div class="task-meta-item">
-                                                                                        <i class="icon task-meta-item__icon">
-                                                                                            <i class="bi bi-diagram-2"></i></i>7/11
-                                                                                        <div class="task-meta-item__unread-mark">
-                                                                                            <div class="noti-badge__transition-group"></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="task-meta">
-                                                                                        <div class="task-meta-item">
-                                                                                            <i class="icon task-meta-item__icon">
-                                                                                                <i class="bi bi-chat"></i></i>4
-                                                                                            <div class="task-meta-item__unread-mark">
-                                                                                                <div class="noti-badge__transition-group"></div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="task-meta-item">
-                                                                                            <i class="icon task-meta-item__icon">
-                                                                                                <i class="bi bi-paperclip"></i></i>4
-                                                                                            <div class="task-meta-item__unread-mark">
-                                                                                                <div class="noti-badge__transition-group"></div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="task-body__right">
-                                                                                <div class="user-avatar-group">
-                                                                                    <div class="user-avatar-group__avatar-container --compact">
-                                                                                        
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                    </div>
-                                                    <div class="files-drop-overlay">
-                                                        
-                                                    </div>
-                                                </section>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="tasklist__frame-bottom">
-                                <div class="tasklist-footer --compact --expanded">
-                                    <section class="task-or-note-input-panel tasklist-footer__task-or-note-input-panel" style="display: none;">
-                                        <textarea class="task-or-note-input-panel__input-box hack-scrollbar" placeholder="새 업무 만들기" style="height: inherit;"></textarea>
-                                        <div class="task-or-note-input-panel__panels">
-                                            <div class="task-or-note-input-panel__panel-left">
-                                                <div class="task-properties-panel">
-                                                    <div class="click-area task-properties-panel__member-panel-item" role="button" tabindex="0">
-                                                        <i class="icon bi bi-person-plus"></i>
-                                                    </div>
-                                                    <div class="click-area task-properties-panel__tag-panel-item" role="button" tabindex="0">
-                                                        <i class="icon bi bi-tag"></i>
-                                                    </div>
-                                                    <div class="click-area task-properties-panel__calendar-panel-item" role="button" tabindex="0">
-                                                        <i class="icon bi bi-calendar4-week"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="task-or-note-input-panel__panel-right">
-                                                <button class="button --size-28 --secondary task-or-note-input-panel__cancel-button" type="button">
-                                                    <div class="button__main-container">
-                                                        <span class="tasks.buttonns.cancel">취소</span>
-                                                    </div>
-                                                </button>
-                                                <button class="button --size-28 task-or-note-input-panel__create-button" type="button" disabled>
-                                                    <div class="button__main-container">
-                                                        <span class="tasks.buttonns.create">만들기</span>
-                                                    </div>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </section>
-                                    <div class="tasklist-footer__wrapper">
-                                        <div class="tasklist-footer__left-section">
-                                            <div class="hbox" style="align-items: center; margin-left: -13px;">
-                                                <div class="box-item" style="margin-left: 13px; flex-grow: 0; flex-shrink: 0;">
-                                                    <div class="hbox" style="align-items: center; margin-left: -5px;">
-                                                        <div class="box-item tasklist-footer__task-icon" style="margin-left: 5px; flex-grow: 0; flex-shrink: 0;">
-                                                            <i class="bi bi-check2-circle"></i>
-                                                        </div> 
-                                                        <div class="box-item tasklist-footer__active-task-count" style="margin-left: 5px; flex-grow: 0; flex-shrink: 0;">5</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tasklist-footer__right-section">
-                                            <div class="click-area tasklist-footer__toggle-completed-tasks-link" role="button" tabindex="0">완료된 업무 1개 보기</div>
-                                            <div class="tasklist-footer__add-task-separator"></div>
-                                            <div class="click-area tasklist-footer__add-task-button" role="button" tabindex="0">
-                                                <i class="bi bi-plus fs-4"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+                            </section>
+                        </div>
                     </div>
                 </div>
         </section>
@@ -2342,7 +2344,7 @@
                                         <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item" href="#"><span class="bi bi-arrow-return-right"></span> 하위업무로 전환하기</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item text-danger" href="#"> <span class="trash bi bi-trash"></span>삭제</a></li>
+                                        <li><a class="dropdown-item text-danger remove-task" href="#"> <span class="trash bi bi-trash"></span>삭제</a></li>
                                     </ul>
                                     <span style="display: none;"></span>
                                 </div>
@@ -2442,9 +2444,75 @@
                                     <div class="tw-task-properties-pane tw-hack-scrollbar js-task-properties-pane ax-task-properties-pane">
                                         <div class="tw-spacer" style="flex-direction: column; gap: 20px; align-items: stretch; justify-content: start;">
                                             <!-- editor -->
-                                            <div id="editor">
+                                            <div id="editor" style="display: none;">
                                             </div>
                                             <!-- //editor -->
+
+                                            <!-- textarea -->
+                                            <div class="tw-task-description-row ax-task-description-row">
+                                                <div class="tw-spacer" style="height: 30px; flex-direction: column; gap: 0px; align-items: start; justify-content: center;">
+                                                    <span class="tw-text --weight-bold --base --multi-line">
+                                                        <span data-l10n-key="description.title.description">
+                                                            설명
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <div class="tw-fancy-text-editor --toolbar-hidden">
+                                                        <div style="display: none;"></div>
+                                                        <div class="ck ck-reset ck-editor ck-rounded-corners" role="application" dir="ltr">
+                                                            <div class="ck ck-editor__top ck-reset_all">
+                                                                <div class="ck ck-sticky-panel">
+                                                                    <div class="ck ck-sticky-panel__placeholder" style="display: none;">
+                                                                    </div>
+                                                                    <div class="ck ck-sticky-panel__content">
+                                                                        <div class="ck ck-toolbar ck-toolbar_grouping" role="toolbar" aria-label="Editor toolbar">
+                                                                            <div class="ck ck-toolbar__items"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ck ck-editor__main" role="presentation">
+                                                                <div class="ck-blurred ck ck-content ck-editor__editable ck-rounded-corners ck-editor__editable_inline" lang="en" dir="1tr" role="textbox" contenteditable="treu">
+                                                                    <p> 설명 추가하기 </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- //textarea -->
+                                        
+                                            <!-- <div class="tw-spacer" style="height: 28px; flex-direction: row; gap: 10px; align-items: center; justify-content: end;">
+                                                <div class="tw-spacer" style="flex-direction: row; gap: 5px; align-items: center; justify-content: end;">
+                                                    <span class="tw-text" style="font-size: 14px;">
+                                                        <span data-l10n-key="text_editor.autosave">
+                                                            자동 저장
+                                                        </span>
+                                                    </span>
+                                                <div class="tw-click-area tw-minimal-switch ax-minimal-switch --off ax-task-description-row__auto-save-switch --clickable" role="button" tabindex="0">
+                                                    <div class="tw-minimal-switch__ball">
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <!-- button -->
+                                            <div class="tw-spacer display button-wrapper" style="flex-direction: row; gap: 5px; align-items: stretch; justify-content: end;">
+                                                <button type="button" class="delete-button tw-click-logic tw-button-v-2 --size-28-px --variant-secondary">
+                                                    <div class="tw-button-v-2__main-container">
+                                                        <span data-l10n-key="text_editor.cancel_edit_description">
+                                                            취소
+                                                        </span>
+                                                    </div>
+                                                </button>
+                                                <button type="button" class="save-button tw-click-logic tw-button-v-2 --size-28-px --variant-primary">
+                                                    <div class="tw-button-v-2__main-container">
+                                                        <span data-l10n-key="text_editor.save_description">
+                                                            저장
+                                                        </span>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                            <!-- </div> -->
     
                                             <!-- 위치 -->
                                             <div class="tw-task-properties-row ax-task-location-row">
@@ -2490,7 +2558,6 @@
                                             </div>
                                             <!-- //위치 -->
     
-                                            <!--9/18수정-->
                                             <!-- 날짜 -->
                                             <div class="tw-task-properties-row ax-task-date-row">
                                                 <div class="tw-spacer" style="flex-direction: column; gap: 10px; align-items: stretch; justify-content: start;">
@@ -3362,7 +3429,7 @@
                                                     <div class="tw-task-checklist js-task-checklist">
                                                         <div class="tw-task-checklist__checklist-pane-wrapper js-task-checklist__checklist-pane-wrapper">
                                                             <div class="tw-task-checklist-pane">
-                                                                <!-- <div class="tw-task-checklist-pane__item-wrapper">
+                                                                <div class="tw-task-checklist-pane__item-wrapper">
                                                                     <div class="tw-task-checklist-item ax-task-checklist-item" data-title="리스트 제목" data-complete="true" style="opacity: 1;">
                                                                         <div class="tw-task-checklist-item__checkbox-container">
                                                                             <div class="checklist-checkbox tw-click-area tw-task-checkbox ax-task-checkbox ax-task-checklist-item__checkbox --large --clickable" role="button" tabindex="0">
@@ -3425,7 +3492,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div> -->
+                                                                </div>
                                                                 <div class="tw-task-add-checklist-item">
                                                                     <div class="tw-task-add-checklist-item__add-icon-container">
                                                                         <i class="tw-icon tw-task-add-checklist-item__add-icon bi bi-plus-lg">
