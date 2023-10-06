@@ -63,6 +63,7 @@ function setCursorStyle() {
     list.style.cursor = 'grabbing'; // 스크롤이 있는 경우
   } else {
     list.style.cursor = 'auto'; // 스크롤이 없는 경우
+    list.style.transform = 'translateX(0px)';
   }
 }
 

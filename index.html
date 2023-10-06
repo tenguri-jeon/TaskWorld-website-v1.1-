@@ -267,7 +267,7 @@
                                 </div> 
                                 <div class="kanban-items hack-scrollbar">
                                     <div class="tasklist__container" style="overflow: hidden; height: 0px; width: 0px;">
-                                        <div class="tasklist__inner-container" style="position: relative; width: 300px; overflow: auto; will-change: trasform; direction: 1tr;">
+                                        <div class="tasklist__inner-container" style="position: relative; width: 300px; height: 630px;  overflow: auto; will-change :trasform;">
                                             <div class="task__outer" draggable="true">
                                                 <div class="task__wrapper">
                                                     <section class="task ">
@@ -503,8 +503,8 @@
                             </div> 
                             <div class="kanban-items hack-scrollbar">
                                 <div class="tasklist__container" style="overflow: hidden; height: 0px; width: 0px;">
-                                    <div class="tasklist__inner-container" style="position: relative; width: 300px; overflow: auto; will-change: trasform; direction: 1tr;">
-                                        <div class="task__outer --padded" daraggable="true">
+                                    <div class="tasklist__inner-container" style="position: relative; width: 300px; height: 630px; overflow: auto; will-change: trasform; direction: 1tr;">
+                                        <!-- <div class="task__outer --padded" daraggable="true">
                                             <div class="task__main-task-title">
                                                 <div class="click-area main-task-title" role="button" tabindex="0">
                                                     <i class="icon main-task-title__icon">
@@ -576,7 +576,7 @@
                                                     <div class="files-drop-overlay"></div>
                                                 </section>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="task__outer" draggable="true">
                                             <div class="task__wrapper">
                                                 <section class="task">
@@ -812,7 +812,7 @@
                                 </div> 
                                 <div class="kanban-items hack-scrollbar">
                                     <div class="tasklist__container" style="overflow: hidden; height: 0px; width: 0px;">
-                                        <div class="tasklist__inner-container" style="position: relative; width: 300px; overflow: auto; will-change: trasform; direction: 1tr;">
+                                        <div class="tasklist__inner-container" style="position: relative; width: 300px; height: 630px; overflow: auto; will-change: trasform; direction: 1tr;">
                                             <div class="task__outer" draggable="true">
                                                 <div class="task__wrapper">
                                                     <section class="task">
@@ -2277,7 +2277,7 @@
                     <header class="tw-task-properties-header">
                         <div class="tw-task-properties-header__main-section">
                             <div class="tw-spacer" id="checkbox" style="flex-direction: row; gap: 10px; align-items: stretch; justify-content: start;">
-                                <div class="tw-task-completion-box ax-task-completion-box" data-testied="task-completion-box" style="width: 34px;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="클릭하여 업무 완료">
+                                <div class="tw-task-completion-box ax-task-completion-box" data-testied="task-completion-box" style="width: 34px;">
                                     <div class="tw-task-completion-box__background">
                                         <div class="tw-task-completion-box__background-left"></div>
                                         <div class="tw-task-completion-box__background-center" style="transform: scaleX(1);"></div>
@@ -2373,7 +2373,7 @@
                         <div class="tw-task-properties-header__title-and-info">
                             <div class="tw-spacer" style="flex-direction: column; gap: 10px; align-items: stretch; justify-content: start;">
                                 <div id="change-input" class="tw-task-properties-header__title-wrapper">
-                                    <div class="tw-click-area tw-editable-panel-title ax-editable-panel-title --editable --plain-text --clickable" role="button" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="제목">
+                                    <div class="tw-click-area tw-editable-panel-title ax-editable-panel-title --editable --plain-text --clickable" role="button">
                                         <i class="tw-icon tw-editable-panel-title__icon ax-editable-panel-title__icon bi bi-pencil"></i>
                                         <div class="tw-editable-panel-title__text ax-editable-panel-title__text" >
                                             제목
@@ -2569,7 +2569,7 @@
                                                         <div class="tw-task-properties-row__right-content">
                                                             <section class="tw-add-combined-date-panel ax-add-combined-date-panel">
                                                                 <div>
-                                                                    <button type="button" class="tw-click-logic tw-button-v-2 --size-28-px --square --variant-secondary ax-add-tags-panel__add-tag-button add-tag-box">
+                                                                    <button type="button" class="tw-click-logic tw-button-v-2 --size-28-px --square --variant-secondary ax-add-tags-panel__add-tag-button">
                                                                         <div class="tw-button-v-2__main-container">
                                                                             <i class="tw-icon tw-button-v-2__icon bi bi-plus-lg" data-testid="add-button-v2__icon"></i>
                                                                         </div>
@@ -2792,7 +2792,7 @@
                                                                             </div>
                                                                         </button>
                                                                     </div>
-                                                                    <div class="tw-add-members-box__right-container">
+                                                                    <!-- <div class="tw-add-members-box__right-container">
                                                                         <div class="tw-add-members-box__right">
                                                                             <div class="tw-add-members-box__added-member">
                                                                                 <div class="tw-workspace-member-avatar-with-button ax-workspace-member-avatar-with-button --button --disabled member-namecard-button">
@@ -2819,7 +2819,7 @@
                                                                         <div class="tw-add-members-box__designation">
                                                                             <div class="tw-spacer" style="flex-direction: column; gap: 5px; align-items: stretch; justify-content: start;"></div>
                                                                         </div>
-                                                                    </div>
+                                                                    </div> -->
                                                                 </div>
                                                             </section>
                                                         </div>
@@ -2948,6 +2948,7 @@
                                                                         </div>
                                                                     </button>
                                                                 </div>
+                                                                <div class="tw-add-tags-panel__right"></div>
                                                                 <!-- <div class="tw-add-tags-panel__right">
                                                                     <div class="tw-add-tags-panel__tag ax-add-tags-panel__tag">
                                                                         <div class="tw-tag ax-tag js-tag --color-green" data-tag-name="태그이름" data-tag-color="green">
@@ -4625,7 +4626,7 @@
                                                                                 <div class="tw-input-kit-row__content">
                                                                                     <div class="tw-input-kit-row__left">
                                                                                     </div>
-                                                                                    <div>업무리스트</div>
+                                                                                    <div class="project-list-name">업무리스트</div>
                                                                                 </div>
                                                                                 <div class="tw-input-kit-row__right">
                                                                                 </div>
@@ -4638,7 +4639,7 @@
                                                                                 <div class="tw-input-kit-row__content">
                                                                                     <div class="tw-input-kit-row__left">
                                                                                     </div>
-                                                                                    <div>업무리스트</div>
+                                                                                    <div class="project-list-name">업무리스트</div>
                                                                                 </div>
                                                                                 <div class="tw-input-kit-row__right">
                                                                                 </div>
@@ -4651,7 +4652,7 @@
                                                                                 <div class="tw-input-kit-row__content">
                                                                                     <div class="tw-input-kit-row__left">
                                                                                     </div>
-                                                                                    <div>업무리스트</div>
+                                                                                    <div class="project-list-name">업무리스트</div>
                                                                                 </div>
                                                                                 <div class="tw-input-kit-row__right">
                                                                                 </div>
@@ -4664,7 +4665,7 @@
                                                                                 <div class="tw-input-kit-row__content">
                                                                                     <div class="tw-input-kit-row__left">
                                                                                     </div>
-                                                                                    <div>업무리스트</div>
+                                                                                    <div class="project-list-name">업무리스트</div>
                                                                                 </div>
                                                                                 <div class="tw-input-kit-row__right">
                                                                                 </div>
@@ -4677,7 +4678,7 @@
                                                                                 <div class="tw-input-kit-row__content">
                                                                                     <div class="tw-input-kit-row__left">
                                                                                     </div>
-                                                                                    <div>업무리스트</div>
+                                                                                    <div class="project-list-name">업무리스트</div>
                                                                                 </div>
                                                                                 <div class="tw-input-kit-row__right">
                                                                                 </div>
@@ -4690,7 +4691,7 @@
                                                                                 <div class="tw-input-kit-row__content">
                                                                                     <div class="tw-input-kit-row__left">
                                                                                     </div>
-                                                                                    <div>업무리스트</div>
+                                                                                    <div class="project-list-name">업무리스트</div>
                                                                                 </div>
                                                                                 <div class="tw-input-kit-row__right">
                                                                                 </div>
@@ -4703,7 +4704,7 @@
                                                                                 <div class="tw-input-kit-row__content">
                                                                                     <div class="tw-input-kit-row__left">
                                                                                     </div>
-                                                                                    <div>업무리스트</div>
+                                                                                    <div class="project-list-name">업무리스트</div>
                                                                                 </div>
                                                                                 <div class="tw-input-kit-row__right">
                                                                                 </div>
@@ -4716,7 +4717,7 @@
                                                                                 <div class="tw-input-kit-row__content">
                                                                                     <div class="tw-input-kit-row__left">
                                                                                     </div>
-                                                                                    <div>업무리스트</div>
+                                                                                    <div class="project-list-name">업무리스트</div>
                                                                                 </div>
                                                                                 <div class="tw-input-kit-row__right">
                                                                                 </div>
@@ -4729,7 +4730,7 @@
                                                                                 <div class="tw-input-kit-row__content">
                                                                                     <div class="tw-input-kit-row__left">
                                                                                     </div>
-                                                                                    <div>업무리스트</div>
+                                                                                    <div class="project-list-name">업무리스트</div>
                                                                                 </div>
                                                                                 <div class="tw-input-kit-row__right">
                                                                                 </div>
@@ -4890,7 +4891,7 @@
                                                             <div class="tw-virtual-list tw-hack-scrollbar" style="position: relative; height: 214px; width: 100%; overflow: auto; will-change: transform direction 1tr">
                                                             <div style="height: 250px; width: 100%;">
                                                                 <div style="position: absolute; left: 0px; top: 0px; height: 57px; width: 100%;">
-                                                                    <div class="js-virtual-list__item" data-item-index="0" style="margin: 10px 10px 5px;">
+                                                                    <div class="js-virtual-list__item sidebar-member-popup" data-item-index="0" style="margin: 10px 10px 5px;">
                                                                         <section class="tw-input-kit-icon-row ax-member-input-widget-user-row --hand --focused --selected" data-email="idrsoft.com" data-full-name="사 용자">
                                                                             <div class="tw-input-kit-icon-row__left">
                                                                                 <div class="tw-input-kit-icon-row__item-info">
@@ -4916,7 +4917,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div style="position: absolute; left: 0px; top: 57px; height: 47px; width: 100%;">
-                                                                    <div class="js-virtual-list__item" data-item-index="0" style="margin: 0px 10px 5px;">
+                                                                    <div class="js-virtual-list__item sidebar-member-popup" data-item-index="0" style="margin: 0px 10px 5px;">
                                                                         <section class="tw-input-kit-icon-row ax-member-input-widget-user-row --hand" data-email="idrsoft.com" data-full-name="사 용자">
                                                                             <div class="tw-input-kit-icon-row__left">
                                                                                 <div class="tw-input-kit-icon-row__item-info">
@@ -4942,7 +4943,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div style="position: absolute; left: 0px; top: 104px; height: 47px; width: 100%;">
-                                                                    <div class="js-virtual-list__item" data-item-index="0" style="margin: 0px 10px 5px;">
+                                                                    <div class="js-virtual-list__item sidebar-member-popup" data-item-index="0" style="margin: 0px 10px 5px;">
                                                                         <section class="tw-input-kit-icon-row ax-member-input-widget-user-row --hand" data-email="idrsoft.com" data-full-name="사 용자">
                                                                             <div class="tw-input-kit-icon-row__left">
                                                                                 <div class="tw-input-kit-icon-row__item-info">
@@ -4968,7 +4969,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div style="position: absolute; left: 0px; top: 151px; height: 47px; width: 100%;">
-                                                                    <div class="js-virtual-list__item" data-item-index="0" style="margin: 0px 10px 5px;">
+                                                                    <div class="js-virtual-list__item sidebar-member-popup" data-item-index="0" style="margin: 0px 10px 5px;">
                                                                         <section class="tw-input-kit-icon-row ax-member-input-widget-user-row --hand" data-email="idrsoft.com" data-full-name="사 용자">
                                                                             <div class="tw-input-kit-icon-row__left">
                                                                                 <div class="tw-input-kit-icon-row__item-info">
@@ -5241,7 +5242,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div style="position: absolute; left: 0px; top: 57px; height: 47px; width: 100%;">
-                                                                    <div class="js-virtual-list__item" data-item-index="0" style="margin: 0px 10px 5px;">
+                                                                    <div class="js-virtual-list__item sidebar-member-popup" data-item-index="0" style="margin: 0px 10px 5px;">
                                                                         <section class="tw-input-kit-icon-row ax-member-input-widget-user-row --hand" data-email="idrsoft.com" data-full-name="사 용자">
                                                                             <div class="tw-input-kit-icon-row__left">
                                                                                 <div class="tw-input-kit-icon-row__item-info">
@@ -5267,7 +5268,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div style="position: absolute; left: 0px; top: 104px; height: 47px; width: 100%;">
-                                                                    <div class="js-virtual-list__item" data-item-index="0" style="margin: 0px 10px 5px;">
+                                                                    <div class="js-virtual-list__item sidebar-member-popup" data-item-index="0" style="margin: 0px 10px 5px;">
                                                                         <section class="tw-input-kit-icon-row ax-member-input-widget-user-row --hand" data-email="idrsoft.com" data-full-name="사 용자">
                                                                             <div class="tw-input-kit-icon-row__left">
                                                                                 <div class="tw-input-kit-icon-row__item-info">
@@ -5293,7 +5294,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div style="position: absolute; left: 0px; top: 151px; height: 47px; width: 100%;">
-                                                                    <div class="js-virtual-list__item" data-item-index="0" style="margin: 0px 10px 5px;">
+                                                                    <div class="js-virtual-list__item sidebar-member-popup" data-item-index="0" style="margin: 0px 10px 5px;">
                                                                         <section class="tw-input-kit-icon-row ax-member-input-widget-user-row --hand" data-email="idrsoft.com" data-full-name="사 용자">
                                                                             <div class="tw-input-kit-icon-row__left">
                                                                                 <div class="tw-input-kit-icon-row__item-info">
@@ -5319,7 +5320,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div style="position: absolute; left: 0px; top: 198px; height: 52px; width: 100%;">
-                                                                    <div class="js-virtual-list__item" data-item-index="4" style="margin: 0px 10px 10px;">
+                                                                    <div class="js-virtual-list__item sidebar-member-popup" data-item-index="4" style="margin: 0px 10px 10px;">
                                                                         <section class="tw-input-kit-icon-row tw-member-input-widget-invitation-row ax-member-input-widget-invitation-row --important --hand follower-invite-popup-button">
                                                                             <div class="tw-input-kit-icon-row__left">
                                                                                 <div class="tw-input-kit-icon-row__item-info">

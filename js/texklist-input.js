@@ -9,45 +9,45 @@ document.addEventListener("DOMContentLoaded", function() {
     let activePanelHeader = null;
     let activePanelFooter = null;
 
-    // function togglePanel(icon, panel, container) {
-    //     if (activePanelHeader !== panel && activePanelFooter !== panel) {
-    //         if (activePanelHeader) {
-    //             activePanelHeader.style.display = 'none';
-    //             const index = Array.from(inputPanelsHeader).indexOf(activePanelHeader);
-    //             if (index !== -1) {
-    //                 tasklistContainer[index].style.height = '656px';
-    //             }
-    //         }
-    //         if (activePanelFooter) {
-    //             activePanelFooter.style.display = 'none';
-    //             const index = Array.from(inputPanelsFooter).indexOf(activePanelFooter);
-    //             if (index !== -1) {
-    //                 tasklistContainer[index].style.height = '656px';
-    //             }
-    //         }
-    //         panel.style.display = 'block';
-    //         const index = Array.from(tasklistContainer).indexOf(container);
-    //         if (index !== -1) {
-    //             tasklistContainer[index].style.height = '543px';
-    //         }
-    //         if (icon.classList.contains('tasklist-header__add-icon')) {
-    //             activePanelHeader = panel;
-    //         } else if (icon.classList.contains('tasklist-footer__add-task-button')) {
-    //             activePanelFooter = panel;
-    //         }
-    //     } else {
-    //         panel.style.display = 'none';
-    //         const index = Array.from(tasklistContainer).indexOf(container);
-    //         if (index !== -1) {
-    //             tasklistContainer[index].style.height = '656px';
-    //         }
-    //         if (icon.classList.contains('tasklist-header__add-icon')) {
-    //             activePanelHeader = null;
-    //         } else if (icon.classList.contains('tasklist-footer__add-task-button')) {
-    //             activePanelFooter = null;
-    //         }
-    //     }
-    // }
+    function togglePanel(icon, panel, container) {
+        if (activePanelHeader !== panel && activePanelFooter !== panel) {
+            if (activePanelHeader) {
+                activePanelHeader.style.display = 'none';
+                const index = Array.from(inputPanelsHeader).indexOf(activePanelHeader);
+                if (index !== -1) {
+                    tasklistContainer[index].style.height = '656px';
+                }
+            }
+            if (activePanelFooter) {
+                activePanelFooter.style.display = 'none';
+                const index = Array.from(inputPanelsFooter).indexOf(activePanelFooter);
+                if (index !== -1) {
+                    tasklistContainer[index].style.height = '656px';
+                }
+            }
+            panel.style.display = 'block';
+            const index = Array.from(tasklistContainer).indexOf(container);
+            if (index !== -1) {
+                tasklistContainer[index].style.height = '543px';
+            }
+            if (icon.classList.contains('tasklist-header__add-icon')) {
+                activePanelHeader = panel;
+            } else if (icon.classList.contains('tasklist-footer__add-task-button')) {
+                activePanelFooter = panel;
+            }
+        } else {
+            panel.style.display = 'none';
+            const index = Array.from(tasklistContainer).indexOf(container);
+            if (index !== -1) {
+                tasklistContainer[index].style.height = '656px';
+            }
+            if (icon.classList.contains('tasklist-header__add-icon')) {
+                activePanelHeader = null;
+            } else if (icon.classList.contains('tasklist-footer__add-task-button')) {
+                activePanelFooter = null;
+            }
+        }
+    }
 
     iconElementsHeader.forEach((icon, index) => {
         icon.addEventListener('click', function() {
