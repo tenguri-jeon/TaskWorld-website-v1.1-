@@ -114,3 +114,4 @@ document.addEventListener('mouseup', () => {
 
   // 마우스를 놓았을 때 움직임이 멈추며, 원하는 추가 동작을 이곳에 추가하세요.
 });
+

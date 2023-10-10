@@ -1,15 +1,14 @@
 // 부트스트랩기능
-    //dropdown기능 
-    const dropdownElementList = document.querySelectorAll('.dropdown-toggle')
-    const dropdownList = [...dropdownElementList].map(dropdownToggleEl => new bootstrap.Dropdown(dropdownToggleEl))
-
-    //tooltip기능 
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-    tooltipTriggerList.forEach(tooltipTriggerEl => {
-      new bootstrap.Tooltip(tooltipTriggerEl, {
-        // trigger: 'hover' // 툴팁을 마우스 오버시에만 표시
-      });
+  //dropdown기능 
+  const dropdownElementList = document.querySelectorAll('.dropdown-toggle')
+  const dropdownList = [...dropdownElementList].map(dropdownToggleEl => new bootstrap.Dropdown(dropdownToggleEl))
+  //tooltip기능 
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  tooltipTriggerList.forEach(tooltipTriggerEl => {
+    new bootstrap.Tooltip(tooltipTriggerEl, {
+      // trigger: 'hover' // 툴팁을 마우스 오버시에만 표시
     });
+  });
 
 // 링크 저장되었다는 알람 js
 const appendAlert = (message, type) => {
@@ -87,5 +86,22 @@ $(document).ready(function() {
           $('.button-wrapper').addClass('display')
     }
   }
-
 })
+
+// sidebar에서 마우스 hover되면 --selected 넣어주는 함수
+$(document).on('mouseenter', '.tw-tag-input-row', function() {
+  $(this).addClass('--selected')
+});
+
+$(document).on('mouseleave', '.tw-tag-input-row', function() {
+  $(this).removeClass('--selected')
+});
+
+$(document).on('mouseenter', '.tw-input-kit-icon-row', function() {
+  $(this).addClass('--focused')
+});
+
+$(document).on('mouseleave', '.tw-input-kit-icon-row', function() {
+  $(this).removeClass('--focused')
+});
+

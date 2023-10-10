@@ -543,7 +543,7 @@
 .editable-text-field__icon{
     margin-left: 5px;
     font-size: 12px;
-    display: none;
+    display: none;  
 }
 .kanban-items{
     flex: 0 1 auto;

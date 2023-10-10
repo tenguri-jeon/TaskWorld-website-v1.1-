@@ -93,6 +93,12 @@ document.addEventListener("DOMContentLoaded", function(){
             $(this).find('.color-label').append(checkicon);
         });
 
+        $(document).on('click', '[data-id="delete-conponent"]', function(){
+            $('.popup-layer-confirmation').remove();
+            // 클릭하면 modal이랑 업무리스트가 삭제되어야함.
+            $('.kanban-column').eq(clickedIndex + 1).remove();
+        })
+
     });
   
     menuButtons.forEach((button) => {

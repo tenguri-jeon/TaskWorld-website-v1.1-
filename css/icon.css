@@ -5293,14 +5293,14 @@ mark {
     cursor: pointer
 }
 
-@font-face {
+/* @font-face {
     font-display: block;
     font-family: tw-icon;
     font-style: normal;
     font-weight: 400;
     src: url(/assets/tw-icon-7ba8c9a7.eot);
     src: url(/assets/tw-icon-7ba8c9a7.eot#iefix) format("embedded-opentype"),url(/assets/tw-icon-29c21428.ttf) format("truetype"),url(/assets/tw-icon-9fef12dd.woff) format("woff"),url(/assets/tw-icon-a1273f5e.svg#tw-icon) format("svg")
-}
+} */
 
 .tw-icon {
     speak: never;
@@ -6308,7 +6308,11 @@ a.tw-click-logic[href],button.tw-click-logic:not(:disabled) {
 
 .tw-choice {
     color: #323742;
-    cursor: pointer
+    cursor: pointer;
+}
+
+.tw-click-area.tw-choice{
+    display: flex;
 }
 
 .tw-choice input {
@@ -6790,6 +6794,11 @@ a.tw-click-logic[href],button.tw-click-logic:not(:disabled) {
     width: 18px
 }
 
+.ax-task-label-row .tw-color-picker__circle{
+    width: 24px;
+    height: 24px;
+}
+
 .tw-color-picker__circle:last-child {
     margin-right: 0
 }
@@ -7063,65 +7072,6 @@ a.tw-click-logic[href],button.tw-click-logic:not(:disabled) {
     margin: 10px 0 0
 }
 
-@media (max-width: 699px) {
-    .tw-confirmation-modal__close-button {
-        padding:20px;
-        right: 0;
-        top: 0
-    }
-
-    .tw-confirmation-modal__close-icon {
-        display: inline-block
-    }
-
-    .tw-confirmation-modal__title {
-        margin-bottom: 20px
-    }
-
-    .tw-confirmation-modal__description {
-        -webkit-box-flex: 1;
-        -ms-flex: 1;
-        flex: 1;
-        margin-bottom: 10px
-    }
-
-    .tw-confirmation-modal__content {
-        -webkit-box-direction: normal;
-        border-radius: 0;
-        bottom: 0;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        left: 0;
-        min-width: 0;
-        overflow-x: hidden;
-        overflow-y: auto;
-        padding: 90px 25px 25px;
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: auto
-    }
-
-    .tw-confirmation-modal__buttons,.tw-confirmation-modal__content {
-        -webkit-box-orient: vertical;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-transform: none;
-        transform: none
-    }
-
-    .tw-confirmation-modal__buttons {
-        -webkit-box-direction: reverse;
-        -ms-flex-direction: column-reverse;
-        flex-direction: column-reverse;
-        margin: 0
-    }
-
-    .tw-confirmation-modal__buttons>* {
-        margin: 10px 0 0
-    }
-}
 
 .tw-click-outside-layer {
     background: transparent;

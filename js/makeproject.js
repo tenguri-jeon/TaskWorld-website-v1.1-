@@ -99,27 +99,23 @@ $(document).ready(function() {
 
     $(document).on('keydown', '.task-or-note-input-panel__input-box', function(event) {
         if (event.which === 13) {
-            debugger;
             event.preventDefault();
             var componentTitle = $(this).val();
-            var index = $('.task-or-note-input-panel__create-button').index(this);
+            var index = $('.task-or-note-input-panel__input-box').index(this);
+            kanbanColumn = $(this).closest('.tasklist');
 
-
-            if (!kanbanColumn.find('.tasklist__inner-container').length) {
-                var makeKanban = $('<div class="kanban-items hack-scrollbar">' + 
-                '<div class="tasklist__container" style ="overflow: hidden; height: 0px; width: 0px;">'+
-                    '<div class="tasklist__inner-container" style="position: relative; height: 656px; width: 300px; overflow: auto; will-change: trasform; direction: 1tr;">' + 
-                    '</div>' + 
-                '</div>' +
-                '</div>'
-                )
-                kanbanColumn.append(makeKanban);
-                makeNewProject(componentTitle , index);
-            }else{
-                makeNewProject(componentTitle , index);
+            var makeKanban = $('<div class="kanban-items hack-scrollbar">' + 
+            '<div class="tasklist__container" style ="overflow: hidden; height: 0px; width: 0px;">'+
+                '<div class="tasklist__inner-container" style="position: relative; height: 656px; width: 300px; overflow: auto; will-change: trasform; direction: 1tr;">' + 
+                '</div>' + 
+            '</div>' +
+            '</div>'
+            )
+            kanbanColumn.append(makeKanban);
+            makeNewProject(componentTitle , index);
             }
         }
-    });
+    );
 
     $(document).ready(function() {
         // tasklist-header__add-icon를 클릭할 때 이벤트 핸들러 추가
