@@ -30552,6 +30552,11 @@
     overflow: hidden
 }
 
+.tw-input-kit-widget__body .tw-color-picker__circle{
+    width: 23px;
+    height: 23px;
+}
+
 .tw-company-value-input-row {
     -webkit-box-align: center;
     -ms-flex-align: center;

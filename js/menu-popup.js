@@ -47,11 +47,33 @@ document.addEventListener("DOMContentLoaded", function(){
         $('.tasklist-menu__button').click(function() {
             // 클릭이벤트 일어날때 마다 array 초기화
             secondClass = '';
-            clickedElement = $(this); // 전역 변수에 할당
-            clickedIndex = $('.tasklist-menu__button').index(clickedElement); // 전역 변수에 할당
+            clickedElement = $(this); 
+            clickedIndex = $('.tasklist-menu__button').index(clickedElement); 
+            var check = `<i class="bi bi-check-lg tw-color-label__icon tw-icon"></i>`
+
+
+            // 누르기 전에 모두 초기화
+            $('.color-picker__circle').removeClass('--selected')
+            $('.color-label').empty()
     
             $('.tasklist-header').eq(clickedIndex).addClass(secondClass);
             $('.tasklist-header__input-panel-container').eq(clickedIndex).addClass(secondClass);
+            
+            // dropdown 눌렀을 경우 해당하는 색상 나오도록 만들기
+            var color =  $(this).closest('.tasklist-header')
+            if (color.length > 0) {
+                var colorlabel = color.attr('class');
+                var colorlabelColor = colorlabel.split(' ');
+            
+                if (colorlabelColor.length > 1) {
+                    // colorlabelColor를 찾아서 체크해줘야 함.
+                    var colorContent =  $('.tasklist-color-selection-menu__color-picker-wrapper').find('.' +  colorlabelColor[1])
+                    colorContent.closest('.color-picker__circle').addClass('--selected')
+                    colorContent.append(check)
+                }
+            } else {
+                console.log("해당하는 요소를 찾을 수 없습니다.");
+            }
         });
     
         // colorpicker를 클릭하면 array에 colorpicker색을 넣어주는 함수
@@ -85,6 +107,7 @@ document.addEventListener("DOMContentLoaded", function(){
         $('.color-picker__circle').click(function() { 
             secondClass = '';
             $('.color-label .color-label__icon').remove();
+            $('.tw-color-label').empty()
             $('.color-picker__circle').removeClass('--selected')
             $(this).addClass('--selected');
             $(this).removeClass('--selectable');

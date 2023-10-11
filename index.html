@@ -208,7 +208,7 @@
                                 <div class="kanban-list-header">
                                     <div class="tasklist__frame-top">
                                         <div>
-                                            <div class="tasklist-header">
+                                            <div class="tasklist-header --bg-blue2">
                                                 <div class="tasklist-header__left-section">
                                                     <div class="tasklist-header__editable-text-field-container">
                                                         <div class="click-area editable-text-field --plain-text" role="button" tabindex="0">
@@ -753,7 +753,7 @@
                                 <div class="kanban-list-header">
                                     <div class="tasklist__frame-top">
                                         <div>
-                                            <div class="tasklist-header">
+                                            <div class="tasklist-header --bg-blue2">
                                                 <div class="tasklist-header__left-section">
                                                     <div class="tasklist-header__editable-text-field-container">
                                                         <div class="click-area editable-text-field --plain-text" role="button" tabindex="0">
@@ -3094,7 +3094,7 @@
                                             <!-- //포인트 -->
     
                                             <!-- 색상라벨 -->
-                                            <div class="tw-task-properties-row ax-task-label-row">
+                                            <div class="tw-task-properties-row ax-task-label-row color-label-wrapper">
                                                 <div class="tw-spacer" style="flex-direction: column; gap: 10px; align-items: stretch; justify-content: start;">
                                                     <div class="tw-task-properties-row__main-container">
                                                         <div class="tw-task-properties-row__label-container">
@@ -6440,7 +6440,8 @@
     
     <script>
         
-        // 에디터
+        // 에디터        $('.tw-color-label').empty()
+
         $(function () {
                 var editor = new FroalaEditor('#editor')
         }); 
@@ -6451,6 +6452,7 @@
             $('.ax-color-picker__circle').click(function(){ 
                 $('.ax-color-picker__circle').removeClass('--selected')
                 $(this).addClass('--selected');
+                $('.tw-color-label').empty()
 
                 const $childElements = $(this).find('.tw-color-label');
                 $($childElements).append(checked);

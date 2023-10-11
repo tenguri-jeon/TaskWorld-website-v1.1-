@@ -27,7 +27,7 @@ function clickDropDown2() {
 
 // 체크박스
 $(document).ready(function() {
-    $('.tw-choice').click(function(){
+    $(document).on('click', '.tw-choice', function(){
         var contain = $(this).hasClass('--checked');
         var checkIcon = $('<i class="tw-icon bi bi-check-lg"></i>')
         var numberOfCheckElements = $('.bi-check-lg').length;

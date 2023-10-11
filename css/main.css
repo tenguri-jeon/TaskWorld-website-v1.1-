@@ -1093,26 +1093,12 @@
 }
 
 /*tasklist-footer*/
-.tasklist__frame-bottom{
-    flex-shrink: 0;
-    opacity: 1;
-    transition: opacity .3s;
-}
 .tasklist-footer.--expanded{
     flex-direction: column;
     padding-top: 10px;
 }
 .tasklist-footer.--compact{
     padding: 2px 5px 2px 10px;
-}
-.tasklist-footer{
-    background-color: #e6e8ec;
-    border-radius: 8px;
-    align-items: center;
-    box-sizing: border-box;
-    color: #696f7a;
-    display: flex;
-    justify-content: space-between;
 }
 .task-or-note-input-panel{
     background-color: #fff;
@@ -1123,12 +1109,10 @@
 .task-or-note-input-panel:focus-within{
     border-color: #27b6ba;
 }
-/*9/18수정*/
 .tasklist-footer__task-or-note-input-panel{
     margin: 8px 5px 7px 0;
     width: calc(100% - 10px);
 }
-/*9/18수정*/
 .task-or-note-input-panel__input-box:placeholder-shown{
     text-overflow: ellipsis;
 }

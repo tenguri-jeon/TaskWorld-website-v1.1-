@@ -1675,6 +1675,7 @@ $(document).ready(function() {
     
         toggleInputMode('.tw-markdown-content p', index);
     });
+    
     $(document).on('keydown', '.checklist-modify-input', function(event) {
         if (event.which === 13 && !event.shiftKey) { // Enter 키 코드이면서 Shift 키가 눌리지 않았을 때
             event.preventDefault();

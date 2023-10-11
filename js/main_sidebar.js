@@ -6,7 +6,7 @@ $(document).ready(function() {
     const taskChartWrapper = document.querySelectorAll('.task');
     const floatingSidebarModal = document.querySelector('.tw-floating-panel-desktop');
     const taskPropertiesCloseButton = document.querySelector('.tw-task-properties-header-options__close-button');
-    let selectedTaskIndex = -1; // 전역 변수로 선택한 task의 index를 저장할 변수를 선언하고 초기값을 -1로 설정
+    let selectedTaskIndex = -1;
     let clickedTaskIndex;
 
     function toggleInputMode(textElement) {
@@ -85,17 +85,22 @@ $(document).ready(function() {
 
                 // "닫기" 버튼을 클릭했을 때 해당 HTML 태그를 제거합니다.
                 $(document).on('click', '.tw-workspace-member-avatar-with-button__close-button', function () {
-                    var avatarContainer = clickedTask.find('.user-avatar-group__avatar-container');
-                
+                    debugger;
+                    var dataUserName = $(this).closest('.tw-workspace-member-avatar-with-button').find('.tw-user-avatar').attr('data-user-name')
+                    var avatarContainer = $('.task[data-task-index="' + clickedTaskIndex + '"]').find('[data-user-name="'+ dataUserName +'"]');
+
                     // user-avatar-group__avatar-container가 1개 이상일 때
-                    if (avatarContainer.length > 1) {
-                        avatarContainer.last().remove();
-                    } else {
+                    if ($('.task[data-task-index="' + clickedTaskIndex + '"]').find('.user-avatar-group').children().length > 1) {
+                        avatarContainer.remove();
+                    } else if($('.task[data-task-index="' + clickedTaskIndex + '"]').find('.user-avatar-group').children().length = 0){
+                        avatarContainer.remove();
+                    } else{
                         // 1개일 때는 task-body 전체를 제거
-                        clickedTask.find('.task-body__date-summary').remove();
-                        clickedTask.find('.divided-row').remove();
-                        clickedTask.find('.task-body__horizontal-divider').remove();
-                        clickedTask.find('.task-body__columns').remove();
+                        $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-body__date-summary').remove();
+                        $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.divided-row').remove();
+                        $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.user-avatar-group').remove();
+                        $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-body__horizontal-divider').remove();
+                        avatarContainer.remove();
                     }
                 
                     $(this).closest('.tw-add-members-box__added-member').remove();
@@ -107,6 +112,7 @@ $(document).ready(function() {
 
                 // sidebar-member-popup의 클릭 이벤트 설정
                 $('.tw-input-kit-search-virtual__list').eq(5).find('.sidebar-member-popup').off('click').on('click', function () {
+                    debugger;
                     // 만약 한번 더 클릭할 경우 요소가 빠지도록 설정 toggle되도록 설정하기
                     //('.ax-member-input-widget-user-row')에('--selected') class가 있으면 실행되지 않는 함수 실행
                     if (!$(this).find('.ax-member-input-widget-user-row').hasClass('--selected')) {
@@ -151,8 +157,6 @@ $(document).ready(function() {
                                 <div class="task-body__left"></div>
                                 <div class="task-body__right">
                                     <div class="user-avatar-group">
-                                        <div class="user-avatar-group__avatar-container --compact" data-user-name="${fullName}" >
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -170,23 +174,38 @@ $(document).ready(function() {
                         if (!isFirstClick) {
                             clickedTask.find('.task__main').append(taskBody);
                             clickedTask.find('.task-body').append(taskBodyContent);
+                            clickedTask.find('user-avatar-group').append(userAvatarContainer)
                         }else {
                             // taskbody는 있지만 안의 내용물이 없을 경우
                             if ($('.task[data-task-index="' + clickedTaskIndex + '"]').find('.user-avatar-group').children().length > 0) {
                                 $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.user-avatar-group').append(userAvatarContainer);
                             }else{
                                 clickedTask.find('.task-body').append(taskBodyContent);
-                                // $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.user-avatar-group').append(userAvatarContainer);
+                                $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.user-avatar-group').append(userAvatarContainer);
                             }
                         }
                     }else{
-                        // 한번 더 클릭한 경우 selected 빼주고 tag에 있는거 없애주면 됨
                         var member = $(this).find('.tw-input-kit-icon-row').attr('data-full-name');
-                        // tw-add-members-box__right 에 member라는 data-full-name 정보를 가지고 있는 것을 삭제해준다.
-                        var tagName = $('[data-user-name="' + member + '"]')
+                        var tagName = $('[data-user-name="' + member + '"]');
                         tagName.closest('.tw-add-members-box__added-member').remove();
-                        $(this).find('.ax-member-input-widget-user-row').removeClass('--selected')
-                        $('.task[data-task-index="' + clickedTaskIndex + '"]').find('[data-user-name="' + member + '"]').remove()
+                        $(this).find('.ax-member-input-widget-user-row').removeClass('--selected');
+
+                        var taskContent = $('.task[data-task-index="' + clickedTaskIndex + '"]').find('[data-user-name="' + member + '"]');
+
+                        // taskBodyContent 부분도 삭제
+                        if ( $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.user-avatar-group').children().length <= 1) {
+                            var taskBody = taskContent.closest('.task').find('.task-body');
+                            taskBody.empty();
+                            $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-body__date-summary').remove();
+                            $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.divided-row').remove();
+                            $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-body__horizontal-divider').remove();
+                            $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.user-avatar-group').remove();
+                        }else{
+                            // 클릭한 task에서 현재 멤버를 찾아서 제거
+                            taskContent.remove();
+                        }
+                        taskContent.remove();
+                        
                     }
                 });
 
@@ -237,48 +256,61 @@ $(document).ready(function() {
                 });
 
                 // tag 클릭 이벤트
-                $('.tw-tag-input-row__left').off('click').on('click', function () {
+                $(document).on('click', '.tw-tag-input-row__left' , function(){
                     var tagname = $(this).find('.tw-tag__tag-name').text()
                     var color = $(this).find('.tw-tag').attr('class').split(' ');
                     var tagColor =  color[3]
 
-                    var tagWrapper = `<div class = "tw-tag-list ax-tag-list tw-task-body__tags"></div>` 
-
-                    var tag = ` <div class="tw-add-tags-panel__tag ax-add-tags-panel__tag">
-                    <div class="tw-tag ax-tag js-tag ` + tagColor +`" data-tag-name="`+ tagname + `" data-tag-color="` + tagColor + `" draggable="true">
-                        <div class="tw-truncated-text js-truncated-text tw-tag__tag-name ax-tag__tag-name" style="max-width: 180px;">
-                            ` + tagname + `
+                    var tagWrapper = `<div class="tw-tag-list ax-tag-list tw-task-body__tags"></div>`;
+    
+                    var tag = `<div class="tw-add-tags-panel__tag ax-add-tags-panel__tag">
+                        <div class="tw-tag ax-tag js-tag ` + tagColor + `" data-tag-name="` + tagname + `" data-tag-color="` + tagColor + `" draggable="true">
+                            <div class="tw-truncated-text js-truncated-text tw-tag__tag-name ax-tag__tag-name" style="max-width: 180px;">
+                                ` + tagname + `
+                            </div>
+                            <i class="tw-icon tw-tag__delete ax-tag__delete bi bi-x">
+                            </i>
                         </div>
-                        <i class="tw-icon tw-tag__delete ax-tag__delete bi bi-x">
-                        </i>
-                        </div>
-                    </div>
-                    ` 
+                    </div>`;
+            
                     // 체크버튼 두번 누르는 toggle 이벤트
-                    if ($(this).find('.tw-choice').hasClass('--checked')) {
-                        // tw-tag-list가 있을 경우
-                        if($('.task[data-task-index="' + clickedTaskIndex + '"]').find('.tw-task-body__tags').length > 0){
-                            $('.ax-task-tags-row').find('.tw-add-tags-panel__right').append(tag);
-                            $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.tw-tag-list').append(tag);
-                            // 조건 tag가 처음으로 생길 경우 (tw-tag-list 가 함께 생김)
-                        }else{
-                            $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-body').append(tagWrapper);
-                            $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.tw-tag-list').append(tag);
-                            $('.ax-task-tags-row').find('.tw-add-tags-panel__right').append(tag);
+                    if ($('.tw-add-tags-panel__right').find('[data-tag-name="'+ tagname +'"]').length <= 0 ) {
+                        if ($(this).find('.tw-choice').hasClass('--checked')) {
+                            // tw-tag-list가 있을 경우
+                            if ($('.task[data-task-index="' + clickedTaskIndex + '"]').find('.tw-task-body__tags').length > 0) {
+                                $('.ax-task-tags-row').find('.tw-add-tags-panel__right').append(tag);
+                                $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.tw-tag-list').append(tag);
+                                // 조건 tag가 처음으로 생길 경우 (tw-tag-list 가 함께 생김)
+                            } else {
+                                $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-body').prepend(tagWrapper);
+                                $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.tw-tag-list').append(tag);
+                                $('.ax-task-tags-row').find('.tw-add-tags-panel__right').append(tag);
+                            }
+                        } else {
+                            // 있던 것 없애줘야함
+                            var deleteTag = $('.task[data-task-index="' + clickedTaskIndex + '"]').find('[data-tag-name="' + tagname + '"]').closest('.ax-add-tags-panel__tag');
+                            var deleteTag2 = $('.ax-task-tags-row').find('.tw-add-tags-panel__right').find('[data-tag-name="' + tagname + '"]').closest('.ax-add-tags-panel__tag');
+                            deleteTag.remove();
+                            deleteTag2.remove();               
                         }
                     }else{
-                        // 있던 것 없애줘야함
-                        var deleteTag = $('[data-tag-name="' + tagname+ '"]').closest('.ax-add-tags-panel__tag')
-                        deleteTag.eq(0).remove();
-                        deleteTag.eq(1).remove();
+                        // 전부 없애면 안되고, 클릭한 부분의 태그와 .sidebar에서만 없애줘야 함
+                        if (!$(this).find('.tw-choice').hasClass('--checked')) {                
+                            var deleteTag = $('.task[data-task-index="' + clickedTaskIndex + '"]').find('[data-tag-name="' + tagname + '"]').closest('.ax-add-tags-panel__tag');
+                            var deleteTag2 = $('.ax-task-tags-row').find('.tw-add-tags-panel__right').find('[data-tag-name="' + tagname + '"]').closest('.ax-add-tags-panel__tag');
+                            deleteTag.remove();
+                            deleteTag2.remove();            
+                        }
                     }
                 });
                 
                 $(document).on('click', '.ax-tag__delete', function(){
+                    var tagname = $(this).closest('.tw-tag').attr('data-tag-name')
                     var findTagName = $(this).closest('.ax-tag').data('tag-name');
-                    var deleteTag = $('[data-tag-name="' + findTagName + '"]').closest('.ax-add-tags-panel__tag')
-                    deleteTag.eq(0).remove();
-                    deleteTag.eq(1).remove();
+                    var deleteTag = $('.task[data-task-index="' + clickedTaskIndex + '"]').find('[data-tag-name="' + tagname + '"]').closest('.ax-add-tags-panel__tag');
+                    var deleteTag2 = $('.ax-task-tags-row').find('.tw-add-tags-panel__right').find('[data-tag-name="' + tagname + '"]').closest('.ax-add-tags-panel__tag');
+                    deleteTag.remove();
+                    deleteTag2.remove();       
                     // 태크추가 popup안에 있는 check 풀어줘야함
                     var popuptag = $('.tw-virtual-list').eq(7).find('[data-tag-name="' + findTagName + '"]').closest('.tw-choice')
                     popuptag.removeClass('--checked')
@@ -290,11 +322,14 @@ $(document).ready(function() {
                     }
                 })
 
-                $('.ax-tag-input-widget__new-tag-button').off('click').on('click', function () {
+                $(document).on('click' , '.ax-tag-input-widget__new-tag-button' , function() {
                     makeNewTag ();
+                    var check = `<i class="tw-icon bi bi-check-lg tw-color-label__icon"></i>`
+            
+                    $('[data-bs-title="Opal Purple"]').eq(1).addClass('--selected')
+                    $('[data-bs-title="Opal Purple"]').eq(1).find('.tw-color-label').append(check)
                 })
             }
-
         } else {
             floatingSidebarModal.style.display = 'none';
         }
@@ -319,8 +354,31 @@ $(document).ready(function() {
         var taskNumber = clickedTaskIndex + 1
         $('.tw-task-location-title__tasklist-title').text(text);
         $('.tw-text').eq(0).text( '#' + taskNumber )
-        console.log(clickedTaskIndex)
-    }
+
+        // 색상라벨 변경해주기
+        $('.tw-color-picker__circle').removeClass('--selected')
+        $('.tw-color-label').empty()
+        var colorlabelWrapper = $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task__task-color');
+        var colorlabel = colorlabelWrapper.attr('class');
+        var colorlabelColor = colorlabel.split(' ')
+        var colorbar = colorlabelColor[2]
+        
+        var colorlabel = $('.ax-task-label-row.color-label-wrapper').find('.' + colorbar)
+        var check = `<i class="bi bi-check-lg tw-color-label__icon tw-icon"></i>`
+        colorlabel.closest('.tw-color-picker__circle').addClass('--selected')
+        colorlabel.append(check)
+
+        // 작성시간 바꿔주기
+        var currentDate = new Date();
+        var month = currentDate.getMonth() + 1;
+        var day = currentDate.getDate();
+        var hours = currentDate.getHours();
+        var minutes = currentDate.getMinutes();
+
+        var formattedDate = "∘ 작성일" + month + "월 " + day + "일"  + hours + "시" + minutes  + "분" ;
+
+        $('[data-l10n-key="tasks.properties.created"]').text(formattedDate)
+    }   
 
     // sidebar열때마다 체크리스트 바꿔주기
     function checklist(clickedTaskIndex){
@@ -482,21 +540,78 @@ $(document).ready(function() {
 
     // popup에서 새로운 tag 만들기
     function makeNewTag () {
-    // input 필드에 텍스트가 입력될 때 버튼을 활성화하는 이벤트 핸들러
+        var secondClassName;
+
+        // input 필드에 텍스트가 입력될 때 버튼을 활성화하는 이벤트 핸들러
         $(document).on('input', '.tw-form-input__input-element', function() {
+        var $createTagButton = $('.ax-tag-input-widget__create-tag-button');
+        var colorpicker = $('.tw-input-kit-widget .--selected').eq(1).find('.tw-color-label').attr('class');
+        var classNames = colorpicker.split(' '); 
+        secondClassName = classNames[2];
             var inputText = $(this).val();
-            var $createTagButton = $('.ax-tag-input-widget__create-tag-button');
             
             if (inputText.length > 0) {
                 // 버튼 활성화
                 $createTagButton.prop('disabled', false);
                 // 여기서 버튼 누르게 되면 생성되도록 함수 생성
-
             } else {
                 // 버튼 비활성화
                 $createTagButton.prop('disabled', true);
             }
         });
+
+        $(document).on('click', '.ax-tag-input-widget__create-tag-button', function(){
+            var newtagname = $('.tw-form-input__input-element').eq(5).val();
+            // 클릭하면 색이랑 글자 가져와서 태그 만들어주면 됨
+
+            var tagWrapper = `<div class="tw-tag-list ax-tag-list tw-task-body__tags"></div>`;
+
+            var tag = `<div class="tw-add-tags-panel__tag ax-add-tags-panel__tag">
+                <div class="tw-tag ax-tag js-tag ` + secondClassName + `" data-tag-name="` + newtagname + `" data-tag-color="` + secondClassName + `" draggable="true">
+                    <div class="tw-truncated-text js-truncated-text tw-tag__tag-name ax-tag__tag-name" style="max-width: 180px;">
+                        ` + newtagname + `
+                    </div>
+                    <i class="tw-icon tw-tag__delete ax-tag__delete bi bi-x">
+                    </i>
+                </div>
+            </div>`;
+
+            var addtag = `<div class="tw-tag-input-row ax-tag-input-row --checked">
+                <div class="tw-tag-input-row__left">
+                    <div class="tw-click-area tw-choice --size-l --clickable --checked" tabindex="0">
+                        <div class="tw-choice__checkbox">
+                            <i class="tw-icon bi bi-check-lg"></i>
+                        </div>
+                        <div class="tw-choice__label ax-choice__label">
+                            <div class="tw-tag-input-row__tag-info">
+                                <div class="tw-tag ax-tag js-tag `+ secondClassName+` data-tag-name="`+ newtagname +`" data-tag-color="`+ secondClassName +`" draggable="true">
+                                    <div class="tw-truncated-text js-truncated-text tw-tag__tag-name ax-tag__tag-name">`+ newtagname +`</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tw-tag-input-row__right  tag-edit-popup-button">
+                    <i class="tw-icon tw-tag-input-row__edit ax-tag-input-row__edit bi bi-pencil"></i>
+                </div>
+            </div>`
+
+            // tw-tag-list가 있을 경우
+            if ($('.task[data-task-index="' + clickedTaskIndex + '"]').find('.tw-task-body__tags').length > 0) {
+                $('.ax-task-tags-row').find('.tw-add-tags-panel__right').append(tag);
+                $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.tw-tag-list').append(tag);
+                // 조건 tag가 처음으로 생길 경우 (tw-tag-list 가 함께 생김)
+            } else {
+                $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-body').append(tagWrapper);
+                $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.tw-tag-list').append(tag);
+                $('.ax-task-tags-row').find('.tw-add-tags-panel__right').append(tag);
+            }
+
+            // 전 화면으로 돌아가기
+            $('.tw-input-kit-widget__back-button.ax-input-kit-widget__back-button').click();
+            // 새로운 태그에 추가하기
+            $('.tw-tag-input-widget').find('.js-virtual-list__item').prepend(addtag)
+        })
     }
 
     // 컴포넌트 열때마다 체크박스 확인 후,sidebar와 연동
@@ -788,8 +903,8 @@ $(document).ready(function() {
         
     });
     
-    // .tw-color-label.--bg-purple를 클릭할 때
-    $('.tw-color-label.--bg-purple').click(function() {
+    // .tw-task-properties-row .--bg-purple를 클릭할 때
+    $('.tw-task-properties-row .--bg-purple').click(function() {
         const selectedTask = $('.task.--is-selected');
         const taskColor = selectedTask.find('.task__task-color, .task-color');
         
@@ -798,8 +913,8 @@ $(document).ready(function() {
         });
         taskColor.addClass('--bg-purple');
     });
-    // .tw-color-label.--bg-blue를 클릭할 때
-    $('.tw-color-label.--bg-blue').click(function() {
+    // .tw-task-properties-row .--bg-blue를 클릭할 때
+    $('.tw-task-properties-row .--bg-blue').click(function() {
         const selectedTask = $('.task.--is-selected');
         const taskColor = selectedTask.find('.task__task-color, .task-color');
         
@@ -808,8 +923,8 @@ $(document).ready(function() {
         });
         taskColor.addClass('--bg-blue');
     });
-    // .tw-color-label.--bg-sky-blue를 클릭할 때
-    $('.tw-color-label.--bg-sky-blue').click(function() {
+    // .tw-task-properties-row .--bg-sky-blue를 클릭할 때
+    $('.tw-task-properties-row .--bg-sky-blue').click(function() {
         const selectedTask = $('.task.--is-selected');
         const taskColor = selectedTask.find('.task__task-color, .task-color');
         
@@ -818,8 +933,8 @@ $(document).ready(function() {
         });
         taskColor.addClass('--bg-sky-blue');
     });
-    // .tw-color-label.--bg-green를 클릭할 때
-    $('.tw-color-label.--bg-green').click(function() {
+    // .tw-task-properties-row .--bg-green를 클릭할 때
+    $('.tw-task-properties-row .--bg-green').click(function() {
         const selectedTask = $('.task.--is-selected');
         const taskColor = selectedTask.find('.task__task-color, .task-color');
         taskColor.removeClass(function(index, className) {
@@ -827,8 +942,8 @@ $(document).ready(function() {
         });
         taskColor.addClass('--bg-green');
     });
-    // .tw-color-label.--bg-amber를 클릭할 때
-    $('.tw-color-label.--bg-amber').click(function() {
+    // .tw-task-properties-row .--bg-amber를 클릭할 때
+    $('.tw-task-properties-row .--bg-amber').click(function() {
         const selectedTask = $('.task.--is-selected');
         const taskColor = selectedTask.find('.task__task-color, .task-color');
         
@@ -837,8 +952,8 @@ $(document).ready(function() {
         });
         taskColor.addClass('--bg-amber');
     });
-    // .tw-color-label.--bg-pink를 클릭할 때
-    $('.tw-color-label.--bg-pink').click(function() {
+    // .tw-task-properties-row .--bg-pink를 클릭할 때
+    $('.tw-task-properties-row .--bg-pink').click(function() {
         const selectedTask = $('.task.--is-selected');
         const taskColor = selectedTask.find('.task__task-color, .task-color');
         
@@ -847,8 +962,8 @@ $(document).ready(function() {
         });
         taskColor.addClass('--bg-pink');
     });
-    // .tw-color-label.--bg-red를 클릭할 때
-    $('.tw-color-label.--bg-red').click(function() {
+    // .tw-task-properties-row .--bg-red를 클릭할 때
+    $('.tw-task-properties-row .--bg-red').click(function() {
         const selectedTask = $('.task.--is-selected');
         const taskColor = selectedTask.find('.task__task-color, .task-color');
         
@@ -857,8 +972,8 @@ $(document).ready(function() {
         });
         taskColor.addClass('--bg-red');
     });
-    // .tw-color-label.--bg-orange를 클릭할 때
-    $('.tw-color-label.--bg-orange').click(function() {
+    // .tw-task-properties-row .--bg-orange를 클릭할 때
+    $('.tw-task-properties-row .--bg-orange').click(function() {
         const selectedTask = $('.task.--is-selected');
         const taskColor = selectedTask.find('.task__task-color, .task-color');
         
@@ -867,8 +982,8 @@ $(document).ready(function() {
         });
         taskColor.addClass('--bg-orange');
     });
-    // .tw-color-label.--bg-brown를 클릭할 때
-    $('.tw-color-label.--bg-brown').click(function() {
+    // .tw-task-properties-row .--bg-brown를 클릭할 때
+    $('.tw-task-properties-row .--bg-brown').click(function() {
         const selectedTask = $('.task.--is-selected');
         const taskColor = selectedTask.find('.task__task-color, .task-color');
         
@@ -877,8 +992,8 @@ $(document).ready(function() {
         });
         taskColor.addClass('--bg-brown');
     });
-    // .tw-color-label.--bg-gray를 클릭할 때
-    $('.tw-color-label.--bg-gray').click(function() {
+    // .tw-task-properties-row .--bg-gray를 클릭할 때
+    $('.tw-task-properties-row .--bg-gray').click(function() {
         const selectedTask = $('.task.--is-selected');
         const taskColor = selectedTask.find('.task__task-color, .task-color');
         
@@ -887,8 +1002,8 @@ $(document).ready(function() {
         });
         taskColor.addClass('--bg-gray');
     });
-    // .tw-color-label.--bg-rainbow를 클릭할 때
-    $('.tw-color-label.--bg-rainbow').click(function() {
+    // .tw-task-properties-row .--bg-rainbow를 클릭할 때
+    $('.tw-task-properties-row .--bg-rainbow').click(function() {
         const selectedTask = $('.task.--is-selected');
         const taskColor = selectedTask.find('.task__task-color, .task-color');
         
@@ -935,6 +1050,7 @@ $(document).ready(function() {
             $('[data-task-index="' + selectedTaskIndex + '"]').addClass('--done');
             // check되었으면 task__outer 의 위치가 task__outer completed-task뒤쪽으로 이동 몇번째로 이동할지 정해야함
             // $('[data-task-index="' + selectedTaskIndex + '"]').closest('.task__outer').insertAfter('.completed-task')eq;
+
 
             // completedConponentTime()
       
