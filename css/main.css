@@ -396,7 +396,6 @@
     border-radius: 5px;
 }
 
-/* 10/4일 수정 */
 /*main-contents*/
 .kanban-columns-wrapper{
     background-color: #eef0f2;
@@ -429,7 +428,6 @@
 .kanban-columns span {
   user-drag: none;
 }
-/* // 10/4 수정 */
 .kanban-board-columns__column{
     display: flex;
     flex-direction: column;
@@ -1352,7 +1350,7 @@ textarea:focus{
     margin-left: 10px;
 }
 .project-footer__completion-bar-inner{
-    background-color: linear-gradient(315deg,#27b6ba 14.64%,#50d3b0 85.36%);
+    background: linear-gradient(315deg,#27b6ba 14.64%,#50d3b0 85.36%);
     border-radius: 100px;
     height: 6px;
     transition: all .3s ease-in-out;

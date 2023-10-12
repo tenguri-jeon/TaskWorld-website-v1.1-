@@ -40,9 +40,17 @@ $(document).ready(function() {
 $(document).ready(function() {
     dividedIndex = null;
 
+    // 페이지 로딩할 때 숫자 계산 해 주는 함수
+    var number = $('.tasklist__frame-bottom').length
+    for (let i = 0; i < number; i++) {
+        changeDoneProjectNumber(i)
+    }
+
+
     // component만드는 함수
     function makeNewProject(title, clickindex) {
-        var dataIndex = $('.task').length + 1;
+        var dataIndex = $('.task').length;
+
         var newComponent = $('<div class="task__outer" draggable="true">').append(
             $('<div class="task__wrapper">').append(
                 $('<section class="task" data-task-index="' + dataIndex + '">').append(
@@ -69,6 +77,7 @@ $(document).ready(function() {
             )
         );
 
+        // list 밑에 있는 완료된 업무란 만들기
         var doneProject = `<div class="tasklist__frame-bottom">
             <div class="tasklist-footer --compact --expanded">
                 <section class="task-or-note-input-panel tasklist-footer__task-or-note-input-panel" style="display: none;">
@@ -125,20 +134,56 @@ $(document).ready(function() {
             </div>
         </div>`
 
+        // 완료된 업무들이 들어가는 완료된 업무 란
+        var doneProjectList = `<div class="tasklist__completed-taks-header" style="height: unset; width: 100%; display: none;">
+                <div class="tasklist__header-done">
+                    <span class="task_lists.completed_tasks">완료된 업무</span>
+                </div>
+                <div class="click-area completed-task-sorting-menu__sort-by" role="button" tabindex="0">
+                    <i class="icon completed-task-sorting-menu__sorting-icon">
+                        <i class="bi bi-sort-up"></i>
+                    </i>
+                    <span class="tasks.task_lists.menu.sort">정렬</span>
+                    <i class="icon completed-task-sorting-menu__arrow-down-icon">
+                        <i class="bi bi-chevron-down"></i>
+                    </i>
+                </div>
+            </div>`
+
         // 조건 만약 task__outer의 length가 0보다 작을 경우 완료된 업무 란 을 만들어 줘야함.
         if ($('.tasklist').eq(clickindex).find('.tasklist__frame-bottom').length <= 0) {
-            $('.tasklist__inner-container').eq(clickindex).append(newComponent);
+            $('.tasklist__inner-container').eq(clickindex).prepend(newComponent);
             $('.task-or-note-input-panel__input-box').val('')
             $('.task-or-note-input-panel__create-button').eq(clickindex).removeClass('active');
             $('.task-or-note-input-panel__create-button').eq(clickindex).prop('disabled', true);
             $('.tasklist').eq(clickindex).append(doneProject)
+            $('.tasklist__inner-container').eq(clickindex).append( doneProjectList);
         }else{
-            $('.tasklist__inner-container').eq(clickindex).append(newComponent);
+            $('.tasklist__inner-container').eq(clickindex).prepend(newComponent);
             $('.task-or-note-input-panel__input-box').val('')
             $('.task-or-note-input-panel__create-button').eq(clickindex).removeClass('active');
             $('.task-or-note-input-panel__create-button').eq(clickindex).prop('disabled', true);
         }
-            
+    }
+    
+    // 업무 생성될 때 마다 / 업무 완료될때 마다 숫자 바뀌도록 만들어 주는 함수 
+    function changeDoneProjectNumber(clickindex){
+        var totaltaskN = $('.tasklist__inner-container').eq(clickindex).find('.task').length
+        var donetaskN = $('.tasklist__inner-container').eq(clickindex).find('.task.--done').length
+        var hallProject = $('.task').length
+        var doneProject = $('.task.--done').length
+        var progress = Math.round((doneProject / hallProject) * 100);
+
+        var tasknumber = totaltaskN - donetaskN
+        $('.tasklist-footer__active-task-count').eq(clickindex).text(tasknumber);
+        $('.tasklist-footer__toggle-completed-tasks-link').eq(clickindex).text('완료된 업무 '+ donetaskN +' 개 보기' )
+
+        $('.project-footer__right span').eq(1).text( progress + '%' + '업무 완료')
+        $('.project-footer__right span').eq(2).text( doneProject + '/' +  hallProject)
+        $('.project-footer__completion-bar-inner').css({
+            'width' : progress + '%'
+        })
+
     }
 
     
@@ -146,43 +191,56 @@ $(document).ready(function() {
     $(document).on('click', '.task-or-note-input-panel__create-button', function() {
         componentTextbox = $(this).closest('.task-or-note-input-panel').find('.task-or-note-input-panel__input-box');
         kanbanColumn = $(this).closest('.tasklist');
-        var index = $('.task-or-note-input-panel__create-button').index(this);
+        var tasklist = $(this).closest('.tasklist');
+        var index = $('.tasklist').index(tasklist);
+
         var componentTitle = componentTextbox.val()
 
-        if (!kanbanColumn.find('.tasklist__inner-container').length) {
+        if (kanbanColumn.find('.tasklist__inner-container').length <= 0) {
             var makeKanban = $('<div class="kanban-items hack-scrollbar">' + 
             '<div class="tasklist__container" style ="overflow: hidden; height: 0px; width: 0px;">'+
-                '<div class="tasklist__inner-container" style="position: relative; height: 630px; width: 300px; overflow: auto; will-change: trasform; direction: 1tr;">' + 
+                '<div class="tasklist__inner-container" style="position: relative; height: 520px; width: 300px; overflow: auto; will-change: trasform; direction: 1tr;">' + 
                 '</div>' + 
             '</div>' +
             '</div>'
             ) 
             kanbanColumn.append(makeKanban);
-            makeNewProject(componentTitle , index);
+            makeNewProject(componentTitle , index );
+            changeDoneProjectNumber(index);
         }else{
             makeNewProject(componentTitle , index);
+            changeDoneProjectNumber(index);
         }
     })
 
     $(document).on('keydown', '.task-or-note-input-panel__input-box', function(event) {
         if (event.which === 13) {
-            event.preventDefault();
-            var componentTitle = $(this).val();
-            var index = $('.task-or-note-input-panel__input-box').index(this);
-            kanbanColumn = $(this).closest('.tasklist');
-
-            var makeKanban = $('<div class="kanban-items hack-scrollbar">' + 
-            '<div class="tasklist__container" style ="overflow: hidden; height: 0px; width: 0px;">'+
-                '<div class="tasklist__inner-container" style="position: relative; height: 630px; width: 300px; overflow: auto; will-change: trasform; direction: 1tr;">' + 
-                '</div>' + 
-            '</div>' +
-            '</div>'
-            )
-            kanbanColumn.append(makeKanban);
-            makeNewProject(componentTitle , index);
+            if ($(this).val().length !== 0) {
+                event.preventDefault();
+                var componentTitle = $(this).val();
+                var tasklist = $(this).closest('.tasklist');
+                var index = $('.tasklist').index(tasklist);
+                kanbanColumn = $(this).closest('.tasklist');
+                if (kanbanColumn.find('.tasklist__inner-container').length <= 0) {
+                    var makeKanban = $('<div class="kanban-items hack-scrollbar">' + 
+                    '<div class="tasklist__container" style ="overflow: hidden; height: 0px; width: 0px;">'+
+                    '<div class="tasklist__inner-container" style="position: relative; height: 630px; width: 300px; overflow: auto; will-change: trasform; direction: 1tr;">' + 
+                    '</div>' + 
+                    '</div>' +
+                    '</div>'
+                    ) 
+                    kanbanColumn.append(makeKanban);
+                    makeNewProject(componentTitle , index );
+                    changeDoneProjectNumber(index);
+                }else{
+                    makeNewProject(componentTitle , index);
+                    changeDoneProjectNumber(index);
+                }
+            }else if(event.keyCode === 13){
+                event.preventDefault();
             }
         }
-    );
+    });
 
     $(document).ready(function() {
         // tasklist-header__add-icon를 클릭할 때 이벤트 핸들러 추가

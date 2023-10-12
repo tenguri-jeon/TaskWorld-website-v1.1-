@@ -85,7 +85,6 @@ $(document).ready(function() {
 
                 // "닫기" 버튼을 클릭했을 때 해당 HTML 태그를 제거합니다.
                 $(document).on('click', '.tw-workspace-member-avatar-with-button__close-button', function () {
-                    debugger;
                     var dataUserName = $(this).closest('.tw-workspace-member-avatar-with-button').find('.tw-user-avatar').attr('data-user-name')
                     var avatarContainer = $('.task[data-task-index="' + clickedTaskIndex + '"]').find('[data-user-name="'+ dataUserName +'"]');
 
@@ -112,7 +111,6 @@ $(document).ready(function() {
 
                 // sidebar-member-popup의 클릭 이벤트 설정
                 $('.tw-input-kit-search-virtual__list').eq(5).find('.sidebar-member-popup').off('click').on('click', function () {
-                    debugger;
                     // 만약 한번 더 클릭할 경우 요소가 빠지도록 설정 toggle되도록 설정하기
                     //('.ax-member-input-widget-user-row')에('--selected') class가 있으면 실행되지 않는 함수 실행
                     if (!$(this).find('.ax-member-input-widget-user-row').hasClass('--selected')) {
@@ -322,7 +320,11 @@ $(document).ready(function() {
                     }
                 })
 
-                $(document).on('click' , '.ax-tag-input-widget__new-tag-button' , function() {
+                $('.ax-tag-input-widget__new-tag-button').on('click', function() {
+                    // 처음 켰을 때 다 빼주기
+                    $('.tw-popup-content-wrapper-new-tag').find('.tw-color-picker__circle').removeClass('--selected');
+                    $('.tw-popup-content-wrapper-new-tag').find('.tw-color-label').empty();
+
                     makeNewTag ();
                     var check = `<i class="tw-icon bi bi-check-lg tw-color-label__icon"></i>`
             
@@ -344,7 +346,25 @@ $(document).ready(function() {
     // 삭제 누르면 없어지는 함수
    function removeTask(clickedTask){
         const task = $('.task[data-task-index="' + clickedTaskIndex + '"]');
+        taskContainer = task.closest('.tasklist__inner-container')
         task.remove();
+
+        var totaltaskN = taskContainer.find('.task').length
+        var donetaskN = taskContainer.find('.task.--done').length
+        var hallProject = $('.task').length
+        var doneProject = $('.task.--done').length
+        var progress = Math.round((doneProject / hallProject) * 100);
+        var tasknumber = totaltaskN - donetaskN
+
+        taskContainer.closest('.tasklist').find('.tasklist-footer__active-task-count').text(tasknumber);
+        taskContainer.closest('.tasklist').find('.tasklist-footer__toggle-completed-tasks-link').text('완료된 업무 '+ donetaskN +' 개 보기' )
+
+        $('.project-footer__right span').eq(1).text( progress + '%' + '업무 완료')
+        $('.project-footer__right span').eq(2).text( doneProject + '/' +  hallProject)
+        $('.project-footer__completion-bar-inner').css({
+            'width' : progress + '%'
+        })
+
    }
 
     // 소속 이름 및 번호 바꿔주기
@@ -561,6 +581,7 @@ $(document).ready(function() {
         });
 
         $(document).on('click', '.ax-tag-input-widget__create-tag-button', function(){
+            debugger;
             var newtagname = $('.tw-form-input__input-element').eq(5).val();
             // 클릭하면 색이랑 글자 가져와서 태그 만들어주면 됨
 
@@ -596,15 +617,20 @@ $(document).ready(function() {
                 </div>
             </div>`
 
-            // tw-tag-list가 있을 경우
-            if ($('.task[data-task-index="' + clickedTaskIndex + '"]').find('.tw-task-body__tags').length > 0) {
-                $('.ax-task-tags-row').find('.tw-add-tags-panel__right').append(tag);
-                $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.tw-tag-list').append(tag);
-                // 조건 tag가 처음으로 생길 경우 (tw-tag-list 가 함께 생김)
-            } else {
-                $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-body').append(tagWrapper);
-                $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.tw-tag-list').append(tag);
-                $('.ax-task-tags-row').find('.tw-add-tags-panel__right').append(tag);
+            // 만약 똑같은 내용이 있으면 안만들어도 됨
+            // 만드려는게 없는 경우 실행되도록
+
+            if (!$('.ax-task-tags-row').find('.tw-add-tags-panel__right').find('.' + newtagname).length > 0) {
+                // tw-tag-list가 있을 경우
+                if ($('.task[data-task-index="' + clickedTaskIndex + '"]').find('.tw-task-body__tags').length > 0) {
+                    $('.ax-task-tags-row').find('.tw-add-tags-panel__right').append(tag);
+                    $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.tw-tag-list').append(tag);
+                    // 조건 tag가 처음으로 생길 경우 (tw-tag-list 가 함께 생김)
+                } else {
+                    $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.task-body').append(tagWrapper);
+                    $('.task[data-task-index="' + clickedTaskIndex + '"]').find('.tw-tag-list').append(tag);
+                    $('.ax-task-tags-row').find('.tw-add-tags-panel__right').append(tag);
+                }
             }
 
             // 전 화면으로 돌아가기
@@ -1031,6 +1057,9 @@ $(document).ready(function() {
       
     // main체크박스 / sidebar체크박스 연동
     function slidebarCompleted(selectedTaskIndex) {
+        var task = $('[data-task-index="' + selectedTaskIndex + '"]').closest('.task__outer')
+        var taskParent = $('[data-task-index="' + selectedTaskIndex + '"]').closest('.tasklist__inner-container')
+
         if (completed) {
           $('.tw-task-properties-header').addClass('--completed');
             $('.ax-task-completion-box').css({
@@ -1045,35 +1074,67 @@ $(document).ready(function() {
             $('.tw-task-completion-box__completed-task').css({
               'display': 'flex'
             });
-            // 선택한 $('.task').eq(selectedTaskIndex)의 자식요소의 체크박스 체크 확인
             $('[data-task-index="' + selectedTaskIndex + '"]').find('.click-area task-checkbox, .--medium').addClass('--completed');
+            $('[data-task-index="' + selectedTaskIndex + '"]').closest('.task__outer').addClass('completed-task');
             $('[data-task-index="' + selectedTaskIndex + '"]').addClass('--done');
-            // check되었으면 task__outer 의 위치가 task__outer completed-task뒤쪽으로 이동 몇번째로 이동할지 정해야함
-            // $('[data-task-index="' + selectedTaskIndex + '"]').closest('.task__outer').insertAfter('.completed-task')eq;
 
-
-            // completedConponentTime()
-      
-          completed = false; // 상태를 토글합니다.
+            // check되었으면 task__outer 의 위치가 tasklist__inner-container 뒤쪽 마지막으로 이동
+            if (taskParent.find('.tasklist__completed-taks-header').css('display') === 'flex') {
+                taskParent.append(task);
+            } else if(taskParent.find('.tasklist__completed-taks-header').css('display') === 'none'){
+                taskParent.append(task);
+                task.css({
+                    'display' : 'none'
+                })
+            }
+            
+            completed = false; // 상태를 토글합니다.
         } else {
-          $('.tw-task-properties-header').removeClass('--completed');
-          $('.ax-task-completion-box').css({
-            'width': '34px'
-          });
-          $('.tw-task-completion-box__background-center').css({
-            'transform': 'scaleX(1)'
-          });
-          $('.tw-task-completion-box__background-right').css({
-            'transform': 'translateX(17px)'
-          });
-          $('.tw-task-completion-box__completed-task').css({
-            'display': 'none'
-          });
-          $('[data-task-index="' + selectedTaskIndex + '"]').find('.click-area task-checkbox, .--medium').removeClass('--completed')
-          $('[data-task-index="' + selectedTaskIndex + '"]').removeClass('--done')
-        //   completedConponentTime()
+            $('.tw-task-properties-header').removeClass('--completed');
+            $('.ax-task-completion-box').css({
+                'width': '34px'
+            });
+            $('.tw-task-completion-box__background-center').css({
+                'transform': 'scaleX(1)'
+            });
+            $('.tw-task-completion-box__background-right').css({
+                'transform': 'translateX(17px)'
+            });
+            $('.tw-task-completion-box__completed-task').css({
+                'display': 'none'
+            });
+            $('[data-task-index="' + selectedTaskIndex + '"]').find('.click-area task-checkbox, .--medium').removeClass('--completed')
+            $('[data-task-index="' + selectedTaskIndex + '"]').removeClass('--done')
+            $('[data-task-index="' + selectedTaskIndex + '"]').closest('.task__outer').removeClass('completed-task');
+            //   completedConponentTime()
+
+            // 만약 footer가 안보이면 (done-task display none상태) 클릭한 요소 display none + 뒤쪽으로 옮김
+            // 만약 footer가 보이면 display block만 해서 뒤쪽으로 옮김
+            taskParent.prepend(task);
+            task.css({
+                'display' : 'block'
+            })
           completed = true; // 상태를 토글합니다.
         }
+
+        // const task = $('.task[data-task-index="' + selectedTaskIndex + '"]');
+        taskContainer = task.closest('.tasklist__inner-container')
+
+        var totaltaskN = taskContainer.find('.task').length
+        var donetaskN = taskContainer.find('.task.--done').length
+        var hallProject = $('.task').length
+        var doneProject = $('.task.--done').length
+        var progress = Math.round((doneProject / hallProject) * 100);
+        var tasknumber = totaltaskN - donetaskN
+
+        taskContainer.closest('.tasklist').find('.tasklist-footer__active-task-count').text(tasknumber);
+        taskContainer.closest('.tasklist').find('.tasklist-footer__toggle-completed-tasks-link').text('완료된 업무 '+ donetaskN +' 개 보기' )
+
+        $('.project-footer__right span').eq(1).text( progress + '%' + '업무 완료')
+        $('.project-footer__right span').eq(2).text( doneProject + '/' +  hallProject)
+        $('.project-footer__completion-bar-inner').css({
+            'width' : progress + '%'
+        })
     }
 
     // 완료된 시간 추가하기 => 전에 클릭한거 index를 기억해서 전에거에 추가하기 때문에 한번 살펴봐야함

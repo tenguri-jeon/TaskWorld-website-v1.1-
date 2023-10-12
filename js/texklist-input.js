@@ -15,20 +15,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 activePanelHeader.style.display = 'none';
                 const index = Array.from(inputPanelsHeader).indexOf(activePanelHeader);
                 if (index !== -1) {
-                    tasklistContainer[index].style.height = '656px';
+                    tasklistContainer[index].style.height = '630px';
                 }
             }
             if (activePanelFooter) {
                 activePanelFooter.style.display = 'none';
                 const index = Array.from(inputPanelsFooter).indexOf(activePanelFooter);
                 if (index !== -1) {
-                    tasklistContainer[index].style.height = '656px';
+                    tasklistContainer[index].style.height = '630px';
                 }
             }
             panel.style.display = 'block';
             const index = Array.from(tasklistContainer).indexOf(container);
             if (index !== -1) {
-                tasklistContainer[index].style.height = '543px';
+                tasklistContainer[index].style.height = '520px';
             }
             if (icon.classList.contains('tasklist-header__add-icon')) {
                 activePanelHeader = panel;
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
             panel.style.display = 'none';
             const index = Array.from(tasklistContainer).indexOf(container);
             if (index !== -1) {
-                tasklistContainer[index].style.height = '656px';
+                tasklistContainer[index].style.height = '520px';
             }
             if (icon.classList.contains('tasklist-header__add-icon')) {
                 activePanelHeader = null;
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 cancelButtonPanelHeader.style.display = 'none';
                 const index = Array.from(inputPanelsHeader).indexOf(cancelButtonPanelHeader);
                 if (index !== -1) {
-                    tasklistContainer[index].style.height = '656px';
+                    tasklistContainer[index].style.height = '630px';
                 }
                 activePanelHeader = null;
             }
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 cancelButtonPanelFooter.style.display = 'none';
                 const index = Array.from(inputPanelsFooter).indexOf(cancelButtonPanelFooter);
                 if (index !== -1) {
-                    tasklistContainer[index].style.height = '656px';
+                    tasklistContainer[index].style.height = '630px';
                 }
                 activePanelFooter = null;
             }

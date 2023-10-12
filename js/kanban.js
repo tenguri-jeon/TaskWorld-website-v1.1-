@@ -94,7 +94,7 @@ document.addEventListener('mousemove', (e) => {
   listX += deltaX;
   
   // 최대 이동 제한
-  const maxListX = list.clientWidth - list.scrollWidth;
+  const maxListX = list.clientWidth - list.scrollWidth - 62;
   if (listX > 0) {
     listX = 0;
   } else if (listX < maxListX) {
